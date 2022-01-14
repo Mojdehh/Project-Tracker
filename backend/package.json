@@ -7,6 +7,7 @@
     "dev": "./node_modules/.bin/nodemon"
   },
   "dependencies": {
+    "axios": "^0.24.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^11.0.0",
