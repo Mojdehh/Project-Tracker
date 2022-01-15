@@ -5,6 +5,8 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Buttons from "./Button";
+import BasicTable from "./BasicTable";
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -68,6 +70,7 @@ export default function VerticalNav() {
       </Tabs>
       <TabPanel value={value} index={0}>
         {/* Dashboard */}
+        <BasicTable />
         <Buttons />
       </TabPanel>
       <TabPanel value={value} index={1}>
