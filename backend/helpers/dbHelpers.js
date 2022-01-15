@@ -19,8 +19,7 @@ module.exports = (db) => {
         .query(query)
         .then((result) => result.rows)
         .catch((err) => err);
-};
-
+}
 
   // const getUserByEmail = email => {
 
@@ -45,6 +44,18 @@ module.exports = (db) => {
   //         .then(result => result.rows[0])
   //         .catch(err => err);
   // }
+
+  const getProjectDetails = () => {
+      const query = {
+          text: `SELECT projects.*, count(tickets.*) 
+          as number_of_tickets FROM projects 
+          JOIN tickets ON projects.id = project_id 
+          GROUP BY projects.id`
+      }
+      return db.query(query)
+        .then(result => result.rows)
+        .catch(err => err);
+  }
 
   const getProjectUsers = () => {
       const query = {
@@ -94,6 +105,7 @@ module.exports = (db) => {
       getProjects,
       getProjectUsers,
       getProjectTickets,
-      getTicketComments
+      getTicketComments,
+      getProjectDetails
   };
 };
