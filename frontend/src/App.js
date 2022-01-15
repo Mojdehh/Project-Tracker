@@ -1,9 +1,10 @@
-import './App.css';
+import "./App.css";
+import VerticalNav from "./components/VerticalNav";
 
 function App() {
   return (
     <div className="App">
-       <h1>checking roboto font</h1>
+      <VerticalNav />
     </div>
   );
 }
