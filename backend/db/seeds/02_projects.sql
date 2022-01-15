@@ -1,10 +1,10 @@
-INSERT INTO projects (name, status, date_created)
-VALUES ('Tweeter')
-INSERT INTO projects (name, status, date_created)
-VALUES ('Tiny App', 'TRUE')
-INSERT INTO projects (name, status, date_created)
-VALUES ('Jungle')
-INSERT INTO projects (name, status, date_created)
-VALUES ('Scheduler')
-INSERT INTO projects (name, status, date_created)
-VALUES ('Quiz App')
+INSERT INTO projects (name)
+VALUES ('Tweeter'),
+
+ ('Tiny App'),
+
+ ('Jungle'),
+
+ ('Scheduler'),
+
+ ('Quiz App');
