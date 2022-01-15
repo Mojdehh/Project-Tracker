@@ -53,7 +53,7 @@ module.exports = (db) => {
           JOIN user_project ON user_id = users.id 
           JOIN projects ON project_id = projects.id 
           WHERE project_id = $1`,
-          values($1)
+          values: $1
       }
       const values = [];
 
@@ -66,7 +66,7 @@ module.exports = (db) => {
   const getProjectTickets = () => {
     const query = {
         text: `SELECT * FROM tickets WHERE project_id = $1`,
-        values($1)
+        values: $1
     }
     const values = [];
 
@@ -79,7 +79,7 @@ module.exports = (db) => {
   const getTicketComments = () => {
     const query = {
         text: ` SELECT * FROM comments WHERE ticket_id = $1`,
-        values($1)
+        values: $1
     }
     const values = [];
 
