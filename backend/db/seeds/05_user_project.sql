@@ -1,18 +1,18 @@
 INSERT INTO user_project (user_id, project_id)
-VALUES (1, 1)
-INSERT INTO user_project (user_id, project_id)
-VALUES (1, 2)
-INSERT INTO user_project (user_id, project_id)
-VALUES (2, 1)
-INSERT INTO user_project (user_id, project_id)
-VALUES (3, 3)
-INSERT INTO user_project (user_id, project_id)
-VALUES (2, 3)
-INSERT INTO user_project (user_id, project_id)
-VALUES (4, 4)
-INSERT INTO user_project (user_id, project_id)
-VALUES (2, 4)
-INSERT INTO user_project (user_id, project_id)
-VALUES (3, 5)
-INSERT INTO user_project (user_id, project_id)
-VALUES (4, 5)
+VALUES (1, 1),
+
+(1, 2),
+
+(2, 1),
+
+(3, 3),
+
+(2, 3),
+
+(4, 4),
+
+(2, 4),
+
+(3, 5),
+
+(4, 5);
