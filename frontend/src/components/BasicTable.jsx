@@ -27,7 +27,6 @@ export default function BasicTable() {
           <TableRow>
             <TableCell>Project Name</TableCell>
             <TableCell align="right">Number of Tickets</TableCell>
-            <TableCell align="right">Number of Developers</TableCell>
             <TableCell align="right">Project Status</TableCell>
             <TableCell align="right">Date Created</TableCell>
           </TableRow>
