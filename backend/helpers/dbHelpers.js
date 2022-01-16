@@ -76,12 +76,12 @@ module.exports = (db) => {
 
   const getProjectTickets = () => {
     const query = {
-        text: `SELECT * FROM tickets WHERE project_id = $1`,
-        values: $1
+        text: `SELECT * FROM tickets WHERE project_id = 1`,
+        // values: $1
     }
-    const values = [];
+    // const values = [];
 
-    return db.query(query, values)
+    return db.query(query)
         .then(result => result.rows)
         .catch(err => err);
 
