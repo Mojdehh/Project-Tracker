@@ -6,10 +6,10 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import useApplicationData from "../hooks/useApplicationData";
+import useTicketsData from "../hooks/useTicketsData";
 
-export default function BasicTable(props) {
-  const state = useApplicationData();
+export default function TicketsTable(props) {
+  const tickets = useTicketsData();
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -22,13 +22,16 @@ export default function BasicTable(props) {
             {props.priority && (
               <TableCell align="center">{props.priority}</TableCell>
             )}
+            {props.description && (
+              <TableCell align="center">{props.description}</TableCell>
+            )}
             <TableCell align="center">{props.status}</TableCell>
             <TableCell align="center">{props.date}</TableCell>
           </TableRow>
         </TableHead>
 
         <TableBody>
-          {state.map((row) => (
+          {tickets.map((row) => (
             <TableRow
               key={row.name}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -36,7 +39,8 @@ export default function BasicTable(props) {
               <TableCell component="th" scope="row">
                 {row.name}
               </TableCell>
-              <TableCell align="right">{row.number_of_tickets}</TableCell>
+              <TableCell align="right">{row.priority}</TableCell>
+              <TableCell align="right">{row.description}</TableCell>
               <TableCell align="right">{row.status}</TableCell>
               <TableCell align="right">{row.date_created}</TableCell>
             </TableRow>
