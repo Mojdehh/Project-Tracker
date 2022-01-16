@@ -7,6 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import useApplicationData from "../hooks/useApplicationData";
+import {Link} from "react-router-dom";
 
 export default function BasicTable(props) {
   const state = useApplicationData();
@@ -34,7 +35,7 @@ export default function BasicTable(props) {
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {row.name}
+                <Link to={row.id} > {row.name} </Link>
               </TableCell>
               <TableCell align="right">{row.number_of_tickets}</TableCell>
               <TableCell align="right">{row.status}</TableCell>

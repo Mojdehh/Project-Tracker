@@ -70,7 +70,7 @@ export default function VerticalNav() {
       >
         <Tab label="Dashboard" {...a11yProps(0)} />
         <Tab label="Projects" {...a11yProps(1)} />
-        <Tab label="Tickets" {...a11yProps(2)} />
+        
       </Tabs>
       <TabPanel value={value} index={0}>
         {/* Dashboard */}
@@ -93,9 +93,7 @@ export default function VerticalNav() {
           date="Date Created"
         />
       </TabPanel>
-      <TabPanel value={value} index={2}>
-        Tickets
-      </TabPanel>
+      
     </Box>
   );
 }
