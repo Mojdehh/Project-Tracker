@@ -1,10 +1,9 @@
 INSERT INTO projects (name)
 VALUES ('Tweeter'),
+('Tiny App'),
 
- ('Tiny App'),
+('Jungle'),
 
- ('Jungle'),
+('Scheduler'),
 
- ('Scheduler'),
-
- ('Quiz App');
+('Quiz App');
