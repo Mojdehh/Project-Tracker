@@ -40,7 +40,7 @@ export default function InteractiveList() {
                     primary="Single-line item"
                     secondary={secondary ? 'Secondary text' : "hi"}
                   />
-                </ListItem>,
+                </ListItem>
             </List>
           </Demo>
     

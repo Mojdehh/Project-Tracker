@@ -71,12 +71,13 @@ export default function VerticalNav() {
       </Tabs>
       <TabPanel value={value} index={0}>
         {/* Dashboard */}
-        <BasicTable />
+        <BasicTable name="Project Name" number="Number of Tickets" status="Project Status" date="Date Created"/>
         <Buttons />
       </TabPanel>
       <TabPanel value={value} index={1}>
         Projects
         <InteractiveList />
+        <BasicTable name="Ticket Name" priority="Priority" status="Status" date="Date Created"/>
       </TabPanel>
       <TabPanel value={value} index={2}>
         Tickets

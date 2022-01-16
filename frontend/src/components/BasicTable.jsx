@@ -20,17 +20,18 @@ import useApplicationData from "../hooks/useApplicationData";
 //   createData("Scheduler", 2, 3, 67, 2020),
 //   createData("Quiz App", 6, 16, 49, 2021),
 // ];
-export default function BasicTable() {
+export default function BasicTable(props) {
   const state = useApplicationData();
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Project Name</TableCell>
-            <TableCell align="right">Number of Tickets</TableCell>
-            <TableCell align="right">Project Status</TableCell>
-            <TableCell align="right">Date Created</TableCell>
+            <TableCell align="center">{props.name}</TableCell>
+            {props.number && <TableCell align="center">{props.number}</TableCell>}
+            {props.priority && <TableCell align="center">{props.priority}</TableCell>}
+            <TableCell align="center">{props.status}</TableCell>
+            <TableCell align="center">{props.date}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
