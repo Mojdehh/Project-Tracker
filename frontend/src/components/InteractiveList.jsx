@@ -18,32 +18,34 @@ export default function InteractiveList(props) {
   let { project_id } = useParams();
   console.log(project_id);
   const projects = useProjectDetail(project_id);
-  console.log(`projects:`, projects);
+  console.log(`projects:`, props.projects);
   if (projects.length === 0) return "loading";
   return (
-    <Box sx={{ flexGrow: 1, maxWidth: 752 }}>
-      <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-        {projects[0].name}
-      </Typography>
-      <Demo>
-        <List dense={dense}>
-          <ListItem>
-            <ListItemText primary="Status" secondary={projects[0].status} />
-          </ListItem>
-          <ListItem>
-            <ListItemText
-              primary="Date Created"
-              secondary={projects[0].date_created}
-            />
-          </ListItem>
-          <ListItem>
-            <ListItemText
-              primary="Number of Assigned Developers"
-              secondary={projects[0].devs}
-            />
-          </ListItem>
-        </List>
-      </Demo>
-    </Box>
+     <Box sx={{ flexGrow: 1, maxWidth: 752 }}>
+    <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
+      {projects[0].name}
+    </Typography>
+    <Demo>
+      <List dense={dense}>
+        <ListItem>
+          <ListItemText primary="Status" secondary={projects[0].status} />
+        </ListItem>
+        <ListItem>
+          <ListItemText
+            primary="Date Created"
+            secondary={projects[0].date_created}
+          />
+        </ListItem>
+        <ListItem>
+          <ListItemText
+            primary="Number of Assigned Developers"
+            secondary={projects[0].devs}
+          />
+        </ListItem>
+      </List>
+    </Demo>
+  </Box>
+  
+    
   );
 }
