@@ -57,6 +57,20 @@ module.exports = (db) => {
         .catch(err => err);
   }
 
+  const getProjectDetailsWithNumDevs = () => {
+    const query = {
+        text: `SELECT projects.*, COUNT(user_project.user_id) as devs 
+        FROM projects
+        JOIN user_project ON projects.id = project_id
+        WHERE projects.id = 1
+        GROUP BY projects.id`
+    }
+    return db.query(query)
+      .then(result => result.rows)
+      .catch(err => err);
+}
+
+
   const getProjectUsers = () => {
       const query = {
           text: `SELECT users.full_name as name 
@@ -105,6 +119,7 @@ module.exports = (db) => {
       getProjects,
       getProjectUsers,
       getProjectTickets,
+      getProjectDetailsWithNumDevs,
       getTicketComments,
       getProjectDetails
   };

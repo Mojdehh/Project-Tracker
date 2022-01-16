@@ -8,6 +8,7 @@ import Buttons from "./Button";
 import BasicTable from "./BasicTable";
 import TicketsTable from "./TicketsTable";
 import InteractiveList from "./InteractiveList";
+import useProjectsData from "../hooks/useProjectsData";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -44,6 +45,7 @@ function a11yProps(index) {
 
 export default function VerticalNav() {
   const [value, setValue] = React.useState(0);
+  const projects = useProjectsData();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -82,7 +84,7 @@ export default function VerticalNav() {
       </TabPanel>
       <TabPanel value={value} index={1}>
         Projects
-        <InteractiveList />
+        <InteractiveList projects={projects}/>
         <TicketsTable
           name="Ticket Name"
           description="Description"

@@ -9,6 +9,7 @@ const cors = require("cors");
 const projectsRouter = require("./routes/projects");
 const projectDetailsRouter = require("./routes/projects");
 const projectTicketsRouter = require("./routes/tickets");
+const projectDetailsWithNumDevsRouter = require("./routes/projects")
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
@@ -27,5 +28,6 @@ app.use("/users", usersRouter);
 app.use("/api/projects", projectsRouter(dbHelpers));
 app.use("/api/projects", projectDetailsRouter(dbHelpers));
 app.use("/api/project/tickets", projectTicketsRouter(dbHelpers));
+app.use("/api/projects", projectDetailsWithNumDevsRouter(dbHelpers));
 
 module.exports = app;

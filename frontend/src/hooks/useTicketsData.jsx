@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function useApplicationData(initial) {
+export default function useTicketsData(initial) {
   const [tickets, setTickets] = useState([]);
 
   useEffect(() => {
