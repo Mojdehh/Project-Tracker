@@ -35,7 +35,7 @@ export default function BasicTable(props) {
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                <Link to={`/projects/${row.id}`}> {row.name} </Link>
+                <Link to={`/projects/${row.id}`}>{row.name}</Link>
               </TableCell>
               <TableCell align="right">{row.number_of_tickets}</TableCell>
               <TableCell align="right">{row.status}</TableCell>

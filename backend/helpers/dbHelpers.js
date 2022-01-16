@@ -1,25 +1,25 @@
 module.exports = (db) => {
   const getUsers = () => {
-      const query = {
-          text: 'SELECT * FROM users',
-      };
+    const query = {
+      text: "SELECT * FROM users",
+    };
 
-      return db
-          .query(query)
-          .then((result) => result.rows)
-          .catch((err) => err);
+    return db
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
   };
 
   const getProjects = () => {
     const query = {
-        text: 'SELECT * FROM projects',
+      text: "SELECT * FROM projects",
     };
 
     return db
-        .query(query)
-        .then((result) => result.rows)
-        .catch((err) => err);
-}
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
+  };
 
   // const getUserByEmail = email => {
 
@@ -46,81 +46,83 @@ module.exports = (db) => {
   // }
 
   const getProjectDetails = () => {
-      const query = {
-          text: `SELECT projects.*, count(tickets.*) 
+    const query = {
+      text: `SELECT projects.*, count(tickets.*) 
           as number_of_tickets FROM projects 
           JOIN tickets ON projects.id = project_id 
-          GROUP BY projects.id`
-      }
-      return db.query(query)
-        .then(result => result.rows)
-        .catch(err => err);
-  }
+          GROUP BY projects.id`,
+    };
+    return db
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
+  };
 
-  const getProjectDetailsWithNumDevs = () => {
+  const getProjectDetailsWithNumDevs = (id) => {
     const query = {
-        text: `SELECT projects.*, COUNT(user_project.user_id) as devs 
+      text: `SELECT projects.*, COUNT(user_project.user_id) as devs 
         FROM projects
         JOIN user_project ON projects.id = project_id
-        WHERE projects.id = 1
-        GROUP BY projects.id`
-    }
-    return db.query(query)
-      .then(result => result.rows)
-      .catch(err => err);
-}
-
+        WHERE projects.id = $1
+        GROUP BY projects.id`,
+    };
+    const values = [id];
+    return db
+      .query(query, values)
+      .then((result) => result.rows)
+      .catch((err) => err);
+  };
 
   const getProjectUsers = () => {
-      const query = {
-          text: `SELECT users.full_name as name 
+    const query = {
+      text: `SELECT users.full_name as name 
           FROM users 
           JOIN user_project ON user_id = users.id 
           JOIN projects ON project_id = projects.id 
           WHERE project_id = $1`,
-          values: $1
-      }
-      const values = [];
+      values: $1,
+    };
+    const values = [];
 
-      return db.query(query, values)
-          .then(result => result.rows)
-          .catch(err => err);
-
-  }
+    return db
+      .query(query, values)
+      .then((result) => result.rows)
+      .catch((err) => err);
+  };
 
   const getProjectTickets = () => {
     const query = {
-        text: `SELECT * FROM tickets WHERE project_id = 1`,
-        // values: $1
-    }
+      text: `SELECT * FROM tickets WHERE project_id = 1`,
+      // values: $1
+    };
     // const values = [];
 
-    return db.query(query)
-        .then(result => result.rows)
-        .catch(err => err);
-
-  }
+    return db
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
+  };
 
   const getTicketComments = () => {
     const query = {
-        text: ` SELECT * FROM comments WHERE ticket_id = $1`,
-        values: $1
-    }
+      text: ` SELECT * FROM comments WHERE ticket_id = $1`,
+      values: $1,
+    };
     const values = [];
 
-    return db.query(query, values)
-        .then(result => result.rows)
-        .catch(err => err);
-
-  }
+    return db
+      .query(query, values)
+      .then((result) => result.rows)
+      .catch((err) => err);
+  };
 
   return {
-      getUsers,
-      getProjects,
-      getProjectUsers,
-      getProjectTickets,
-      getProjectDetailsWithNumDevs,
-      getTicketComments,
-      getProjectDetails
+    getUsers,
+    getProjects,
+    getProjectUsers,
+    getProjectTickets,
+    getProjectDetailsWithNumDevs,
+    getTicketComments,
+    getProjectDetails,
   };
 };

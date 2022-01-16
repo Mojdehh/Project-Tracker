@@ -9,7 +9,7 @@ const cors = require("cors");
 const projectsRouter = require("./routes/projects");
 const projectDetailsRouter = require("./routes/projects");
 const projectTicketsRouter = require("./routes/tickets");
-const projectDetailsWithNumDevsRouter = require("./routes/projects")
+const projectDetailsWithNumDevsRouter = require("./routes/projects");
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
