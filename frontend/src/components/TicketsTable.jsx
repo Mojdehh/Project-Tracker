@@ -41,7 +41,9 @@ export default function TicketsTable(props) {
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                <Link to={`/projects/:project_id/tickets/${row.id}`}>{row.name}</Link>
+                <Link to={`/projects/${project_id}/tickets/${row.id}`}>
+                  {row.name}
+                </Link>
                 {/* {row.name} */}
               </TableCell>
               <TableCell align="right">{row.priority}</TableCell>

@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Link, Routes } from "react-router-dom";
 import Buttons from "./components/Button";
 import InteractiveList from "./components/InteractiveList";
 import TicketsTable from "./components/TicketsTable";
+import TicketsList from "./components/TicketsList";
 
 function App() {
   return (
@@ -24,6 +25,10 @@ function App() {
               />
             </>
           }
+        ></Route>
+        <Route
+          path="/projects/:project_id/tickets/:ticket_id"
+          element={<TicketsList />}
         ></Route>
       </Routes>
     </div>

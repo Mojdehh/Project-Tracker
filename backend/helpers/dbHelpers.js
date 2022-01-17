@@ -92,7 +92,7 @@ module.exports = (db) => {
 
   const getProjectTickets = (id) => {
     const query = {
-      text: `SELECT * FROM tickets WHERE project_id = $1`
+      text: `SELECT * FROM tickets WHERE project_id = $1`,
     };
     const values = [id];
 
@@ -114,13 +114,13 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
-  const getTicketDetails = (id) => {
+  const getTicketDetails = (project_id, ticket_id) => {
     const query = {
-      text: ` SELECT tickets.*, users.full_name as name 
-      FROM tickets JOIN users ON user_id = users.id 
-      WHERE tickets.id = $1`,
+      text: `SELECT tickets.*, users.full_name as Username FROM tickets 
+      JOIN users ON users.id = user_id 
+      WHERE project_id = $1 AND tickets.id = $2;`,
     };
-    const values = [id];
+    const values = [project_id, ticket_id];
 
     return db
       .query(query, values)
@@ -136,6 +136,6 @@ module.exports = (db) => {
     getProjectDetailsWithNumDevs,
     getTicketComments,
     getProjectDetails,
-    getTicketDetails
+    getTicketDetails,
   };
 };
