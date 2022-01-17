@@ -104,7 +104,9 @@ module.exports = (db) => {
 
   const getTicketComments = (id) => {
     const query = {
-      text: ` SELECT * FROM comments WHERE ticket_id = $1`,
+      text: ` SELECT comments.*, users.full_name as username FROM comments 
+              JOIN users ON users.id = user_id 
+              WHERE ticket_id = $1`,
     };
     const values = [id];
 
