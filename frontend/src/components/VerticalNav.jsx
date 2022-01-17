@@ -4,11 +4,11 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import Buttons from "./Button";
 import BasicTable from "./BasicTable";
 import TicketsTable from "./TicketsTable";
 import InteractiveList from "./InteractiveList";
 import useProjectDetail from "../hooks/useProjectsData";
+import ProjectPopUp from "./ProjectPopUp";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -84,13 +84,13 @@ export default function VerticalNav() {
           status="Status"
           date="Date Created"
         /> */}
-          <BasicTable
-            name="Project Name"
-            number="Number of Tickets"
-            status="Project Status"
-            date="Date Created"
-          />
-        <Buttons />
+        <BasicTable
+          name="Project Name"
+          number="Number of Tickets"
+          status="Project Status"
+          date="Date Created"
+        />
+        <ProjectPopUp name="Add a Project" add="create new project" />
       </TabPanel>
     </Box>
   );

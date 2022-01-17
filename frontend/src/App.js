@@ -1,7 +1,7 @@
 import "./App.css";
 import VerticalNav from "./components/VerticalNav";
 import { BrowserRouter, Route, Link, Routes } from "react-router-dom";
-import Buttons from "./components/Button";
+import AddButton from "./components/AddButton";
 import InteractiveList from "./components/InteractiveList";
 import TicketsTable from "./components/TicketsTable";
 import TicketsList from "./components/TicketsList";
@@ -17,6 +17,7 @@ function App() {
           element={
             <>
               <InteractiveList />
+              <AddButton name="Add a ticket" />
               <TicketsTable
                 name="Ticket Name"
                 description="Description"
@@ -32,6 +33,7 @@ function App() {
           element={
             <>
               <TicketsList />
+              <AddButton name="Add a comment" />
               <CommentSection />
             </>
           }
