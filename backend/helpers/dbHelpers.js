@@ -102,12 +102,25 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
-  const getTicketComments = () => {
+  const getTicketComments = (id) => {
     const query = {
       text: ` SELECT * FROM comments WHERE ticket_id = $1`,
-      values: $1,
     };
-    const values = [];
+    const values = [id];
+
+    return db
+      .query(query, values)
+      .then((result) => result.rows)
+      .catch((err) => err);
+  };
+
+  const getTicketDetails = (id) => {
+    const query = {
+      text: ` SELECT tickets.*, users.full_name as name 
+      FROM tickets JOIN users ON user_id = users.id 
+      WHERE tickets.id = $1`,
+    };
+    const values = [id];
 
     return db
       .query(query, values)
@@ -123,5 +136,6 @@ module.exports = (db) => {
     getProjectDetailsWithNumDevs,
     getTicketComments,
     getProjectDetails,
+    getTicketDetails
   };
 };

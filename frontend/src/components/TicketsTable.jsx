@@ -7,7 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import useTicketsData from "../hooks/useTicketsData";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 export default function TicketsTable(props) {
   let { project_id } = useParams();
@@ -41,7 +41,8 @@ export default function TicketsTable(props) {
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {row.name}
+                <Link to={`/projects/:project_id/tickets/${row.id}`}>{row.name}</Link>
+                {/* {row.name} */}
               </TableCell>
               <TableCell align="right">{row.priority}</TableCell>
               <TableCell align="right">{row.description}</TableCell>
