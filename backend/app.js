@@ -27,7 +27,7 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/api/projects", projectsRouter(dbHelpers));
 app.use("/api/projects", projectDetailsRouter(dbHelpers));
-app.use("/api/project/tickets", projectTicketsRouter(dbHelpers));
+app.use("/api/projects", projectTicketsRouter(dbHelpers));
 app.use("/api/projects", projectDetailsWithNumDevsRouter(dbHelpers));
 
 module.exports = app;

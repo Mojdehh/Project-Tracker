@@ -7,9 +7,13 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import useTicketsData from "../hooks/useTicketsData";
+import { useParams } from "react-router-dom";
 
 export default function TicketsTable(props) {
-  const tickets = useTicketsData();
+  let { project_id } = useParams();
+  console.log(project_id);
+  const tickets = useTicketsData(project_id);
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">

@@ -4,6 +4,7 @@ const {
   getProjects,
   getProjectDetails,
   getProjectDetailsWithNumDevs,
+  getProjectTickets
 } = require("../helpers/dbHelpers.js");
 
 /* GET all projects. */
@@ -11,6 +12,7 @@ module.exports = ({
   getProjects,
   getProjectDetails,
   getProjectDetailsWithNumDevs,
+  getProjectTickets
 }) => {
   router.get("/", (req, res) => {
     getProjects()
@@ -52,6 +54,18 @@ module.exports = ({
         })
       );
   });
+
+  router.get("/:project_id/tickets", (req, res) => {
+    const projectID = req.params.project_id;
+    getProjectTickets(projectID)
+      .then((projects) => res.json(projects))
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
+
 
   return router;
 };

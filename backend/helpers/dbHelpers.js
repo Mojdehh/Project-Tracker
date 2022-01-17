@@ -90,15 +90,14 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
-  const getProjectTickets = () => {
+  const getProjectTickets = (id) => {
     const query = {
-      text: `SELECT * FROM tickets WHERE project_id = 1`,
-      // values: $1
+      text: `SELECT * FROM tickets WHERE project_id = $1`
     };
-    // const values = [];
+    const values = [id];
 
     return db
-      .query(query)
+      .query(query, values)
       .then((result) => result.rows)
       .catch((err) => err);
   };
