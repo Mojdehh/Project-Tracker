@@ -130,6 +130,30 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
+  const addProject = (name) => {
+    const query = {
+      text: `INSERT INTO projects (name) VALUES ($1) RETURNING *;`
+    };
+    const values = [name];
+
+    return db
+      .query(query, values)
+      .then((result) => result.rows)
+      .catch((err) => err);
+  };
+
+  const addProjectUsers = (project_id, user_id) => {
+    const query = {
+      text: `INSERT INTO user_project (project_id, user_id) VALUES ($1, $2) RETURNING *;`
+    };
+    const values = [project_id, user_id];
+
+    return db
+      .query(query, values)
+      .then((result) => result.rows)
+      .catch((err) => err);
+  };
+
   return {
     getUsers,
     getProjects,
@@ -139,5 +163,7 @@ module.exports = (db) => {
     getTicketComments,
     getProjectDetails,
     getTicketDetails,
+    addProject,
+    addProjectUsers
   };
 };

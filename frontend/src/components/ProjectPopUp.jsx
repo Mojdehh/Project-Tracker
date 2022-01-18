@@ -10,6 +10,7 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
 import TextInput from "./TextInput";
+import useProjectsData from "../hooks/useProjectsData";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -51,6 +52,7 @@ BootstrapDialogTitle.propTypes = {
 
 export default function CustomizedDialogs(props) {
   const [open, setOpen] = React.useState(false);
+  const [value, setValue] = React.useState("");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -58,6 +60,13 @@ export default function CustomizedDialogs(props) {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const { addProject } = useProjectsData();
+  const handleClick = (value) => {
+    addProject(value);
+    handleClose();
+    console.log("value in popup:", value)
+  }
 
   return (
     <div>
@@ -76,25 +85,10 @@ export default function CustomizedDialogs(props) {
           {props.name}
         </BootstrapDialogTitle>
         <DialogContent dividers>
-          <TextInput name="Project Name" title="Add Developers" />
-          {/* <Typography gutterBottom>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-            dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
-            ac consectetur ac, vestibulum at eros.
-          </Typography>
-          <Typography gutterBottom>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
-            Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor
-            auctor.
-          </Typography>
-          <Typography gutterBottom>
-            Aenean lacinia bibendum nulla sed consectetur. Praesent commodo
-            cursus magna, vel scelerisque nisl consectetur et. Donec sed odio
-            dui. Donec ullamcorper nulla non metus auctor fringilla.
-          </Typography> */}
+          <TextInput name="Project Name" title="Add Developers" value={value} setValue={setValue}/>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose}>
+          <Button autoFocus onClick={() => handleClick(value)}>
             {props.add}
           </Button>
         </DialogActions>

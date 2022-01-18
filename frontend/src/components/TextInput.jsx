@@ -4,11 +4,10 @@ import TextField from "@mui/material/TextField";
 import UsersDropDown from "./UsersDropDown";
 
 export default function TextInput(props) {
-  const [value, setValue] = React.useState("Controlled");
 
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
+  // const handleChange = (event) => {
+  //   setValue(event.target.value)
+  // };
 
   return (
     <Box
@@ -21,10 +20,12 @@ export default function TextInput(props) {
     >
       <div>
         <TextField
-          id="outlined-textarea"
+          id="project_name"
           label={props.name}
           // placeholder={props.name}
           multiline
+          value={props.value}
+          onChange={(event) => {props.setValue(event.target.value)}}
         />
         <br />
         <UsersDropDown title="Add developers" />

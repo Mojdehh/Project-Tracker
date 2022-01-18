@@ -1,8 +1,21 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function useProjectsData(initial) {
+export default function useProjectsData(value) {
   const [projects, setProjects] = useState([]);
+  const [project, setProject] = useState({});
+  function addProject(value) {
+    console.log("value:", value);
+     return axios.post('http://localhost:8080/api/projects', {
+        projectName: value
+      })
+      .then((response) => {
+        console.log(response);
+      }, (error) => {
+        console.log(error);
+      });
+  }
+  
 
   useEffect(() => {
     axios
@@ -13,6 +26,10 @@ export default function useProjectsData(initial) {
       })
       .catch((err) => console.log(err));
   }, []);
-  console.log("projects->", projects);
-  return projects;
+  // console.log("projects->", projects);
+  return { projects, project, addProject };
 }
+
+
+
+
