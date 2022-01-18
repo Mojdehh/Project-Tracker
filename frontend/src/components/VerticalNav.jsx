@@ -49,9 +49,10 @@ function a11yProps(index) {
 export default function VerticalNav() {
   const [value, setValue] = React.useState(0);
   const projects = useProjectDetail();
-  const state = useApplicationData();
-  const [list, setList] = useState(state);
-  console.log("list", list);
+  const {state} = useApplicationData();
+  // const [list, setList] = useState([...state]);
+  // console.log("list", list);
+  const [counter, setCounter] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -95,9 +96,15 @@ export default function VerticalNav() {
           number="Number of Tickets"
           status="Project Status"
           date="Date Created"
-          list={state}
+          state={state}
+          counter={counter}
+          
         />
-        <ProjectPopUp name="Add a Project" add="create new project" list={list} setList={setList}/>
+        <ProjectPopUp name="Add a Project" add="create new project" 
+        // list={list} 
+        // setList={setList} 
+        counter={counter} 
+        setCounter={setCounter}/>
       </TabPanel>
     </Box>
   );

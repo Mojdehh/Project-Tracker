@@ -11,6 +11,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
 import TextInput from "./TextInput";
 import useProjectsData from "../hooks/useProjectsData";
+import useApplicationData from "../hooks/useApplicationData";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -56,6 +57,7 @@ export default function CustomizedDialogs(props) {
   const [state, updateState] = React.useState();
   const forceUpdate = React.useCallback(() => updateState({}), []);
 
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -63,12 +65,14 @@ export default function CustomizedDialogs(props) {
     setOpen(false);
   };
 
-  const { addProject, refresh } = useProjectsData();
-  const handleClick = (value) => {
+  const { addProject, refresh } = useApplicationData();
+  const handleClick = (value, event) => {
+    event.preventDefault();
     addProject(value);
     handleClose();
-    props.setList(value);
-    forceUpdate();
+    // props.setList(value);
+    // forceUpdate();
+    props.setCounter(props.counter + 1);
   }
 
   return (
@@ -91,7 +95,7 @@ export default function CustomizedDialogs(props) {
           <TextInput name="Project Name" title="Add Developers" value={value} setValue={setValue}/>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={() => handleClick(value)}>
+          <Button autoFocus onClick={(event) => handleClick(value, event)}>
             {props.add}
           </Button>
         </DialogActions>

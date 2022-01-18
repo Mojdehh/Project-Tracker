@@ -18,6 +18,7 @@ export default function BasicTable(props) {
   
   return (
     <TableContainer component={Paper}>
+      <h1>{props.counter}</h1>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
@@ -34,7 +35,7 @@ export default function BasicTable(props) {
         </TableHead>
 
         <TableBody>
-          {props.list.map((row) => (
+          {props.state.map((row) => (
             <TableRow
               key={row.name}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
