@@ -10,11 +10,11 @@ const projectsRouter = require("./routes/projects");
 const projectDetailsRouter = require("./routes/projects");
 const projectTicketsRouter = require("./routes/tickets");
 const projectDetailsWithNumDevsRouter = require("./routes/projects");
-const getTicketCommentsRouter = require("./routes/tickets")
+const getTicketCommentsRouter = require("./routes/tickets");
 const getTicketDetailsRouter = require("./routes/tickets");
 const addProjectRouter = require("./routes/projects");
 const addProjectUsersRouter = require("./routes/projects");
-
+const getUsersRouter = require("./routes/users");
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
@@ -38,5 +38,6 @@ app.use("/api/projects", getTicketDetailsRouter(dbHelpers));
 app.use("/api/projects", getTicketCommentsRouter(dbHelpers));
 app.use("/api/projects", addProjectRouter(dbHelpers));
 app.use("/api/projects", addProjectUsersRouter(dbHelpers));
+app.use("/api/users", getUsersRouter(dbHelpers));
 
 module.exports = app;

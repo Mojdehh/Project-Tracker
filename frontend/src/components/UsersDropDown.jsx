@@ -7,6 +7,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Chip from "@mui/material/Chip";
+import axios from "axios";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -19,18 +20,18 @@ const MenuProps = {
   },
 };
 
-const names = [
-  "Oliver Hansen",
-  "Van Henry",
-  "April Tucker",
-  "Ralph Hubbard",
-  "Omar Alexander",
-  "Carlos Abbott",
-  "Miriam Wagner",
-  "Bradley Wilkerson",
-  "Virginia Andrews",
-  "Kelly Snyder",
-];
+// const names = [
+//   "Oliver Hansen",
+//   "Van Henry",
+//   "April Tucker",
+//   "Ralph Hubbard",
+//   "Omar Alexander",
+//   "Carlos Abbott",
+//   "Miriam Wagner",
+//   "Bradley Wilkerson",
+//   "Virginia Andrews",
+//   "Kelly Snyder",
+// ];
 
 function getStyles(name, personName, theme) {
   return {
@@ -44,6 +45,19 @@ function getStyles(name, personName, theme) {
 export default function UsersDropDown(props) {
   const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
+  const [names, setNames] = React.useState([]);
+
+  React.useEffect(() => {
+    return axios
+      .get("http://localhost:8080/api/users")
+      .then((users) => {
+        console.log("users", users.data);
+        setNames(users.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const handleChange = (event) => {
     const {
@@ -79,11 +93,12 @@ export default function UsersDropDown(props) {
         >
           {names.map((name) => (
             <MenuItem
-              key={name}
-              value={name}
+              key={name.id}
+              id={name.id}
+              value={name.full_name}
               style={getStyles(name, personName, theme)}
             >
-              {name}
+              {name.full_name}
             </MenuItem>
           ))}
         </Select>

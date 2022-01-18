@@ -1,7 +1,7 @@
 module.exports = (db) => {
   const getUsers = () => {
     const query = {
-      text: "SELECT * FROM users",
+      text: "SELECT users.full_name, users.id from users",
     };
 
     return db
@@ -132,7 +132,7 @@ module.exports = (db) => {
 
   const addProject = (name) => {
     const query = {
-      text: `INSERT INTO projects (name) VALUES ($1) RETURNING *;`
+      text: `INSERT INTO projects (name) VALUES ($1) RETURNING *;`,
     };
     const values = [name];
 
@@ -144,7 +144,7 @@ module.exports = (db) => {
 
   const addProjectUsers = (project_id, user_id) => {
     const query = {
-      text: `INSERT INTO user_project (project_id, user_id) VALUES ($1, $2) RETURNING *;`
+      text: `INSERT INTO user_project (project_id, user_id) VALUES ($1, $2) RETURNING *;`,
     };
     const values = [project_id, user_id];
 
@@ -164,6 +164,6 @@ module.exports = (db) => {
     getProjectDetails,
     getTicketDetails,
     addProject,
-    addProjectUsers
+    addProjectUsers,
   };
 };
