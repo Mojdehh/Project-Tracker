@@ -10,7 +10,12 @@ import useApplicationData from "../hooks/useApplicationData";
 import { Link } from "react-router-dom";
 
 export default function BasicTable(props) {
-  const state = useApplicationData();
+
+  const pageLoad = useApplicationData();
+  function refresh() {
+    return pageLoad;
+  }
+  
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -29,7 +34,7 @@ export default function BasicTable(props) {
         </TableHead>
 
         <TableBody>
-          {state.map((row) => (
+          {props.list.map((row) => (
             <TableRow
               key={row.name}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

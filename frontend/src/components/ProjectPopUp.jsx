@@ -53,6 +53,8 @@ BootstrapDialogTitle.propTypes = {
 export default function CustomizedDialogs(props) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
+  const [state, updateState] = React.useState();
+  const forceUpdate = React.useCallback(() => updateState({}), []);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -61,11 +63,12 @@ export default function CustomizedDialogs(props) {
     setOpen(false);
   };
 
-  const { addProject } = useProjectsData();
+  const { addProject, refresh } = useProjectsData();
   const handleClick = (value) => {
     addProject(value);
     handleClose();
-    console.log("value in popup:", value)
+    props.setList(value);
+    forceUpdate();
   }
 
   return (

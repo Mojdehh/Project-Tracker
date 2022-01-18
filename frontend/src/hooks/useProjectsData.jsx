@@ -16,6 +16,15 @@ export default function useProjectsData(value) {
       });
   }
   
+  function refresh() {
+    return axios
+    .get("http://localhost:8080/api/projects/details")
+    .then((details) => {
+      console.log(details.data);
+      setProjects(...projects, details.data);
+    })
+    .catch((err) => console.log(err));
+  }
 
   useEffect(() => {
     axios
@@ -27,7 +36,7 @@ export default function useProjectsData(value) {
       .catch((err) => console.log(err));
   }, []);
   // console.log("projects->", projects);
-  return { projects, project, addProject };
+  return { projects, project, addProject, refresh };
 }
 
 

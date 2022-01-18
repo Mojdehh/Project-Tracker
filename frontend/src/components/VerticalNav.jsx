@@ -9,6 +9,9 @@ import TicketsTable from "./TicketsTable";
 import InteractiveList from "./InteractiveList";
 import useProjectDetail from "../hooks/useProjectsData";
 import ProjectPopUp from "./ProjectPopUp";
+import { useState } from "react";
+import useApplicationData from "../hooks/useApplicationData";
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -46,6 +49,9 @@ function a11yProps(index) {
 export default function VerticalNav() {
   const [value, setValue] = React.useState(0);
   const projects = useProjectDetail();
+  const state = useApplicationData();
+  const [list, setList] = useState(state);
+  console.log("list", list);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -89,8 +95,9 @@ export default function VerticalNav() {
           number="Number of Tickets"
           status="Project Status"
           date="Date Created"
+          list={state}
         />
-        <ProjectPopUp name="Add a Project" add="create new project" />
+        <ProjectPopUp name="Add a Project" add="create new project" list={list} setList={setList}/>
       </TabPanel>
     </Box>
   );

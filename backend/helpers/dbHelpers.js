@@ -49,7 +49,7 @@ module.exports = (db) => {
     const query = {
       text: `SELECT projects.*, count(tickets.*) 
           as number_of_tickets FROM projects 
-          JOIN tickets ON projects.id = project_id 
+          FULL OUTER JOIN tickets ON projects.id = project_id 
           GROUP BY projects.id`,
     };
     return db
