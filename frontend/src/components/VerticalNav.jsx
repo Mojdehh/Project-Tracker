@@ -11,6 +11,8 @@ import useProjectDetail from "../hooks/useProjectsData";
 import ProjectPopUp from "./ProjectPopUp";
 import { useState } from "react";
 import useApplicationData from "../hooks/useApplicationData";
+import axios from "axios";
+import { getTableContainerUtilityClass } from "@mui/material";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -47,16 +49,53 @@ function a11yProps(index) {
 
 export default function VerticalNav() {
   const [value, setValue] = React.useState(0);
+  const [tableRow, setTableRows] = React.useState([]);
   const projects = useProjectDetail();
   const { state } = useApplicationData();
   // const [list, setList] = useState([...state]);
   // console.log("list", list);
   const [counter, setCounter] = React.useState(0);
 
+  React.useEffect(() => {
+    setTableRows(state);
+  }, [state]);
+
+  function addProject(value) {
+    console.log("value:", value);
+    return axios
+      .post("http://localhost:8080/api/projects", {
+        projectName: value,
+      })
+      .then(
+        (response) => {
+          console.log("response", response);
+          // if we dont want to make a second get request use line 73
+          //setTableRows([...tableRow, response.data[0]]);
+          axios
+            .get("http://localhost:8080/api/projects/details")
+            .then((details) => {
+              console.log("detials", details.data);
+              setTableRows(details.data);
+            });
+          return state;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  }
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
+  const handleClick = (value, event) => {
+    event.preventDefault();
+    addProject(value);
+    //handleClose();
+    // props.setList(value);
+    // forceUpdate();
+    setCounter(counter + 1);
+  };
   return (
     <Box
       sx={{
@@ -95,7 +134,7 @@ export default function VerticalNav() {
           number="Number of Tickets"
           status="Project Status"
           date="Date Created"
-          state={state}
+          state={tableRow}
           counter={counter}
         />
         <ProjectPopUp
@@ -105,6 +144,7 @@ export default function VerticalNav() {
           // setList={setList}
           counter={counter}
           setCounter={setCounter}
+          handleClick={handleClick}
         />
       </TabPanel>
     </Box>

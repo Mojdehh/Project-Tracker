@@ -64,15 +64,15 @@ export default function CustomizedDialogs(props) {
     setOpen(false);
   };
 
-  const { addProject, refresh } = useApplicationData();
-  const handleClick = (value, event) => {
-    event.preventDefault();
-    addProject(value);
-    handleClose();
-    // props.setList(value);
-    // forceUpdate();
-    props.setCounter(props.counter + 1);
-  };
+  // const { addProject, refresh } = useApplicationData();
+  // const handleClick = (value, event) => {
+  //   event.preventDefault();
+  //   addProject(value);
+  //   handleClose();
+  //   // props.setList(value);
+  //   // forceUpdate();
+  //   props.setCounter(props.counter + 1);
+  // };
 
   return (
     <div>
@@ -99,7 +99,13 @@ export default function CustomizedDialogs(props) {
           />
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={(event) => handleClick(value, event)}>
+          <Button
+            autoFocus
+            onClick={(event) => {
+              props.handleClick(value, event);
+              handleClose();
+            }}
+          >
             {props.add}
           </Button>
         </DialogActions>
