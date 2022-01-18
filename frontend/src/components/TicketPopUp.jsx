@@ -64,7 +64,7 @@ export default function CustomizedDialogs() {
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
-        Create New Ticket
+        Add a Ticket
       </Button>
       <BootstrapDialog
         onClose={handleClose}

@@ -12,7 +12,6 @@ import ProjectPopUp from "./ProjectPopUp";
 import { useState } from "react";
 import useApplicationData from "../hooks/useApplicationData";
 
-
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -49,7 +48,7 @@ function a11yProps(index) {
 export default function VerticalNav() {
   const [value, setValue] = React.useState(0);
   const projects = useProjectDetail();
-  const {state} = useApplicationData();
+  const { state } = useApplicationData();
   // const [list, setList] = useState([...state]);
   // console.log("list", list);
   const [counter, setCounter] = React.useState(0);
@@ -98,13 +97,15 @@ export default function VerticalNav() {
           date="Date Created"
           state={state}
           counter={counter}
-          
         />
-        <ProjectPopUp name="Add a Project" add="create new project" 
-        // list={list} 
-        // setList={setList} 
-        counter={counter} 
-        setCounter={setCounter}/>
+        <ProjectPopUp
+          name="Add a Project"
+          add="create new project"
+          // list={list}
+          // setList={setList}
+          counter={counter}
+          setCounter={setCounter}
+        />
       </TabPanel>
     </Box>
   );

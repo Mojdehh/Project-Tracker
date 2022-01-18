@@ -9,9 +9,8 @@ import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
-import TextInput from "./TextInput";
-import useProjectsData from "../hooks/useProjectsData";
-import useApplicationData from "../hooks/useApplicationData";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -51,11 +50,8 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export default function CustomizedDialogs(props) {
+export default function CustomizedDialogs() {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
-  const [state, updateState] = React.useState();
-  const forceUpdate = React.useCallback(() => updateState({}), []);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -64,20 +60,10 @@ export default function CustomizedDialogs(props) {
     setOpen(false);
   };
 
-  const { addProject, refresh } = useApplicationData();
-  const handleClick = (value, event) => {
-    event.preventDefault();
-    addProject(value);
-    handleClose();
-    // props.setList(value);
-    // forceUpdate();
-    props.setCounter(props.counter + 1);
-  };
-
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
-        {props.name}
+        Add a comment
       </Button>
       <BootstrapDialog
         onClose={handleClose}
@@ -88,19 +74,33 @@ export default function CustomizedDialogs(props) {
           id="customized-dialog-title"
           onClose={handleClose}
         >
-          Add Project
+          Post Comment
         </BootstrapDialogTitle>
         <DialogContent dividers>
-          <TextInput
-            name="Project Name"
-            title="Add Developers"
-            value={value}
-            setValue={setValue}
-          />
+          <Box
+            component="form"
+            sx={{
+              "& .MuiTextField-root": { m: 1, width: "50ch" },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <div>
+              <TextField
+                id=""
+                label="Comment"
+                placeholder="Type a comment"
+                multiline
+                // value={props.value}
+                // onChange={(event) => {props.setValue(event.target.value)}}
+              />
+              <br />
+            </div>
+          </Box>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={(event) => handleClick(value, event)}>
-            {props.add}
+          <Button autoFocus onClick={handleClose}>
+            Submit comment
           </Button>
         </DialogActions>
       </BootstrapDialog>

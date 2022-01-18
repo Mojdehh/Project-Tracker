@@ -7,7 +7,7 @@ import TicketsTable from "./components/TicketsTable";
 import TicketsList from "./components/TicketsList";
 import CommentSection from "./components/CommentSection";
 import TicketPopUp from "./components/TicketPopUp";
-
+import CommentPopUp from "./components/CommentPopup";
 function App() {
   return (
     <div className="App">
@@ -34,7 +34,7 @@ function App() {
           element={
             <>
               <TicketsList />
-              <AddButton name="Add a comment" />
+              <CommentPopUp />
               <CommentSection />
             </>
           }
