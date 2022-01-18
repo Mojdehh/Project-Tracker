@@ -6,6 +6,7 @@ import InteractiveList from "./components/InteractiveList";
 import TicketsTable from "./components/TicketsTable";
 import TicketsList from "./components/TicketsList";
 import CommentSection from "./components/CommentSection";
+import TicketPopUp from "./components/TicketPopUp";
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
           element={
             <>
               <InteractiveList />
-              <AddButton name="Add a ticket" />
+              <TicketPopUp name="Add a Ticket" add="Create new Ticket" />
               <TicketsTable
                 name="Ticket Name"
                 description="Description"
