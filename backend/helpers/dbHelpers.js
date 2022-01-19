@@ -154,6 +154,19 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
+  const addTicket = (name, description, priority, user_id, project_id) => {
+    const query = {
+      text: `INSERT INTO tickets (name, description, priority, user_id, project_id)
+      VALUES ($1, $2, $3, $4, $5) RETURNING *;`,
+    };
+    const values = [name, description, priority, user_id, project_id];
+
+    return db
+      .query(query, values)
+      .then((result) => result.rows)
+      .catch((err) => err);
+  };
+
   return {
     getUsers,
     getProjects,
@@ -165,5 +178,6 @@ module.exports = (db) => {
     getTicketDetails,
     addProject,
     addProjectUsers,
+    addTicket,
   };
 };
