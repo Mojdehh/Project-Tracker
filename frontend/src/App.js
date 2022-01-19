@@ -2,14 +2,12 @@ import "./App.css";
 import VerticalNav from "./components/VerticalNav";
 import { BrowserRouter, Route, Link, Routes } from "react-router-dom";
 import AddButton from "./components/AddButton";
-import InteractiveList from "./components/InteractiveList";
-import TicketsTable from "./components/TicketsTable";
 import TicketsList from "./components/TicketsList";
 import CommentSection from "./components/CommentSection";
-import TicketPopUp from "./components/TicketPopUp";
 import CommentPopUp from "./components/CommentPopup";
 import NavBar from "./components/NavBar";
 import BreadCrumbs from "./components/BreadCrumbs";
+import ProjectPage from "./components/ProjectPage";
 
 function App() {
   return (
@@ -22,7 +20,8 @@ function App() {
             path="/projects/:project_id"
             element={
               <>
-                <BreadCrumbs project={"project name"} />
+              <ProjectPage />
+                {/* <BreadCrumbs project={"project name"} />
                 <InteractiveList />
                 <TicketPopUp name="Add a Ticket" add="Create new Ticket" />
                 <TicketsTable
@@ -31,7 +30,7 @@ function App() {
                   priority="Priority"
                   status="Status"
                   date="Date Created"
-                />
+                /> */}
               </>
             }
           ></Route>
