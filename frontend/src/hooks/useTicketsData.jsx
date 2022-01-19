@@ -14,5 +14,5 @@ export default function useTicketsData(project_id) {
       .catch((err) => console.log(err));
   }, []);
   console.log("tickets->", tickets);
-  return tickets;
+  return { tickets, setTickets };
 }
