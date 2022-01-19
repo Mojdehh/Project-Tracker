@@ -11,9 +11,9 @@ import { useParams, Link } from "react-router-dom";
 
 export default function TicketsTable(props) {
   let { project_id } = useParams();
-  const { tickets, setTickets } = useTicketsData(project_id);
+  //  const { tickets, setTickets } = useTicketsData(project_id);
 
-  console.log(project_id);
+  // console.log(project_id);
   //const tickets = useTicketsData(project_id);
 
   return (
@@ -37,7 +37,7 @@ export default function TicketsTable(props) {
         </TableHead>
 
         <TableBody>
-          {tickets.map((row) => (
+          {props.tickets.map((row) => (
             <TableRow
               key={row.name}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

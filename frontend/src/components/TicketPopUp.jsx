@@ -65,6 +65,7 @@ export default function TicketPopUp(props) {
   };
   const handleClose = () => {
     addTicket();
+    
     setOpen(false);
   };
 
@@ -77,11 +78,36 @@ export default function TicketPopUp(props) {
         // userId: someValue
       })
       .then((response) => {
+        props.setTickets((prev) => {
+          const rows = [...prev]
+          rows.push(response.data[0]);
+          return rows;
+        })
+      
+        // axios
+        //   .get(`http://localhost:8080/api/projects/${project_id}/tickets`)
+        //   .then((details) => {
+        //     console.log("detials", details.data);
+        //     props.setTicketRows(details.data);
+        //   });
+        //  return props.ticketRows;
         //setTableRows(details.data);
         console.log(response);
       })
       .catch((err) => console.log(err));
+
   }
+
+  // const newTickets = async () => {
+  //   const result = await axios      
+  //       .get(`http://localhost:8080/api/projects/${project_id}/tickets`)
+
+  //       // .then((details) => {
+  //       //   console.log("detials", details.data);
+  //       //   props.setTicketRows(details.data);
+  //       props.setTicketRows(result.data);
+  // }
+
 
   return (
     <div>

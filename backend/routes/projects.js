@@ -64,7 +64,7 @@ module.exports = ({
     getProjectTickets(projectID)
       .then((projects) => res.json(projects))
       .catch((err) =>
-        res.json({
+        res.status(500).json({
           error: err.message,
         })
       );

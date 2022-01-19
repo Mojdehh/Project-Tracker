@@ -9,7 +9,7 @@ export default function useTicketsData(project_id) {
       .get(`http://localhost:8080/api/projects/${project_id}/tickets`)
       .then((details) => {
         console.log(details.data);
-        setTickets(...tickets, details.data);
+        setTickets(details.data);
       })
       .catch((err) => console.log(err));
   }, []);
