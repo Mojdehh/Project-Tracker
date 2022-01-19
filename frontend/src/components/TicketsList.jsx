@@ -13,7 +13,7 @@ const Demo = styled("div")(({ theme }) => ({
 }));
 
 export default function TicketsList(props) {
-  const [dense, setDense] = React.useState(false);
+  const [dense, setDense] = React.useState(true);
   const [secondary, setSecondary] = React.useState(false);
   let { project_id, ticket_id } = useParams();
   console.log(ticket_id);

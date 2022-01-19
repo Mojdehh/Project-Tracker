@@ -12,6 +12,8 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import RadioBtn from "./RadioBtn";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -51,15 +53,35 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export default function CustomizedDialogs() {
+export default function TicketPopUp() {
   const [open, setOpen] = React.useState(false);
+  const [name, setName] = React.useState("");
+  const [description, setDescription] = React.useState("");
+  const [priority, setPriority] = React.useState();
+  const { project_id } = useParams();
 
   const handleClickOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
+    addTicket();
     setOpen(false);
   };
+
+  function addTicket() {
+    return axios
+      .post(`http://localhost:8080/api/projects/${project_id}`, {
+        ticketName: name,
+        description: description,
+        priority: priority,
+        // userId: someValue
+      })
+      .then((response) => {
+        //setTableRows(details.data);
+        console.log(response);
+      })
+      .catch((err) => console.log(err));
+  }
 
   return (
     <div>
@@ -92,8 +114,10 @@ export default function CustomizedDialogs() {
                 label="Ticket Name"
                 placeholder="Ticket Name"
                 multiline
-                // value={props.value}
-                // onChange={(event) => {props.setValue(event.target.value)}}
+                value={name}
+                onChange={(event) => {
+                  setName(event.target.value);
+                }}
               />
               <br />
               <TextField
@@ -101,11 +125,13 @@ export default function CustomizedDialogs() {
                 label="Ticket Description"
                 placeholder="Ticket Description"
                 multiline
-                // value={props.value}
-                // onChange={(event) => {props.setValue(event.target.value)}}
+                value={description}
+                onChange={(event) => {
+                  setDescription(event.target.value);
+                }}
               />
               <br />
-              <RadioBtn />
+              <RadioBtn priority={priority} setPriority={setPriority} />
             </div>
           </Box>
         </DialogContent>
