@@ -5,6 +5,7 @@ const {
   getTicketComments,
   getTicketDetails,
   addTicket,
+  addComment,
 } = require("../helpers/dbHelpers.js");
 
 /* GET all projects. */
@@ -13,6 +14,7 @@ module.exports = ({
   getTicketComments,
   getTicketDetails,
   addTicket,
+  addComment,
 }) => {
   router.get("/", (req, res) => {
     getProjectTickets()
@@ -63,6 +65,20 @@ module.exports = ({
     const name = req.body.ticketName;
     addTicket(name, description, priority, userID, projectID)
       .then((ticket) => res.json(ticket))
+      .catch((err) => {
+        res.json({
+          error: err.message,
+        });
+      });
+  });
+
+  router.post("/:project_id/tickets/:ticket_id/comments", (req, res) => {
+    const projectID = req.params.project_id;
+    const ticketID = req.params.ticket_id;
+    const userID = 3;
+    const comment = req.body.comment;
+    addComment(comment, userID, ticketID)
+      .then((comment) => res.json(comment))
       .catch((err) => {
         res.json({
           error: err.message,

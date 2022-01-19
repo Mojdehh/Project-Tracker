@@ -1,13 +1,9 @@
 import "./App.css";
 import VerticalNav from "./components/VerticalNav";
-import { BrowserRouter, Route, Link, Routes } from "react-router-dom";
-import AddButton from "./components/AddButton";
-import TicketsList from "./components/TicketsList";
-import CommentSection from "./components/CommentSection";
-import CommentPopUp from "./components/CommentPopup";
+import { Route, Link, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";
-import BreadCrumbs from "./components/BreadCrumbs";
 import ProjectPage from "./components/ProjectPage";
+import TicketPage from "./components/TicketPage";
 
 function App() {
   return (
@@ -20,7 +16,7 @@ function App() {
             path="/projects/:project_id"
             element={
               <>
-              <ProjectPage />
+                <ProjectPage />
                 {/* <BreadCrumbs project={"project name"} />
                 <InteractiveList />
                 <TicketPopUp name="Add a Ticket" add="Create new Ticket" />
@@ -38,13 +34,14 @@ function App() {
             path="/projects/:project_id/tickets/:ticket_id"
             element={
               <>
-                <BreadCrumbs
+                <TicketPage />
+                {/* <BreadCrumbs
                   projectName={"Project Name"}
                   ticket={"Ticket Name"}
                 />
                 <TicketsList />
                 <CommentPopUp />
-                <CommentSection />
+                <CommentSection /> */}
               </>
             }
           ></Route>

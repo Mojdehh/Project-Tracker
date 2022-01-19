@@ -11,6 +11,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -50,15 +52,52 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export default function CustomizedDialogs() {
+export default function CustomizedDialogs(props) {
   const [open, setOpen] = React.useState(false);
+  const [comment, setComment] = React.useState("");
+  let { project_id, ticket_id } = useParams();
 
   const handleClickOpen = () => {
     setOpen(true);
   };
-  const handleClose = () => {
+  const handleClose = (event) => {
+    event.preventDefault();
+    addComment();
     setOpen(false);
   };
+
+  function addComment() {
+    console.log("comment", comment);
+    return axios
+      .post(
+        `http://localhost:8080/api/projects/${project_id}/tickets/${ticket_id}/comments`,
+        {
+          comment: comment,
+          // userId: someValue
+        }
+      )
+      .then((response) => {
+        axios
+          .get(
+            `http://localhost:8080/api/projects/${project_id}/tickets/${ticket_id}/comments`
+          )
+          .then((response) => {
+            props.setComments((prev) => {
+              const rows = [...prev];
+              rows.unshift(response.data[0]);
+              return rows;
+            });
+            // console.log("response", response);
+            // props.setComments((prev) => {
+            //   const rows = [...prev];
+            //   rows.push(response.data[0]);
+            //   return rows;
+            // });
+            //console.log(response);
+          })
+          .catch((err) => console.log(err));
+      });
+  }
 
   return (
     <div>
@@ -91,8 +130,10 @@ export default function CustomizedDialogs() {
                 label="Comment"
                 placeholder="Type a comment"
                 multiline
-                // value={props.value}
-                // onChange={(event) => {props.setValue(event.target.value)}}
+                value={comment}
+                onChange={(event) => {
+                  setComment(event.target.value);
+                }}
               />
               <br />
             </div>

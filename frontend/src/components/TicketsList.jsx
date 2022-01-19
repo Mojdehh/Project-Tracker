@@ -17,36 +17,42 @@ export default function TicketsList(props) {
   const [secondary, setSecondary] = React.useState(false);
   let { project_id, ticket_id } = useParams();
   console.log(ticket_id);
-  const ticket = useTicketDetails(project_id, ticket_id);
-  console.log("ticketlistticket", ticket);
-  if (ticket.length === 0) return "loading";
+  // const ticket = useTicketDetails(project_id, ticket_id);
+  //console.log("ticketlistticket", ticket);
+  if (props.ticket.length === 0) return "loading";
   return (
     <Box sx={{ flexGrow: 1, maxWidth: 752 }}>
       <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-        {ticket[0].name}
+        {props.ticket[0].name}
       </Typography>
       <Demo>
         <List dense={dense}>
           <ListItem>
             <ListItemText
               primary="Description"
-              secondary={ticket[0].description}
+              secondary={props.ticket[0].description}
             />
           </ListItem>
           <ListItem>
-            <ListItemText primary="Status" secondary={ticket[0].status} />
+            <ListItemText primary="Status" secondary={props.ticket[0].status} />
           </ListItem>
           <ListItem>
-            <ListItemText primary="Priority" secondary={ticket[0].priority} />
+            <ListItemText
+              primary="Priority"
+              secondary={props.ticket[0].priority}
+            />
           </ListItem>
           <ListItem>
             <ListItemText
               primary="Date Created"
-              secondary={ticket[0].date_created}
+              secondary={props.ticket[0].date_created}
             />
           </ListItem>
           <ListItem>
-            <ListItemText primary="Developer" secondary={ticket[0].username} />
+            <ListItemText
+              primary="Developer"
+              secondary={props.ticket[0].username}
+            />
           </ListItem>
         </List>
       </Demo>

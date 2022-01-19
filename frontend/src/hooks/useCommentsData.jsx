@@ -11,10 +11,10 @@ export default function useCommentsData(project_id, ticket_id) {
       )
       .then((details) => {
         console.log(details.data);
-        setComments(...comments, details.data);
+        setComments(details.data);
       })
       .catch((err) => console.log(err));
   }, []);
 
-  return comments;
+  return { comments, setComments };
 }
