@@ -67,8 +67,47 @@ export default function UsersDropDown(props) {
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
-  };
+    props.setUsers(value);
+    const newArr = names.find(
+      (name) => name.full_name === value[value.length - 1]
+    );
+    props.setUserId(value);
 
+    console.log("props.id", props.userId);
+    console.log(newArr);
+    console.log(value);
+    // names.forEach((user) => {
+    // if (props.id.length !== 0) {
+    //   let newID = [...props.id, newArr];
+    //   props.setId(newID);
+    // } else {
+    //   props.setId(newArr);
+    // }
+    // console.log(value);
+    // if (!user) {
+    //   setId(user);
+    // } else if (user.full_name === value[0]) {
+    //   console.log(value);
+    //   setId(user);
+    // }
+    // console.log("user", user);
+    // console.log("id", id);
+    // });
+  };
+  // const handleSelection = (event) => {
+  //   props.setUsers(value);
+  // };
+  // const findUserIdByName = (name) => {
+  //   const id = names.find((id) => id.name === name);
+  //   return id.id;
+  // };
+  // console.log(findUserIdByName("Alice Smith"));
+  const findUserNameById = (id) => {
+    console.log("names", names);
+    const user = names.find((name) => name.id === id);
+    console.log(user);
+    return user.full_name;
+  };
   return (
     <div>
       <FormControl sx={{ m: 1, width: "50ch" }}>
@@ -85,7 +124,7 @@ export default function UsersDropDown(props) {
           renderValue={(selected) => (
             <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
               {selected.map((value) => (
-                <Chip key={value} label={value} />
+                <Chip key={value} label={findUserNameById(value)} />
               ))}
             </Box>
           )}
@@ -95,8 +134,11 @@ export default function UsersDropDown(props) {
             <MenuItem
               key={name.id}
               id={name.id}
-              value={name.full_name}
+              value={name.id}
               style={getStyles(name, personName, theme)}
+              onClick={(event) => {
+                props.setUsers(event.target.id);
+              }}
             >
               {name.full_name}
             </MenuItem>

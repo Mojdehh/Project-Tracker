@@ -54,6 +54,7 @@ BootstrapDialogTitle.propTypes = {
 export default function CustomizedDialogs(props) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
+  const [users, setUsers] = React.useState([]);
   const [state, updateState] = React.useState();
   const forceUpdate = React.useCallback(() => updateState({}), []);
 
@@ -96,13 +97,17 @@ export default function CustomizedDialogs(props) {
             title="Add Developers"
             value={value}
             setValue={setValue}
+            users={users}
+            setUsers={setUsers}
+            userId={props.userId}
+            setUserId={props.setUserId}
           />
         </DialogContent>
         <DialogActions>
           <Button
             autoFocus
             onClick={(event) => {
-              props.handleClick(value, event);
+              props.handleClick(value, props.userId, event);
               handleClose();
             }}
           >

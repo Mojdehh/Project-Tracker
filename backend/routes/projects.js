@@ -6,7 +6,7 @@ const {
   getProjectDetailsWithNumDevs,
   getProjectTickets,
   addProject,
-  addProjectUsers
+  addProjectUsers,
 } = require("../helpers/dbHelpers.js");
 
 /* GET all projects. */
@@ -16,7 +16,7 @@ module.exports = ({
   getProjectDetailsWithNumDevs,
   getProjectTickets,
   addProject,
-  addProjectUsers
+  addProjectUsers,
 }) => {
   router.get("/", (req, res) => {
     getProjects()
@@ -71,7 +71,7 @@ module.exports = ({
   });
 
   router.post("/", (req, res) => {
-    const name = req.body.projectName
+    const name = req.body.projectName;
     console.log("name: ", name);
     addProject(name)
       .then((projects) => res.json(projects))
@@ -82,9 +82,9 @@ module.exports = ({
       );
   });
 
-  router.post("/", (req, res) => {
-    const projectID = req.body.value;
-    const userID = req.body.value;
+  router.post("/users", (req, res) => {
+    const projectID = req.body.project_id;
+    const userID = req.body.user_id;
     console.log("projectID and userID: ", projectID, userID);
     addProjectUsers(projectID, userID)
       .then((projects) => res.json(projects))

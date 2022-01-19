@@ -4,7 +4,6 @@ import TextField from "@mui/material/TextField";
 import UsersDropDown from "./UsersDropDown";
 
 export default function TextInput(props) {
-
   // const handleChange = (event) => {
   //   setValue(event.target.value)
   // };
@@ -25,10 +24,18 @@ export default function TextInput(props) {
           // placeholder={props.name}
           multiline
           value={props.value}
-          onChange={(event) => {props.setValue(event.target.value)}}
+          onChange={(event) => {
+            props.setValue(event.target.value);
+          }}
         />
         <br />
-        <UsersDropDown title="Add developers" />
+        <UsersDropDown
+          title="Add developers"
+          users={props.users}
+          setUsers={props.setUsers}
+          userId={props.userId}
+          setUserId={props.setUserId}
+        />
       </div>
     </Box>
   );

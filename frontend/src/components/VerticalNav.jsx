@@ -51,10 +51,9 @@ export default function VerticalNav() {
   const [value, setValue] = React.useState(0);
   const [tableRow, setTableRows] = React.useState([]);
   const projects = useProjectDetail();
+  const [userId, setUserId] = React.useState([]);
+  console.log("userId", userId);
   const { state } = useApplicationData();
-  // const [list, setList] = useState([...state]);
-  // console.log("list", list);
-  const [counter, setCounter] = React.useState(0);
 
   React.useEffect(() => {
     setTableRows(state);
@@ -62,22 +61,30 @@ export default function VerticalNav() {
 
   function addProject(value) {
     console.log("value:", value);
+    console.log("userID", userId);
     return axios
       .post("http://localhost:8080/api/projects", {
         projectName: value,
       })
       .then(
         (response) => {
-          console.log("response", response);
-          // if we dont want to make a second get request use line 73
-          //setTableRows([...tableRow, response.data[0]]);
+          const projectID = response.data[0].id;
           axios
-            .get("http://localhost:8080/api/projects/details")
-            .then((details) => {
-              console.log("detials", details.data);
-              setTableRows(details.data);
+            .post("http://localhost:8080/api/projects/users", {
+              project_id: projectID,
+              user_id: userId[0],
+            })
+            .then((response) => {
+              // if we dont want to make a second get request use line 73
+              //setTableRows([...tableRow, response.data[0]]);
+              axios
+                .get("http://localhost:8080/api/projects/details")
+                .then((details) => {
+                  console.log("detials", details.data);
+                  setTableRows(details.data);
+                });
+              return state;
             });
-          return state;
         },
         (error) => {
           console.log(error);
@@ -88,13 +95,9 @@ export default function VerticalNav() {
     setValue(newValue);
   };
 
-  const handleClick = (value, event) => {
+  const handleClick = (value, id, event) => {
     event.preventDefault();
     addProject(value);
-    //handleClose();
-    // props.setList(value);
-    // forceUpdate();
-    setCounter(counter + 1);
   };
   return (
     <Box
@@ -135,15 +138,14 @@ export default function VerticalNav() {
           status="Project Status"
           date="Date Created"
           state={tableRow}
-          counter={counter}
         />
         <ProjectPopUp
           name="Add a Project"
           add="create new project"
+          userId={userId}
+          setUserId={setUserId}
           // list={list}
           // setList={setList}
-          counter={counter}
-          setCounter={setCounter}
           handleClick={handleClick}
         />
       </TabPanel>
