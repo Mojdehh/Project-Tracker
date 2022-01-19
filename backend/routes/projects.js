@@ -3,7 +3,7 @@ var router = express.Router();
 const {
   getProjects,
   getProjectDetails,
-  getProjectDetailsWithNumDevs,
+  getProjectDetailsWithDevs,
   getProjectTickets,
   addProject,
   addProjectUsers,
@@ -13,7 +13,7 @@ const {
 module.exports = ({
   getProjects,
   getProjectDetails,
-  getProjectDetailsWithNumDevs,
+  getProjectDetailsWithDevs,
   getProjectTickets,
   addProject,
   addProjectUsers,
@@ -39,7 +39,7 @@ module.exports = ({
   });
 
   router.get("/details/devs", (req, res) => {
-    getProjectDetailsWithNumDevs()
+    getProjectDetailsWithDevs()
       .then((projects) => res.json(projects))
       .catch((err) =>
         res.json({
@@ -50,7 +50,7 @@ module.exports = ({
 
   router.get("/:project_id", (req, res) => {
     const projectID = req.params.project_id;
-    getProjectDetailsWithNumDevs(projectID)
+    getProjectDetailsWithDevs(projectID)
       .then((projects) => res.json(projects))
       .catch((err) =>
         res.json({
@@ -85,8 +85,9 @@ module.exports = ({
   router.post("/users", (req, res) => {
     const projectID = req.body.project_id;
     const userID = req.body.user_id;
+    const projectTitle = req.body.project_name;
     console.log("projectID and userID: ", projectID, userID);
-    addProjectUsers(projectID, userID)
+    addProjectUsers(userID, projectTitle, projectID)
       .then((projects) => res.json(projects))
       .catch((err) =>
         res.json({

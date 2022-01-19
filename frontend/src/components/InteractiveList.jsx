@@ -18,7 +18,16 @@ export default function InteractiveList(props) {
   let { project_id } = useParams();
   console.log(project_id);
   const projects = useProjectDetail(project_id);
-  console.log(`projects:`, props.projects);
+  console.log(`projects:`, projects);
+
+  const assignedDevs = (projects) => {
+    const devs = [];
+    for (let each of projects) {
+      devs.push(each.devs)
+    }
+    return devs.join(", ");
+  };  
+
   if (projects.length === 0) return "loading";
   return (
      <Box sx={{ flexGrow: 1, maxWidth: 752 }}>
@@ -38,8 +47,8 @@ export default function InteractiveList(props) {
         </ListItem>
         <ListItem>
           <ListItemText
-            primary="Number of Assigned Developers"
-            secondary={projects[0].devs}
+            primary="Assigned Developers"
+            secondary={assignedDevs(projects)}
           />
         </ListItem>
       </List>

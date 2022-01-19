@@ -58,13 +58,13 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
-  const getProjectDetailsWithNumDevs = (id) => {
+  const getProjectDetailsWithDevs = (id) => {
     const query = {
-      text: `SELECT projects.*, COUNT(user_project.user_id) as devs 
-        FROM projects
-        JOIN user_project ON projects.id = project_id
-        WHERE projects.id = $1
-        GROUP BY projects.id`,
+      text: `SELECT projects.*, users.full_name as devs 
+            FROM projects
+            JOIN user_project ON projects.id = project_id
+            JOIN users ON users.id = user_id  WHERE projects.id = $1 
+            GROUP BY users.full_name, projects.id`,
     };
     const values = [id];
     return db
@@ -142,11 +142,11 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
-  const addProjectUsers = (project_id, user_id) => {
+  const addProjectUsers = (user_id, project_name, project_id) => {
     const query = {
-      text: `INSERT INTO user_project (project_id, user_id) VALUES ($1, $2) RETURNING *;`,
+      text: `INSERT INTO user_project (user_id, project_name, project_id) VALUES ($1, $2, $3) RETURNING *;`,
     };
-    const values = [project_id, user_id];
+    const values = [user_id, project_name, project_id];
 
     return db
       .query(query, values)
@@ -172,7 +172,7 @@ module.exports = (db) => {
     getProjects,
     getProjectUsers,
     getProjectTickets,
-    getProjectDetailsWithNumDevs,
+    getProjectDetailsWithDevs,
     getTicketComments,
     getProjectDetails,
     getTicketDetails,

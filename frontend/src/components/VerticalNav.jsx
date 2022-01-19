@@ -23,22 +23,26 @@ export default function VerticalNav() {
           // if userId.length > 1 for each run post request
           // if not just run once
           const projectID = response.data[0].id;
-          axios
-            .post("http://localhost:8080/api/projects/users", {
-              project_id: projectID,
-              user_id: userId[0],
-            })
-            .then((response) => {
-              // if we dont want to make a second get request use line 73
-              //setTableRows([...tableRow, response.data[0]]);
-              axios
-                .get("http://localhost:8080/api/projects/details")
-                .then((details) => {
-                  console.log("detials", details.data);
-                  setTableRows(details.data);
-                });
-              return state;
-            });
+          const projectTitle = response.data[0].name;
+          userId.forEach((user) => {
+            axios
+              .post("http://localhost:8080/api/projects/users", {
+                project_id: projectID,
+                project_name: projectTitle,
+                user_id: user,
+              })
+              .then((response) => {
+                // if we dont want to make a second get request use line 73
+                //setTableRows([...tableRow, response.data[0]]);
+                axios
+                  .get("http://localhost:8080/api/projects/details")
+                  .then((details) => {
+                    console.log("detials", details.data);
+                    setTableRows(details.data);
+                  });
+                return state;
+              });
+          })
         },
         (error) => {
           console.log(error);
