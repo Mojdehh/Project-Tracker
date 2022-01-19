@@ -20,6 +20,8 @@ export default function VerticalNav() {
       })
       .then(
         (response) => {
+          // if userId.length > 1 for each run post request
+          // if not just run once
           const projectID = response.data[0].id;
           axios
             .post("http://localhost:8080/api/projects/users", {
