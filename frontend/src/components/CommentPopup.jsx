@@ -60,9 +60,15 @@ export default function CustomizedDialogs(props) {
   const handleClickOpen = () => {
     setOpen(true);
   };
+
+  const handleClickClose = () => {
+    setComment("");
+    setOpen(false);
+  };
   const handleClose = (event) => {
     event.preventDefault();
     addComment();
+    setComment("");
     setOpen(false);
   };
 
@@ -82,12 +88,12 @@ export default function CustomizedDialogs(props) {
             `http://localhost:8080/api/projects/${project_id}/tickets/${ticket_id}/comments`
           )
           .then((response) => {
+            console.log("response", response);
             props.setComments((prev) => {
               const rows = [...prev];
-              rows.unshift(response.data[0]);
+              rows.push(response.data[0]);
               return rows;
             });
-            // console.log("response", response);
             // props.setComments((prev) => {
             //   const rows = [...prev];
             //   rows.push(response.data[0]);
@@ -105,13 +111,13 @@ export default function CustomizedDialogs(props) {
         Add a comment
       </Button>
       <BootstrapDialog
-        onClose={handleClose}
+        onClose={handleClickClose}
         aria-labelledby="customized-dialog-title"
         open={open}
       >
         <BootstrapDialogTitle
           id="customized-dialog-title"
-          onClose={handleClose}
+          onClose={handleClickClose}
         >
           Post Comment
         </BootstrapDialogTitle>
