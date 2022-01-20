@@ -29,7 +29,7 @@ function getStyles(name, personName, theme) {
   };
 }
 
-export default function UsersDropDown(props) {
+export default function MultipleSelectChip(props) {
   const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
   const [names, setNames] = React.useState([]);
@@ -54,64 +54,38 @@ export default function UsersDropDown(props) {
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
-    props.setUsers(value);
-    const newArr = names.find(
-      (name) => name.full_name === value[value.length - 1]
-    );
-    props.setUserId(value);
+  };
 
-    console.log("props.id", props.userId);
-    console.log(newArr);
-    console.log(value);
-    // names.forEach((user) => {
-    // if (props.id.length !== 0) {
-    //   let newID = [...props.id, newArr];
-    //   props.setId(newID);
-    // } else {
-    //   props.setId(newArr);
-    // }
-    // console.log(value);
-    // if (!user) {
-    //   setId(user);
-    // } else if (user.full_name === value[0]) {
-    //   console.log(value);
-    //   setId(user);
-    // }
-    // console.log("user", user);
-    // console.log("id", id);
-    // });
+  const arrDevs = (devs) => {
+    const newArr = [];
+    for (let item of devs) {
+      newArr.push(item.devs);
+    }
+    return newArr;
   };
-  // const handleSelection = (event) => {
-  //   props.setUsers(value);
-  // };
-  // const findUserIdByName = (name) => {
-  //   const id = names.find((id) => id.name === name);
-  //   return id.id;
-  // };
-  // console.log(findUserIdByName("Alice Smith"));
-  const findUserNameById = (id) => {
-    console.log("names", names);
-    const user = names.find((name) => name.id === id);
-    console.log(user);
-    return user.full_name;
-  };
+
   return (
     <div>
       <FormControl sx={{ m: 1, width: "50ch" }}>
-        <InputLabel id="demo-multiple-chip-label">{props.title}</InputLabel>
+        <InputLabel id="demo-multiple-chip-label">
+          Edit Assigned Developers
+        </InputLabel>
         <Select
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
           multiple
-          value={personName}
+          value={arrDevs(props.devs)}
           onChange={handleChange}
           input={
-            <OutlinedInput id="select-multiple-chip" label={props.title} />
+            <OutlinedInput
+              id="select-multiple-chip"
+              label="Edit Assigned Developers"
+            />
           }
           renderValue={(selected) => (
             <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
               {selected.map((value) => (
-                <Chip key={value} label={findUserNameById(value)} />
+                <Chip key={value} label={value} />
               ))}
             </Box>
           )}
@@ -120,8 +94,7 @@ export default function UsersDropDown(props) {
           {names.map((name) => (
             <MenuItem
               key={name.id}
-              id={name.id}
-              value={name.id}
+              value={name.full_name}
               style={getStyles(name, personName, theme)}
               onClick={(event) => {
                 props.setUsers(event.target.id);

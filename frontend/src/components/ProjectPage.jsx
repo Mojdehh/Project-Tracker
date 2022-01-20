@@ -6,8 +6,6 @@ import BreadCrumbs from "./BreadCrumbs";
 import useTicketsData from "../hooks/useTicketsData";
 import { useParams } from "react-router";
 
-
-
 export default function ProjectPage() {
   let { project_id } = useParams();
 
@@ -18,13 +16,16 @@ export default function ProjectPage() {
   //   setTicketRows(state);
   // }, [ticketRow]);
 
-
   return (
     <>
       <BreadCrumbs project={"project name"} />
       <InteractiveList />
-      <TicketPopUp name="Add a Ticket" add="Create new Ticket" tickets={tickets}
-        setTickets={setTickets} />
+      <TicketPopUp
+        name="Add a Ticket"
+        add="Create new Ticket"
+        tickets={tickets}
+        setTickets={setTickets}
+      />
       <TicketsTable
         name="Ticket Name"
         description="Description"
@@ -33,8 +34,7 @@ export default function ProjectPage() {
         date="Date Created"
         tickets={tickets}
         setTickets={setTickets}
-      /> 
-
+      />
     </>
-  )
+  );
 }
