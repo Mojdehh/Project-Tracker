@@ -89,20 +89,21 @@ export default function CustomizedDialogs(props) {
           )
           .then((response) => {
             console.log("response", response);
-            props.setComments((prev) => {
-              const rows = [...prev];
-              rows.push(response.data[0]);
-              return rows;
-            });
+            props.setComments(response.data);
             // props.setComments((prev) => {
             //   const rows = [...prev];
             //   rows.push(response.data[0]);
             //   return rows;
-            // });
-            //console.log(response);
-          })
-          .catch((err) => console.log(err));
-      });
+          });
+        // props.setComments((prev) => {
+        //   const rows = [...prev];
+        //   rows.push(response.data[0]);
+        //   return rows;
+        // });
+        //console.log(response);
+      })
+      .catch((err) => console.log(err));
+    // });
   }
 
   return (

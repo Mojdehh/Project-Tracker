@@ -63,9 +63,15 @@ export default function TicketPopUp(props) {
   const handleClickOpen = () => {
     setOpen(true);
   };
+
+  const handleClickClose = () => {
+    setName("");
+    setDescription("");
+    setOpen(false);
+  };
   const handleClose = () => {
     addTicket();
-    
+
     setOpen(false);
   };
 
@@ -79,11 +85,11 @@ export default function TicketPopUp(props) {
       })
       .then((response) => {
         props.setTickets((prev) => {
-          const rows = [...prev]
-          rows.push(response.data[0]);
+          const rows = [...prev];
+          rows.unshift(response.data[0]);
           return rows;
-        })
-      
+        });
+
         // axios
         //   .get(`http://localhost:8080/api/projects/${project_id}/tickets`)
         //   .then((details) => {
@@ -92,14 +98,13 @@ export default function TicketPopUp(props) {
         //   });
         //  return props.ticketRows;
         //setTableRows(details.data);
-        console.log(response);
+        //console.log(response);
       })
       .catch((err) => console.log(err));
-
   }
 
   // const newTickets = async () => {
-  //   const result = await axios      
+  //   const result = await axios
   //       .get(`http://localhost:8080/api/projects/${project_id}/tickets`)
 
   //       // .then((details) => {
@@ -108,20 +113,19 @@ export default function TicketPopUp(props) {
   //       props.setTicketRows(result.data);
   // }
 
-
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
         Add a Ticket
       </Button>
       <BootstrapDialog
-        onClose={handleClose}
+        onClose={handleClickClose}
         aria-labelledby="customized-dialog-title"
         open={open}
       >
         <BootstrapDialogTitle
           id="customized-dialog-title"
-          onClose={handleClose}
+          onClose={handleClickClose}
         >
           Add Ticket
         </BootstrapDialogTitle>

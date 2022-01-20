@@ -92,7 +92,8 @@ module.exports = (db) => {
 
   const getProjectTickets = (id) => {
     const query = {
-      text: `SELECT * FROM tickets WHERE project_id = $1`,
+      text: `SELECT * FROM tickets WHERE project_id = $1
+      ORDER BY date_created DESC;`,
     };
     const values = [id];
 
@@ -104,9 +105,10 @@ module.exports = (db) => {
 
   const getTicketComments = (id) => {
     const query = {
-      text: ` SELECT comments.*, users.full_name as username FROM comments 
-              JOIN users ON users.id = user_id 
-              WHERE ticket_id = $1`,
+      text: `SELECT comments.*, users.full_name as username FROM comments 
+            JOIN users ON users.id = user_id 
+            WHERE ticket_id = $1
+            ORDER BY date_created DESC;`,
     };
     const values = [id];
 
