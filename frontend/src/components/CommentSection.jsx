@@ -15,7 +15,11 @@ export default function CommentSection(props) {
   if (props.comments.length === 0) return "No Comments";
   console.log("props.comments", props.comments);
   return (
+    
     <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
+      <ListItem sx={{ mt: 2, mb: 2  }} variant="h6" >
+      Comments:
+        </ListItem>
       {props.comments.map((row) => (
         <>
           <ListItem key={row.id} alignItems="flex-start">
