@@ -7,6 +7,7 @@ const {
   getProjectTickets,
   addProject,
   addProjectUsers,
+  editProject,
 } = require("../helpers/dbHelpers.js");
 
 /* GET all projects. */
@@ -17,6 +18,7 @@ module.exports = ({
   getProjectTickets,
   addProject,
   addProjectUsers,
+  editProject,
 }) => {
   router.get("/", (req, res) => {
     getProjects()
@@ -75,6 +77,28 @@ module.exports = ({
     console.log("name: ", name);
     addProject(name)
       .then((projects) => res.json(projects))
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
+
+  router.put("/:project_id", (req, res) => {
+    const projectID = req.params.project_id;
+    const name = req.body.projectName;
+    const status = req.body.status;
+    const today = new Date();
+    const date =
+      today.getFullYear() +
+      "-" +
+      (today.getMonth() + 1) +
+      "-" +
+      today.getDate();
+    const time = today.getHours() + ":" + today.getMinutes();
+    const dateTime = date + " " + time;
+    editProject(projectID, name, status, dateTime)
+      .then((project) => res.json(project))
       .catch((err) =>
         res.json({
           error: err.message,

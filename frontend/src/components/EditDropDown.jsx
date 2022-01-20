@@ -54,6 +54,7 @@ export default function MultipleSelectChip(props) {
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
+    props.setUsers(value);
   };
 
   const arrDevs = (devs) => {
@@ -63,6 +64,7 @@ export default function MultipleSelectChip(props) {
     }
     return newArr;
   };
+  //setPersonName(arrDevs(props.devs));
 
   return (
     <div>
@@ -74,7 +76,7 @@ export default function MultipleSelectChip(props) {
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
           multiple
-          value={arrDevs(props.devs)}
+          value={personName}
           onChange={handleChange}
           input={
             <OutlinedInput

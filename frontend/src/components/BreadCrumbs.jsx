@@ -16,7 +16,8 @@ export default function BreadCrumbs(props) {
           Projects
         </Link>
         {props.project && (
-          <Typography color="text.primary">Project Name</Typography>
+          // asynchronous props.project[0] will load before receiving data
+          <Typography color="text.primary">{props.project.name}</Typography>
         )}
 
         {props.projectName && (

@@ -178,6 +178,22 @@ module.exports = (db) => {
       .then((result) => result.rows)
       .catch((err) => err);
   };
+
+  const editProject = (id, name, status, project_id) => {
+    const query = {
+      text: `INSERT INTO projects (id, name, status, date_updated)
+      VALUES ($1, $2, $3, $4)
+      ON CONFLICT (id) DO 
+      UPDATE SET name = $2, status = $3, date_updated = $4 
+      RETURNING *;`,
+    };
+
+    const values = [id, name, status, project_id];
+    return db
+      .query(query, values)
+      .then((result) => result.rows)
+      .catch((err) => err);
+  };
   return {
     getUsers,
     getProjects,
@@ -191,5 +207,6 @@ module.exports = (db) => {
     addProjectUsers,
     addTicket,
     addComment,
+    editProject,
   };
 };

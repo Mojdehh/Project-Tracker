@@ -161,7 +161,7 @@ export default function TicketPopUp(props) {
                 }}
               />
               <br />
-              <RadioBtn priority={priority} setPriority={setPriority} />
+              <RadioBtn priority={"priority"} setPriority={setPriority} />
             </div>
           </Box>
         </DialogContent>

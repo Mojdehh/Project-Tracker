@@ -11,6 +11,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import EditDropDown from "./EditDropDown";
+import RadioBtn from "./RadioBtn";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -57,13 +58,21 @@ export default function CustomizedDialogs(props) {
   const [state, updateState] = React.useState();
   const forceUpdate = React.useCallback(() => updateState({}), []);
   console.log("users", users);
+  if (props.projects.length === 0) return "loading";
+
   const handleClickOpen = () => {
+    //props.setProjectName(props.projectName);
+    props.setResetName(props.projectName);
     setOpen(true);
   };
-  const handleClose = () => {
+  console.log("props.resetName---", props.resetName);
+  const handleClose = (event) => {
+    event.preventDefault();
+    props.setProjectName(props.resetName);
     setOpen(false);
   };
 
+  const statusArr = ["Open", "Closed"];
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
@@ -105,9 +114,9 @@ export default function CustomizedDialogs(props) {
                 label={"Edit Project Name"}
                 // placeholder={props.name}
                 multiline
-                value={props.title}
+                value={props.projectName}
                 onChange={(event) => {
-                  props.setValue(event.target.value);
+                  props.setProjectName(event.target.value);
                 }}
               />
               <br />
@@ -118,7 +127,16 @@ export default function CustomizedDialogs(props) {
                 userId={props.userId}
                 setUserId={props.setUserId}
               /> */}
-              <EditDropDown devs={props.devs} />
+              <EditDropDown
+                devs={props.devs}
+                users={users}
+                setUsers={setUsers}
+              />
+              <RadioBtn
+                statusArr={statusArr}
+                status={props.status}
+                setStatus={props.setStatus}
+              />
             </div>
           </Box>
         </DialogContent>
@@ -126,8 +144,13 @@ export default function CustomizedDialogs(props) {
           <Button
             autoFocus
             onClick={(event) => {
-              props.handleClick(value, props.userId, event);
-              handleClose();
+              props.handleSaveChanges(
+                props.projectName,
+                props.userId,
+                event,
+                props.status
+              );
+              setOpen(false);
             }}
           >
             Save Changes
