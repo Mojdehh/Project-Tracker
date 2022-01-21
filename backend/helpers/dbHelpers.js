@@ -195,6 +195,21 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
+  const login = () => {
+    const query = {
+      text: `SELECT * FROM users WHERE email = 'asmith@gmail.com';`
+    };
+    return db
+    .query(query)
+    .then((result) => {
+      console.log(result.rows);
+      
+      return result.rows})
+    
+    .catch((err) => err);
+  };
+
+
   const editTicket = (
     id,
     name,
@@ -242,6 +257,7 @@ module.exports = (db) => {
     addTicket,
     addComment,
     editProject,
+    login,
     editTicket,
   };
 };
