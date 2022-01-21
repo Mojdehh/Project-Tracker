@@ -7,19 +7,43 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import { useParams } from "react-router-dom";
+import CommentIcon from '@mui/icons-material/Comment';
+import Grid from '@mui/material/Grid';
+import CommentPopUp from "./CommentPopup";
 
 export default function CommentSection(props) {
   let { project_id, ticket_id } = useParams();
   // const comments = useCommentsData(project_id, ticket_id);
 
+  const avatarStyle = { display: 'flex', backgroundColor: '#4caf50', justifyContent: 'center', alignItems: 'center' }
+
   if (props.comments.length === 0) return "No Comments";
   console.log("props.comments", props.comments);
   return (
-    
+
     <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
-      <ListItem sx={{ mt: 2, mb: 2  }} variant="h6" >
-      Comments:
-        </ListItem>
+
+      <Grid container direction="row" alignItems="center">
+        <Grid item>
+          <Avatar sx={{ ml: 2, mb: 3 }} style={avatarStyle}><CommentIcon /></Avatar>
+        </Grid>
+        <Grid item>
+          <Typography sx={{ mt: 2, mb: 2, ml: 1 }} variant="h6" >
+            Comments
+          <Grid item>
+            <CommentPopUp
+              ticket={props.ticket}
+              setTicket={props.setTicket}
+              comments={props.comments}
+              setComments={props.setComments}
+            />
+            
+          </Grid>
+          </Typography>
+        </Grid>
+      </Grid>
+      <Divider variant="inset" />
+
       {props.comments.map((row) => (
         <>
           <ListItem key={row.id} alignItems="flex-start">

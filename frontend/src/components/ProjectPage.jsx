@@ -23,6 +23,7 @@ export default function ProjectPage() {
   const [searchResults, setSearchResults] = React.useState([]);
 
   console.log("status project page", status);
+
   function editProject() {
     return axios
       .put(`http://localhost:8080/api/projects/${project_id}`, {
@@ -47,7 +48,7 @@ export default function ProjectPage() {
 
   return (
     <>
-      <BreadCrumbs project={projects} />
+      <BreadCrumbs projectName={projectName} />
       <InteractiveList
         resetName={resetName}
         projects={projects}
