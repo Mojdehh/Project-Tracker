@@ -3,7 +3,7 @@ import BasicTable from "./BasicTable";
 import ProjectPopUp from "./ProjectPopUp";
 import useApplicationData from "../hooks/useApplicationData";
 import axios from "axios";
-import ProjectSearch from "./SearchField";
+import SearchField from "./SearchField";
 
 export default function VerticalNav(props) {
   const [tableRow, setTableRows] = React.useState([]);
@@ -63,7 +63,7 @@ export default function VerticalNav(props) {
 
   return (
     <>
-      <ProjectSearch
+      <SearchField
         searchTerm={searchTerm} 
         setSearchTerm={setSearchTerm}
         searchResults={searchResults} 
