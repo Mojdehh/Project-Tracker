@@ -19,6 +19,7 @@ export default function RadioBtn(props) {
             row
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="row-radio-buttons-group"
+            defaultValue={props.projects[0].status}
           >
             <FormControlLabel
               value="Open"
@@ -55,7 +56,85 @@ export default function RadioBtn(props) {
           >
             <FormControlLabel
               value="Low"
-              control={<Radio />}
+              control={
+                <Radio
+                  sx={{
+                    color: "#FFD700",
+                    "&.Mui-checked": {
+                      color: "#FFD700",
+                    },
+                  }}
+                />
+              }
+              label="Low"
+              onChange={(event) => {
+                props.setPriority(event.target.value);
+              }}
+            />
+            <FormControlLabel
+              value="Medium"
+              control={
+                <Radio
+                  sx={{
+                    color: "#FF8C01",
+                    "&.Mui-checked": {
+                      color: "#FF8C01",
+                    },
+                  }}
+                />
+              }
+              label="Medium"
+              onChange={(event) => {
+                props.setPriority(event.target.value);
+              }}
+            />
+            <FormControlLabel
+              value="High"
+              control={
+                <Radio
+                  sx={{
+                    color: "#FF402C",
+                    "&.Mui-checked": {
+                      color: "#FF402C",
+                    },
+                  }}
+                />
+              }
+              label="High"
+              onChange={(event) => {
+                props.setPriority(event.target.value);
+              }}
+            />
+          </RadioGroup>
+        </>
+      )}
+      {props.ticketState && (
+        <>
+          <FormLabel id="demo-row-radio-buttons-group-label">
+            Priority
+          </FormLabel>
+          <RadioGroup
+            sx={{
+              display: "flex",
+              textAlign: "center",
+            }}
+            row
+            aria-labelledby="demo-row-radio-buttons-group-label"
+            name="row-radio-buttons-group"
+            defaultValue={props.ticketState.priority}
+          >
+            <FormControlLabel
+              value="Low"
+              control={
+                <Radio
+                  sx={{
+                    color: "#FFD700",
+                    "&.Mui-checked": {
+                      color: "#FFD700",
+                    },
+                  }}
+                />
+              }
               label="Low"
               onChange={(event) => {
                 props.setTicketState({ priority: event.target.value });
@@ -63,7 +142,16 @@ export default function RadioBtn(props) {
             />
             <FormControlLabel
               value="Medium"
-              control={<Radio />}
+              control={
+                <Radio
+                  sx={{
+                    color: "#FF8C01",
+                    "&.Mui-checked": {
+                      color: "#FF8C01",
+                    },
+                  }}
+                />
+              }
               label="Medium"
               onChange={(event) => {
                 props.setTicketState({ priority: event.target.value });
@@ -71,18 +159,22 @@ export default function RadioBtn(props) {
             />
             <FormControlLabel
               value="High"
-              control={<Radio />}
+              control={
+                <Radio
+                  sx={{
+                    color: "#FF402C",
+                    "&.Mui-checked": {
+                      color: "#FF402C",
+                    },
+                  }}
+                />
+              }
               label="High"
               onChange={(event) => {
                 props.setTicketState({ priority: event.target.value });
               }}
             />
           </RadioGroup>
-        </>
-      )}
-      {props.ticketStatus && (
-        <>
-          <br />
           <FormLabel id="demo-row-radio-buttons-group-label">Status</FormLabel>
           <RadioGroup
             sx={{
@@ -92,11 +184,16 @@ export default function RadioBtn(props) {
             row
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="row-radio-buttons-group"
+            defaultValue={props.ticketState.status}
           >
             <FormControlLabel
               value="Open"
               control={<Radio />}
-              label="Open"
+              label={
+                props.resetTicketState.status === "Resolved"
+                  ? "Re-Open"
+                  : "Open"
+              }
               onChange={(event) => {
                 props.setTicketState({ status: event.target.value });
               }}
