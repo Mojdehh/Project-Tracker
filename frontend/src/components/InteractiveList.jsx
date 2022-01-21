@@ -8,6 +8,9 @@ import Typography from "@mui/material/Typography";
 import EditProjectPopUp from "./EditProjectPopUp";
 import { useParams } from "react-router-dom";
 
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+
 const Demo = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
 }));
@@ -28,7 +31,16 @@ export default function InteractiveList(props) {
 
   if (props.projects.length === 0) return "loading";
   return (
-    <Box sx={{ flexGrow: 1, maxWidth: 752 }}>
+    <div style={{ display: "flex", justifyContent: "center" }}>
+<Card
+        elevation={4}
+        sx={{ mt: 3, mb: 2, display: "block", width: "60vw" }}
+      >
+
+<CardContent>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+    <Box sx={{ flexGrow: 1, maxWidth: 752, justifyContent: "center",
+                alignItems: "center"}}>
       <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
         {props.projects[0].name}
       </Typography>
@@ -48,7 +60,7 @@ export default function InteractiveList(props) {
         setStatus={props.setStatus}
       />
       <Demo>
-        <List dense={dense}>
+        <List sx={{ display: "flex", flexDirection: "row" }} dense={dense}>
           <ListItem>
             <ListItemText
               primary="Status"
@@ -78,5 +90,9 @@ export default function InteractiveList(props) {
         </List>
       </Demo>
     </Box>
+    </div>
+    </CardContent>
+    </Card>
+    </div>
   );
 }
