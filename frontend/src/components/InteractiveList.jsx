@@ -7,6 +7,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 import EditProjectPopUp from "./EditProjectPopUp";
 import { useParams } from "react-router-dom";
+import CircularUnderLoad from "./CircularUnderLoad";
 
 const Demo = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
@@ -26,7 +27,7 @@ export default function InteractiveList(props) {
     return devs.join(", ");
   };
 
-  if (props.projects.length === 0) return "loading";
+  if (props.projects.length === 0) return <CircularUnderLoad />;
   return (
     <Box sx={{ flexGrow: 1, maxWidth: 752 }}>
       <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
