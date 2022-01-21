@@ -44,7 +44,7 @@ export default function BasicTable(props) {
               </TableCell>
               <TableCell align="right">{row.number_of_tickets}</TableCell>
               <TableCell align="right">{row.status}</TableCell>
-              <TableCell align="right">{row.date_created}</TableCell>
+              <TableCell align="right">{row.date_created.replace(/\.[0-9]{3}/, '').replace('T', '').replace('Z', '')}</TableCell>
             </TableRow>
           ))}
         </TableBody>
