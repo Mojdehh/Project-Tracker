@@ -2,8 +2,8 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { useRef } from "react";
-import { IconButton } from '@mui/material';
-import SearchIcon from "@material-ui/icons/Search";
+import InputAdornment from '@mui/material/InputAdornment';
+import SearchIcon from '@mui/icons-material/Search';
 
 export default function SearchField(props) {
   const inputE1 = useRef("");
@@ -34,16 +34,19 @@ export default function SearchField(props) {
       autoComplete="off"
     >
       <TextField 
-        id="outlined-basic" 
+        id="input-with-sx" 
         label="Search Projects"
         variant="outlined"
         inputRef={inputE1}
         value={props.searchTerm} 
         onChange={searchHandler}
-        endAdornment={
-            <IconButton>
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
               <SearchIcon />
-            </IconButton>}
+            </InputAdornment>
+          ),
+        }}
       />
     </Box>
   );
