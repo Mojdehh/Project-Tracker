@@ -12,6 +12,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import EditDropDown from "./EditDropDown";
 import RadioBtn from "./RadioBtn";
+import CircularUnderLoad from "./CircularUnderLoad";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -58,7 +59,7 @@ export default function CustomizedDialogs(props) {
   const [state, updateState] = React.useState();
   const forceUpdate = React.useCallback(() => updateState({}), []);
   console.log("users", users);
-  if (props.projects.length === 0) return "loading";
+  if (props.projects.length === 0) return <CircularUnderLoad />;
 
   const handleClickOpen = () => {
     //props.setProjectName(props.projectName);

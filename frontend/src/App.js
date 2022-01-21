@@ -1,4 +1,5 @@
 import "./App.css";
+import * as React from "react";
 import VerticalNav from "./components/VerticalNav";
 import { Route, Link, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";

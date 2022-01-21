@@ -46,6 +46,7 @@ export default function MultipleSelectChip(props) {
       });
   }, []);
 
+  console.log("names", names);
   const handleChange = (event) => {
     const {
       target: { value },
@@ -65,7 +66,8 @@ export default function MultipleSelectChip(props) {
     return newArr;
   };
   //setPersonName(arrDevs(props.devs));
-
+  console.log(arrDevs(props.devs));
+  function sort(arr1, arr2) {}
   return (
     <div>
       <FormControl sx={{ m: 1, width: "50ch" }}>
@@ -76,7 +78,7 @@ export default function MultipleSelectChip(props) {
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
           multiple
-          value={personName}
+          value={arrDevs(props.devs)}
           onChange={handleChange}
           input={
             <OutlinedInput

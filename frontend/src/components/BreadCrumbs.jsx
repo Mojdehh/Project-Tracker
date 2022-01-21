@@ -28,7 +28,9 @@ export default function BreadCrumbs(props) {
           <Typography color="text.primary">{props.projectName}</Typography>
         )}
         {props.ticketName && (
-          <Typography color="text.primary">{props.ticketName}</Typography>
+          <Typography color="text.primary">
+            Ticket: {props.ticketName}
+          </Typography>
         )}
       </Breadcrumbs>
     </div>

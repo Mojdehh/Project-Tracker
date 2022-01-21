@@ -7,7 +7,10 @@ import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 import EditProjectPopUp from "./EditProjectPopUp";
 import { useParams } from "react-router-dom";
+import CircularUnderLoad from "./CircularUnderLoad";
 
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
 const Demo = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
 }));
@@ -26,57 +29,78 @@ export default function InteractiveList(props) {
     return devs.join(", ");
   };
 
-  if (props.projects.length === 0) return "loading";
+  if (props.projects.length === 0) return <CircularUnderLoad />;
   return (
-    <Box sx={{ flexGrow: 1, maxWidth: 752 }}>
-      <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-        {props.projects[0].name}
-      </Typography>
-      <EditProjectPopUp
-        name="Edit Project"
-        add="Edit Project"
-        title={props.projects[0].name}
-        devs={props.projects}
-        projects={props.projects}
-        setProjects={props.setProjects}
-        projectName={props.projectName}
-        setProjectName={props.setProjectName}
-        resetName={props.resetName}
-        setResetName={props.setResetName}
-        handleSaveChanges={props.handleSaveChanges}
-        status={props.status}
-        setStatus={props.setStatus}
-      />
-      <Demo>
-        <List dense={dense}>
-          <ListItem>
-            <ListItemText
-              primary="Status"
-              secondary={props.projects[0].status}
-            />
-          </ListItem>
-          <ListItem>
-            <ListItemText
-              primary="Date Created"
-              secondary={props.projects[0].date_created}
-            />
-            {props.projects[0].date_updated && (
-              <ListItem>
-                <ListItemText
-                  primary="Date Updated"
-                  secondary={props.projects[0].date_updated}
-                />
-              </ListItem>
-            )}
-          </ListItem>
-          <ListItem>
-            <ListItemText
-              primary="Assigned Developers"
-              secondary={assignedDevs(props.projects)}
-            />
-          </ListItem>
-        </List>
-      </Demo>
-    </Box>
+    <div style={{ display: "flex", justifyContent: "center" }}>
+      <Card
+        elevation={4}
+        sx={{ mt: 3, mb: 2, display: "block", width: "75vw", height: "30vw" }}
+      >
+        <CardContent>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Box
+              sx={{
+                flexGrow: 1,
+                maxWidth: 752,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
+                {props.projects[0].name}
+              </Typography>
+              <Demo>
+                <List
+                  sx={{ display: "flex", flexDirection: "row" }}
+                  dense={dense}
+                >
+                  <ListItem>
+                    <ListItemText
+                      primary="Status"
+                      secondary={props.projects[0].status}
+                    />
+                  </ListItem>
+                  <ListItem>
+                    <ListItemText
+                      primary="Date Created"
+                      secondary={props.projects[0].date_created}
+                    />
+                    {props.projects[0].date_updated && (
+                      <ListItem>
+                        <ListItemText
+                          primary="Date Updated"
+                          secondary={props.projects[0].date_updated}
+                        />
+                      </ListItem>
+                    )}
+                  </ListItem>
+                  <ListItem>
+                    <ListItemText
+                      primary="Assigned Developers"
+                      secondary={assignedDevs(props.projects)}
+                    />
+                  </ListItem>
+                </List>
+              </Demo>
+            </Box>
+          </div>
+          <EditProjectPopUp
+            name="Edit Project"
+            add="Edit Project"
+            title={props.projects[0].name}
+            devs={props.projects}
+            projects={props.projects}
+            setProjects={props.setProjects}
+            projectName={props.projectName}
+            setProjectName={props.setProjectName}
+            resetName={props.resetName}
+            setResetName={props.setResetName}
+            handleSaveChanges={props.handleSaveChanges}
+            status={props.status}
+            setStatus={props.setStatus}
+          />
+        </CardContent>
+      </Card>
+    </div>
   );
 }

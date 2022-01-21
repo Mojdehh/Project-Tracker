@@ -59,6 +59,8 @@ export default function CustomizedDialogs(props) {
     props.setResetTicketState({
       name: props.ticketState.name,
       description: props.ticketState.description,
+      status: props.ticketState.status,
+      priority: props.ticketState.priority,
     });
     setOpen(true);
   };
@@ -67,6 +69,8 @@ export default function CustomizedDialogs(props) {
     props.setTicketState({
       name: props.resetTicketState.name,
       description: props.resetTicketState.description,
+      status: props.resetTicketState.status,
+      priority: props.resetTicketState.priority,
     });
     setOpen(false);
   };
@@ -108,7 +112,7 @@ export default function CustomizedDialogs(props) {
               <TextField
                 required
                 id="ticketName"
-                //label={"Ticket Name"}
+                label={"Ticket Name"}
                 //placeholder="Edit Ticket Name"
                 //multiline
                 value={props.ticketState.name}
@@ -128,9 +132,10 @@ export default function CustomizedDialogs(props) {
               <TextField
                 required
                 id="ticketDescription"
-                //label={"Ticket Description"}
+                label={"Ticket Description"}
                 //placeholder="Edit Ticket Description"
                 //multiline
+                helperText="Enter Ticket Description"
                 value={props.ticketState.description}
                 onChange={(event) => {
                   props.setTicketState({ description: event.target.value });
@@ -139,15 +144,15 @@ export default function CustomizedDialogs(props) {
             </div>
             <div>
               <br />
-              <RadioBtn
-                priority={"priority"}
-                setPriority={props.setPriority}
+              {/* <RadioBtn
+                //priority={"priority"}
+                //setPriority={props.setPriority}
                 setTicketState={props.setTicketState}
                 ticketState={props.ticketState}
-              />
-              <br />
+              /> */}
               <RadioBtn
-                ticketStatus={"priority"}
+                //ticketStatus={"priority"}
+                resetTicketState={props.resetTicketState}
                 ticketState={props.ticketState}
                 setTicketState={props.setTicketState}
               />

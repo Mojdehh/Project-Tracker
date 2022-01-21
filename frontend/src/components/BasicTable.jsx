@@ -10,12 +10,11 @@ import useApplicationData from "../hooks/useApplicationData";
 import { Link } from "react-router-dom";
 
 export default function BasicTable(props) {
-
   const pageLoad = useApplicationData();
   function refresh() {
     return pageLoad;
   }
-  
+
   return (
     <TableContainer component={Paper}>
       <h1>{props.counter}</h1>
