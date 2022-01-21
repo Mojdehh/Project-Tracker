@@ -1,5 +1,9 @@
-import React, { useRef } from "react";
-
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import { useRef } from "react";
+import { IconButton } from '@mui/material';
+import SearchIcon from "@material-ui/icons/Search";
 
 export default function SearchField(props) {
   const inputE1 = useRef("");
@@ -19,20 +23,29 @@ export default function SearchField(props) {
         props.setSearchResults(props.state);
       }
   };
-  
+
   return (
-    <div className="search bar">
-      <div className="icon search">
-        <input
-          ref={inputE1}
-          type="text"  
-          placeholder="Search Projects" 
-          className="prompt" 
-          value={props.searchTerm} 
-          onChange={searchHandler}
-        />
-        <i className="seach icon"></i>
-      </div>
-    </div>
+    <Box
+      component="form"
+      sx={{
+        '& > :not(style)': { m: 1, width: '50ch' },
+      }}
+      noValidate
+      autoComplete="off"
+    >
+      <TextField 
+        id="outlined-basic" 
+        label="Search Projects"
+        variant="outlined"
+        inputRef={inputE1}
+        value={props.searchTerm} 
+        onChange={searchHandler}
+        endAdornment={
+            <IconButton>
+              <SearchIcon />
+            </IconButton>}
+      />
+    </Box>
   );
+
 }
