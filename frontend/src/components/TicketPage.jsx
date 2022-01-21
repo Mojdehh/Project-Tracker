@@ -4,12 +4,14 @@ import CommentPopUp from "./CommentPopup";
 import CommentSection from "./CommentSection";
 import BreadCrumbs from "./BreadCrumbs";
 import useTicketDetails from "../hooks/useTicketDetails";
+import useProjectDetail from "../hooks/useProjectDetail";
 import useCommentsData from "../hooks/useCommentsData";
 import { useParams } from "react-router";
 import axios from "axios";
 
 export default function TicketPage() {
   let { project_id, ticket_id } = useParams();
+  const { projectName } = useProjectDetail(project_id);
   const { ticket, setTicket, ticketState, setTicketState } = useTicketDetails(
     project_id,
     ticket_id
@@ -50,7 +52,11 @@ export default function TicketPage() {
   const handleSaveChanges = () => editTicket();
   return (
     <>
-      <BreadCrumbs projectName={"Project Name"} ticket={"Ticket Name"} />
+      <BreadCrumbs
+        projectName={projectName}
+        ticketName={ticketState.name}
+        project_id={project_id}
+      />
       <TicketsList
         ticket={ticket}
         setTicket={setTicket}

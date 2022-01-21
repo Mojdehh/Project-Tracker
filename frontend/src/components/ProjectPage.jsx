@@ -40,7 +40,7 @@ export default function ProjectPage() {
   console.log("projects page", projects);
   return (
     <>
-      <BreadCrumbs project={projects} />
+      <BreadCrumbs projectName={projectName} />
       <InteractiveList
         resetName={resetName}
         projects={projects}
