@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import useTicketDetails from "../hooks/useTicketDetails";
 import { useParams } from "react-router-dom";
 import EditTicketPopUp from "./EditTicketPopUp";
+import CircularUnderLoad from "./CircularUnderLoad";
 
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -23,7 +24,7 @@ export default function TicketsList(props) {
   console.log(ticket_id);
   // const ticket = useTicketDetails(project_id, ticket_id);
   //console.log("ticketlistticket", ticket);
-  if (props.ticket.length === 0) return "loading";
+  if (props.ticket.length === 0) return <CircularUnderLoad />;
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <Card

@@ -1,9 +1,11 @@
 import "./App.css";
+import * as React from "react";
 import VerticalNav from "./components/VerticalNav";
 import { Route, Link, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import ProjectPage from "./components/ProjectPage";
 import TicketPage from "./components/TicketPage";
+import Login from "./components/Login";
 
 function App() {
   return (
@@ -11,6 +13,7 @@ function App() {
       <>
         <NavBar />
         <Routes>
+        <Route path="/login" element={<Login />}></Route>
           <Route path="/" element={<VerticalNav />}></Route>
           <Route
             path="/projects/:project_id"

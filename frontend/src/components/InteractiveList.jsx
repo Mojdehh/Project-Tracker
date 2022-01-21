@@ -7,9 +7,10 @@ import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 import EditProjectPopUp from "./EditProjectPopUp";
 import { useParams } from "react-router-dom";
+import CircularUnderLoad from "./CircularUnderLoad";
+
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-
 const Demo = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
 }));
@@ -28,7 +29,7 @@ export default function InteractiveList(props) {
     return devs.join(", ");
   };
 
-  if (props.projects.length === 0) return "loading";
+  if (props.projects.length === 0) return <CircularUnderLoad />;
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <Card

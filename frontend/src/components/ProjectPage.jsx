@@ -7,6 +7,7 @@ import useTicketsData from "../hooks/useTicketsData";
 import useProjectDetail from "../hooks/useProjectDetail";
 import { useParams } from "react-router";
 import axios from "axios";
+import SearchField from "./SearchField";
 
 export default function ProjectPage() {
   let { project_id } = useParams();
@@ -18,6 +19,9 @@ export default function ProjectPage() {
   const { tickets, setTickets } = useTicketsData(project_id);
   const [resetName, setResetName] = React.useState();
   const [status, setStatus] = React.useState();
+  const [searchTerm, setSearchTerm] = React.useState("");
+  const [searchResults, setSearchResults] = React.useState([]);
+
   console.log("status project page", status);
 
   function editProject() {
@@ -37,7 +41,11 @@ export default function ProjectPage() {
   // React.useEffect(() => {
   //   setTicketRows(state);
   // }, [ticketRow]);
-  console.log("projects page", projects);
+  // console.log("projects page", projects);
+  console.log("tickets length", tickets.length);
+  console.log("tickets ", tickets);
+  
+
   return (
     <>
       <BreadCrumbs projectName={projectName} />
@@ -57,15 +65,26 @@ export default function ProjectPage() {
         tickets={tickets}
         setTickets={setTickets}
       />
-      <TicketsTable
-        name="Ticket Name"
-        description="Description"
-        priority="Priority"
-        status="Status"
-        date="Date Created"
-        tickets={tickets}
-        setTickets={setTickets}
+      <SearchField
+        label="Search Tickets"
+        searchTerm={searchTerm} 
+        setSearchTerm={setSearchTerm}
+        searchResults={searchResults} 
+        setSearchResults={setSearchResults}
+        state={tickets}
       />
+      {tickets.length > 0 
+        ? <TicketsTable
+            name="Ticket Name"
+            description="Description"
+            priority="Priority"
+            status="Status"
+            date="Date Created"
+            tickets={searchTerm.length < 1 ? tickets : searchResults}
+            setTickets={setTickets}
+          />
+        : "No Tickets Found!"
+    }
     </>
   );
 }

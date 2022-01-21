@@ -1,17 +1,22 @@
-import * as React from "react";
+import React, { useRef } from "react";
 import BasicTable from "./BasicTable";
 import ProjectPopUp from "./ProjectPopUp";
 import useApplicationData from "../hooks/useApplicationData";
 import axios from "axios";
+import SearchField from "./SearchField";
 
-export default function VerticalNav() {
+export default function VerticalNav(props) {
   const [tableRow, setTableRows] = React.useState([]);
   const [userId, setUserId] = React.useState([]);
   const { state } = useApplicationData();
+  const [searchTerm, setSearchTerm] = React.useState("");
+  const [searchResults, setSearchResults] = React.useState([]);
+
 
   React.useEffect(() => {
     setTableRows(state);
   }, [state]);
+
 
   function addProject(value) {
     return axios
@@ -54,14 +59,23 @@ export default function VerticalNav() {
     event.preventDefault();
     addProject(value);
   };
+
   return (
     <>
+      <SearchField
+        label="Search Projects"
+        searchTerm={searchTerm} 
+        setSearchTerm={setSearchTerm}
+        searchResults={searchResults} 
+        setSearchResults={setSearchResults}
+        state={state}
+      />
       <BasicTable
         name="Project Name"
         number="Number of Tickets"
         status="Project Status"
         date="Date Created"
-        state={tableRow}
+        state={searchTerm.length < 1 ? tableRow : searchResults}
       />
       <ProjectPopUp
         name="Add a Project"

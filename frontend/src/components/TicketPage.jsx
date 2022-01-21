@@ -68,12 +68,12 @@ export default function TicketPage() {
         // setPriority={setPriority}
         handleSaveChanges={handleSaveChanges}
       />
-      <CommentPopUp
+      {/* <CommentPopUp
         ticket={ticket}
         setTicket={setTicket}
         comments={comments}
         setComments={setComments}
-      />
+      /> */}
       <CommentSection
         ticket={ticket}
         setTicket={setTicket}
