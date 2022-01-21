@@ -136,6 +136,7 @@ export default function CustomizedDialogs(props) {
                 statusArr={statusArr}
                 status={props.status}
                 setStatus={props.setStatus}
+                projects={props.projects}
               />
             </div>
           </Box>

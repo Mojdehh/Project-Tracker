@@ -210,6 +210,39 @@ module.exports = (db) => {
   };
 
 
+  const editTicket = (
+    id,
+    name,
+    description,
+    priority,
+    status,
+    user_id,
+    project_id,
+    date_updated
+  ) => {
+    const query = {
+      text: `INSERT INTO tickets (id, name, description, priority, status, user_id, project_id, date_updated)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+      ON CONFLICT (id) DO
+      UPDATE SET name = $2, description = $3, priority = $4, status = $5, user_id = $6, project_id = $7, date_updated = $8
+      RETURNING *;`,
+    };
+    const values = [
+      id,
+      name,
+      description,
+      priority,
+      status,
+      user_id,
+      project_id,
+      date_updated,
+    ];
+    return db
+      .query(query, values)
+      .then((result) => result.rows)
+      .catch((err) => err);
+  };
+
   return {
     getUsers,
     getProjects,
@@ -224,6 +257,7 @@ module.exports = (db) => {
     addTicket,
     addComment,
     editProject,
-    login
+    login,
+    editTicket,
   };
 };

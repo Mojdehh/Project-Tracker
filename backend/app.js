@@ -20,6 +20,7 @@ const getUsersRouter = require("./routes/users");
 const addTicketRouter = require("./routes/tickets");
 const addCommentRouter = require("./routes/tickets");
 const addLoginRouter = require("./routes/login");
+const editTicketRouter = require("./routes/tickets");
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
@@ -53,5 +54,6 @@ app.use(cookieSession({
   name: "session",
   keys: ["key1", "key2"]
 }));
+app.use("/api/projects", editTicketRouter(dbHelpers));
 
 module.exports = app;
