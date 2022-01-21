@@ -9,6 +9,7 @@ import Typography from "@mui/material/Typography";
 import { useParams } from "react-router-dom";
 import CommentIcon from '@mui/icons-material/Comment';
 import Grid from '@mui/material/Grid';
+import CommentPopUp from "./CommentPopup";
 
 export default function CommentSection(props) {
   let { project_id, ticket_id } = useParams();
@@ -30,6 +31,12 @@ export default function CommentSection(props) {
       <Typography sx={{ mt: 2, mb: 2, ml: 1 }} variant="h6" >
       Comments
         </Typography>
+        <CommentPopUp
+        ticket={props.ticket}
+        setTicket={props.setTicket}
+        comments={props.comments}
+        setComments={props.setComments}
+      />
   </Grid>
   </Grid>
   <Divider variant="inset"  />
