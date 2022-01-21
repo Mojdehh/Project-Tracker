@@ -60,25 +60,23 @@ export default function VerticalNav(props) {
     addProject(value);
   };
 
-
   return (
     <>
       <SearchField
+        label="Search Projects"
         searchTerm={searchTerm} 
         setSearchTerm={setSearchTerm}
         searchResults={searchResults} 
         setSearchResults={setSearchResults}
         state={state}
       />
-      {tableRow.length > 0
-        ? <BasicTable
-          name="Project Name"
-          number="Number of Tickets"
-          status="Project Status"
-          date="Date Created"
-          state={searchTerm.length < 1 ? tableRow : searchResults}
-          />
-        : "No Projects Found."}
+      <BasicTable
+        name="Project Name"
+        number="Number of Tickets"
+        status="Project Status"
+        date="Date Created"
+        state={searchTerm.length < 1 ? tableRow : searchResults}
+      />
       <ProjectPopUp
         name="Add a Project"
         add="create new project"

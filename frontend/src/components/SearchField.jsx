@@ -11,15 +11,14 @@ export default function SearchField(props) {
   const searchHandler = () => {
     props.setSearchTerm(inputE1.current.value);
       if(props.searchTerm !== "") {
-        const newProjectsTable = props.state.filter((project) => {
+        const filteredResult = props.state.filter((project) => {
           return Object.values(project)
             .join(" ")
             .toLowerCase()
             .includes(props.searchTerm.toLowerCase());
         });
-        props.setSearchResults(newProjectsTable);
-      }
-      else {
+        props.setSearchResults(filteredResult);
+      } else {
         props.setSearchResults(props.state);
       }
   };
@@ -35,7 +34,7 @@ export default function SearchField(props) {
     >
       <TextField 
         id="input-with-sx" 
-        label="Search Projects"
+        label={props.label}
         variant="outlined"
         inputRef={inputE1}
         value={props.searchTerm} 
