@@ -70,22 +70,7 @@ export default function TicketPage(props) {
         handleSaveChanges={handleSaveChanges}
       />
       <br />
-      <br />
-      
-        
-
-
-        
-       {/* <CommentPopUp
-         ticket={ticket}
-         setTicket={setTicket}
-         comments={comments}
-         setComments={setComments}
-       />
-  */}
-        
-
-      
+      <br />    
       <CommentSection
         ticket={ticket}
         setTicket={setTicket}

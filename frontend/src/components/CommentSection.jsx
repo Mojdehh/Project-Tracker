@@ -10,7 +10,6 @@ import { useParams } from "react-router-dom";
 import CommentIcon from '@mui/icons-material/Comment';
 import Grid from '@mui/material/Grid';
 import CommentPopUp from "./CommentPopup";
-import Box from "@mui/material/Box";
 
 export default function CommentSection(props) {
   let { project_id, ticket_id } = useParams();
@@ -24,9 +23,7 @@ export default function CommentSection(props) {
 
     <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
 
-
     {props.comments.length === 0 ? (
-      
       <Grid container direction="row" alignItems="center">
         <Grid item>
           <Avatar sx={{ ml: 2, mb: 4 }} style={avatarStyle}><CommentIcon /></Avatar>
@@ -41,21 +38,10 @@ export default function CommentSection(props) {
               comments={props.comments}
               setComments={props.setComments}
             />
-            
           </Grid>
           </Typography>
         </Grid>
-      </Grid>
-      
-      // <Box component="span" >
-      // <CommentPopUp
-      //   ticket={props.ticket}
-      //   setTicket={props.setTicket}
-      //   comments={props.comments}
-      //   setComments={props.setComments}
-      // />
-      //  </Box> 
-      
+      </Grid> 
 
     ) : (
 
@@ -79,9 +65,7 @@ export default function CommentSection(props) {
         </Grid>
       </Grid>
     )}
-    {/* <Divider variant="inset" /> */}
-
-
+    
       {props.comments.map((row) => (
         <>
           <ListItem key={row.id} alignItems="flex-start">
