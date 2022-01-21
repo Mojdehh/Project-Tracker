@@ -34,7 +34,7 @@ export default function InteractiveList(props) {
     <div style={{ display: "flex", justifyContent: "center" }}>
       <Card
         elevation={4}
-        sx={{ mt: 3, mb: 2, display: "block", width: "75vw", height: "30vw" }}
+        sx={{ mt: 3, mb: 2, display: "block", width: "60vw" }}
       >
         <CardContent>
           <div style={{ display: "flex", justifyContent: "center" }}>
@@ -57,27 +57,67 @@ export default function InteractiveList(props) {
                   <ListItem>
                     <ListItemText
                       primary="Status"
+                      primaryTypographyProps={{
+                        display: "flex",
+                        textalign: "center",
+                        justifyContent: "center",
+                      }}
                       secondary={props.projects[0].status}
+                      secondaryTypographyProps={{
+                        display: "flex",
+                        textalign: "center",
+                        justifyContent: "center",
+                      }}
                     />
                   </ListItem>
                   <ListItem>
                     <ListItemText
                       primary="Date Created"
-                      secondary={props.projects[0].date_created}
+                      primaryTypographyProps={{
+                        display: "flex",
+                        textalign: "center",
+                        justifyContent: "center",
+                      }}
+                      secondary={props.projects[0].date_created.match(/(.*)T/)[1]}
+                      secondaryTypographyProps={{
+                        display: "flex",
+                        textalign: "center",
+                        justifyContent: "center",
+                      }}
                     />
+                    </ListItem>
                     {props.projects[0].date_updated && (
                       <ListItem>
                         <ListItemText
                           primary="Date Updated"
-                          secondary={props.projects[0].date_updated}
+                          primaryTypographyProps={{
+                            display: "flex",
+                            textalign: "center",
+                            justifyContent: "center",
+                          }}
+                          secondary={props.projects[0].date_updated.match(/(.*)T/)[1]}
+                          secondaryTypographyProps={{
+                            display: "flex",
+                            textalign: "center",
+                            justifyContent: "center",
+                          }}
                         />
                       </ListItem>
                     )}
-                  </ListItem>
                   <ListItem>
                     <ListItemText
                       primary="Assigned Developers"
+                      primaryTypographyProps={{
+                        display: "flex",
+                        textalign: "center",
+                        justifyContent: "center",
+                      }}
                       secondary={assignedDevs(props.projects)}
+                      secondaryTypographyProps={{
+                        display: "flex",
+                        textalign: "center",
+                        justifyContent: "center",
+                      }}
                     />
                   </ListItem>
                 </List>

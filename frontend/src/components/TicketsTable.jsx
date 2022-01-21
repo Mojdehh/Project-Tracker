@@ -18,11 +18,12 @@ export default function TicketsTable(props) {
 
   return (
     <TableContainer
-      component={Paper}
-      style={{ display: "flex", justifyContent: "center" }}
-    >
+      component={Paper}>
+      {/* style={{ display: "flex", justifyContent: "center" }}
+    > */}
       <Table
-        sx={{ mt: 3, mb: 2, display: "block", width: "75vw", minWidth: 650 }}
+      // mt: 3, mb: 2, display: "block", width: "75vw",
+        sx={{ minWidth: 650 }}
         aria-label="simple table"
       >
         <TableHead>
