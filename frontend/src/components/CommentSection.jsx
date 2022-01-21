@@ -20,26 +20,29 @@ export default function CommentSection(props) {
   if (props.comments.length === 0) return "No Comments";
   console.log("props.comments", props.comments);
   return (
-    
+
     <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
 
-<Grid container direction="row" alignItems="center">
-  <Grid item>
-      <Avatar sx={{ml: 2}} style={avatarStyle}><CommentIcon /></Avatar>
-  </Grid>
-  <Grid item>
-      <Typography sx={{ mt: 2, mb: 2, ml: 1 }} variant="h6" >
-      Comments
-        </Typography>
-        <CommentPopUp
-        ticket={props.ticket}
-        setTicket={props.setTicket}
-        comments={props.comments}
-        setComments={props.setComments}
-      />
-  </Grid>
-  </Grid>
-  <Divider variant="inset"  />
+      <Grid container direction="row" alignItems="center">
+        <Grid item>
+          <Avatar sx={{ ml: 2, mb: 3 }} style={avatarStyle}><CommentIcon /></Avatar>
+        </Grid>
+        <Grid item>
+          <Typography sx={{ mt: 2, mb: 2, ml: 1 }} variant="h6" >
+            Comments
+          <Grid item>
+            <CommentPopUp
+              ticket={props.ticket}
+              setTicket={props.setTicket}
+              comments={props.comments}
+              setComments={props.setComments}
+            />
+            
+          </Grid>
+          </Typography>
+        </Grid>
+      </Grid>
+      <Divider variant="inset" />
 
       {props.comments.map((row) => (
         <>
