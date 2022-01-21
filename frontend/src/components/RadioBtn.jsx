@@ -23,7 +23,7 @@ export default function RadioBtn(props) {
             <FormControlLabel
               value="Open"
               control={<Radio />}
-              label="Open"
+              label={props.projects[0].status === "Closed" ? "Re-Open" : "Open"}
               onChange={(event) => {
                 props.setStatus(event.target.value);
               }}
@@ -58,7 +58,7 @@ export default function RadioBtn(props) {
               control={<Radio />}
               label="Low"
               onChange={(event) => {
-                props.setPriority(event.target.value);
+                props.setTicketState({ priority: event.target.value });
               }}
             />
             <FormControlLabel
@@ -66,7 +66,7 @@ export default function RadioBtn(props) {
               control={<Radio />}
               label="Medium"
               onChange={(event) => {
-                props.setPriority(event.target.value);
+                props.setTicketState({ priority: event.target.value });
               }}
             />
             <FormControlLabel
@@ -74,7 +74,47 @@ export default function RadioBtn(props) {
               control={<Radio />}
               label="High"
               onChange={(event) => {
-                props.setPriority(event.target.value);
+                props.setTicketState({ priority: event.target.value });
+              }}
+            />
+          </RadioGroup>
+        </>
+      )}
+      {props.ticketStatus && (
+        <>
+          <br />
+          <FormLabel id="demo-row-radio-buttons-group-label">Status</FormLabel>
+          <RadioGroup
+            sx={{
+              display: "flex",
+              textAlign: "center",
+            }}
+            row
+            aria-labelledby="demo-row-radio-buttons-group-label"
+            name="row-radio-buttons-group"
+          >
+            <FormControlLabel
+              value="Open"
+              control={<Radio />}
+              label="Open"
+              onChange={(event) => {
+                props.setTicketState({ status: event.target.value });
+              }}
+            />
+            <FormControlLabel
+              value="Pending"
+              control={<Radio />}
+              label="Pending"
+              onChange={(event) => {
+                props.setTicketState({ status: event.target.value });
+              }}
+            />
+            <FormControlLabel
+              value="Resolved"
+              control={<Radio />}
+              label="Resolved"
+              onChange={(event) => {
+                props.setTicketState({ status: event.target.value });
               }}
             />
           </RadioGroup>
