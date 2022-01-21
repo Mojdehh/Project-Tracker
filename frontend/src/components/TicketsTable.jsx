@@ -17,8 +17,14 @@ export default function TicketsTable(props) {
   //const tickets = useTicketsData(project_id);
 
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+    <TableContainer
+      component={Paper}
+      style={{ display: "flex", justifyContent: "center" }}
+    >
+      <Table
+        sx={{ mt: 3, mb: 2, display: "block", width: "75vw", minWidth: 650 }}
+        aria-label="simple table"
+      >
         <TableHead>
           <TableRow>
             <TableCell align="center">{props.name}</TableCell>
