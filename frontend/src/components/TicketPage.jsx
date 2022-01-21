@@ -8,8 +8,9 @@ import useProjectDetail from "../hooks/useProjectDetail";
 import useCommentsData from "../hooks/useCommentsData";
 import { useParams } from "react-router";
 import axios from "axios";
+import Grid from '@mui/material/Grid';
 
-export default function TicketPage() {
+export default function TicketPage(props) {
   let { project_id, ticket_id } = useParams();
   const { projectName } = useProjectDetail(project_id);
   const { ticket, setTicket, ticketState, setTicketState } = useTicketDetails(
@@ -68,12 +69,23 @@ export default function TicketPage() {
         // setPriority={setPriority}
         handleSaveChanges={handleSaveChanges}
       />
-      {/* <CommentPopUp
-        ticket={ticket}
-        setTicket={setTicket}
-        comments={comments}
-        setComments={setComments}
-      /> */}
+      <br />
+      <br />
+      
+        
+
+
+        
+       {/* <CommentPopUp
+         ticket={ticket}
+         setTicket={setTicket}
+         comments={comments}
+         setComments={setComments}
+       />
+  */}
+        
+
+      
       <CommentSection
         ticket={ticket}
         setTicket={setTicket}

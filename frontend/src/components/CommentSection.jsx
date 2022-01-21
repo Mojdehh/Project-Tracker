@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 import CommentIcon from '@mui/icons-material/Comment';
 import Grid from '@mui/material/Grid';
 import CommentPopUp from "./CommentPopup";
+import Box from "@mui/material/Box";
 
 export default function CommentSection(props) {
   let { project_id, ticket_id } = useParams();
@@ -17,15 +18,18 @@ export default function CommentSection(props) {
 
   const avatarStyle = { display: 'flex', backgroundColor: '#4caf50', justifyContent: 'center', alignItems: 'center' }
 
-  if (props.comments.length === 0) return "No Comments";
+  // if (props.comments.length === 0) return "No Comments";
   console.log("props.comments", props.comments);
   return (
 
     <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
 
+
+    {props.comments.length === 0 ? (
+      
       <Grid container direction="row" alignItems="center">
         <Grid item>
-          <Avatar sx={{ ml: 2, mb: 3 }} style={avatarStyle}><CommentIcon /></Avatar>
+          <Avatar sx={{ ml: 2, mb: 4 }} style={avatarStyle}><CommentIcon /></Avatar>
         </Grid>
         <Grid item>
           <Typography sx={{ mt: 2, mb: 2, ml: 1 }} variant="h6" >
@@ -42,7 +46,41 @@ export default function CommentSection(props) {
           </Typography>
         </Grid>
       </Grid>
-      <Divider variant="inset" />
+      
+      // <Box component="span" >
+      // <CommentPopUp
+      //   ticket={props.ticket}
+      //   setTicket={props.setTicket}
+      //   comments={props.comments}
+      //   setComments={props.setComments}
+      // />
+      //  </Box> 
+      
+
+    ) : (
+
+      <Grid container direction="row" alignItems="center">
+        <Grid item>
+          <Avatar sx={{ ml: 2, mb: 4 }} style={avatarStyle}><CommentIcon /></Avatar>
+        </Grid>
+        <Grid item>
+          <Typography sx={{ mt: 2, mb: 2, ml: 1 }} variant="h6" >
+            Comments
+          <Grid item>
+            <CommentPopUp
+              ticket={props.ticket}
+              setTicket={props.setTicket}
+              comments={props.comments}
+              setComments={props.setComments}
+            />
+            
+          </Grid>
+          </Typography>
+        </Grid>
+      </Grid>
+    )}
+    {/* <Divider variant="inset" /> */}
+
 
       {props.comments.map((row) => (
         <>
