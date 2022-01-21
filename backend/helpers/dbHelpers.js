@@ -195,17 +195,23 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
-  const login = () => {
+
+  const login = (email, password) => {
     const query = {
-      text: `SELECT * FROM users WHERE email = 'asmith@gmail.com';`
+      text: `SELECT * FROM users WHERE email = $1;`
     };
+    const values = [email];
     return db
-    .query(query)
+    .query(query, values)
     .then((result) => {
-      console.log(result.rows);
-      
-      return result.rows})
-    
+      console.log('result.rows', result.rows);
+      return result.rows[0]})
+    .then(result => {
+      if (result !== undefined && result.password === password) {
+        return result
+      }
+      return null;
+    })
     .catch((err) => err);
   };
 

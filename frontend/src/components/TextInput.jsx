@@ -28,6 +28,14 @@ export default function TextInput(props) {
             props.setValue(event.target.value);
           }}
         />
+        <section
+          style={{
+            marginLeft: "15px",
+            color: "red",
+          }}
+        >
+          {props.error}
+        </section>
         <br />
         <UsersDropDown
           title="Add developers"
@@ -35,6 +43,7 @@ export default function TextInput(props) {
           setUsers={props.setUsers}
           userId={props.userId}
           setUserId={props.setUserId}
+          errorNoDevs={props.errorNoDevs}
         />
       </div>
     </Box>

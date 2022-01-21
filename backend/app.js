@@ -33,6 +33,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(cookieSession({
+  name: "session",
+  keys: ["key1", "key2"]
+}));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
@@ -50,10 +54,6 @@ app.use("/api/users", getUsersRouter(dbHelpers));
 app.use("/api/projects", addCommentRouter(dbHelpers));
 app.use("/api", addLoginRouter(dbHelpers));
 
-app.use(cookieSession({
-  name: "session",
-  keys: ["key1", "key2"]
-}));
 app.use("/api/projects", editTicketRouter(dbHelpers));
 
 module.exports = app;

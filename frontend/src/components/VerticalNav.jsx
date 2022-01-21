@@ -12,11 +12,9 @@ export default function VerticalNav(props) {
   const [searchTerm, setSearchTerm] = React.useState("");
   const [searchResults, setSearchResults] = React.useState([]);
 
-
   React.useEffect(() => {
     setTableRows(state);
   }, [state]);
-
 
   function addProject(value) {
     return axios
@@ -27,6 +25,7 @@ export default function VerticalNav(props) {
         (response) => {
           // if userId.length > 1 for each run post request
           // if not just run once
+          console.log("res", response);
           const projectID = response.data[0].id;
           const projectTitle = response.data[0].name;
           userId.forEach((user) => {
@@ -47,7 +46,7 @@ export default function VerticalNav(props) {
                   });
                 return state;
               });
-          })
+          });
         },
         (error) => {
           console.log(error);
@@ -57,16 +56,17 @@ export default function VerticalNav(props) {
 
   const handleClick = (value, id, event) => {
     event.preventDefault();
-    addProject(value);
+    //validate(value);
+    //addProject(value);
   };
 
   return (
     <>
       <SearchField
         label="Search Projects"
-        searchTerm={searchTerm} 
+        searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
-        searchResults={searchResults} 
+        searchResults={searchResults}
         setSearchResults={setSearchResults}
         state={state}
       />
@@ -83,6 +83,7 @@ export default function VerticalNav(props) {
         userId={userId}
         setUserId={setUserId}
         handleClick={handleClick}
+        addProject={addProject}
       />
     </>
   );

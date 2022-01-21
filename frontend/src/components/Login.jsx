@@ -11,9 +11,7 @@ import Avatar from '@mui/material/Avatar';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { Link } from 'react-router-dom';
 import axios from "axios";
-
-
-
+import { useState } from 'react';
 
 const bull = (
   <Box
@@ -27,6 +25,8 @@ const bull = (
 
 export default function BasicCard() {
   const avatarStyle = { display: 'flex', backgroundColor: '#4caf50', justifyContent: 'center', alignItems: 'center' }
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   
 
   const handleClick = () => {
@@ -37,10 +37,10 @@ export default function BasicCard() {
   function login() {
     return axios
     .post(`http://localhost:8080/api/login`, {
+      email, password
     })
     .then((response) => {
-      response.redirect("/")
-    });
+      window.location.href = '/'});
 
   }
 
@@ -61,16 +61,22 @@ export default function BasicCard() {
 
             <TextField
               id="Username"
+              name="email"
               label="Username"
               placeholder="Enter Username"
+              value={email}
+              onChange={(event)=> {setEmail(event.target.value)}}
             />
             <br />
             <br />
             <TextField
               id="Password"
+              name="password"
               label="Password"
               placeholder="Enter Password"
               type="password"
+              value={password}
+              onChange={(event)=> {setPassword(event.target.value)}}
             />
             
             <br />

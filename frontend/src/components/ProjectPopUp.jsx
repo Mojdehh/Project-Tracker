@@ -57,6 +57,8 @@ export default function CustomizedDialogs(props) {
   const [users, setUsers] = React.useState([]);
   const [state, updateState] = React.useState();
   const forceUpdate = React.useCallback(() => updateState({}), []);
+  const [error, setError] = React.useState("");
+  const [errorNoDevs, setErrorNoDevs] = React.useState("");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -74,7 +76,29 @@ export default function CustomizedDialogs(props) {
   //   // forceUpdate();
   //   props.setCounter(props.counter + 1);
   // };
+  console.log("users state", users);
 
+  function validate(value, users) {
+    if (value === "") {
+      setError("Please Enter Project Name");
+      return;
+    }
+    if (users.length === 0) {
+      setError("");
+      setErrorNoDevs("Please Assign Developers");
+      return;
+    }
+    setError("");
+    setErrorNoDevs("");
+    handleClick(value);
+    handleClose();
+  }
+
+  const handleClick = (value) => {
+    props.addProject(value);
+    setValue("");
+    setUsers([]);
+  };
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
@@ -101,14 +125,18 @@ export default function CustomizedDialogs(props) {
             setUsers={setUsers}
             userId={props.userId}
             setUserId={props.setUserId}
+            error={error}
+            errorNoDevs={errorNoDevs}
           />
         </DialogContent>
         <DialogActions>
           <Button
             autoFocus
             onClick={(event) => {
-              props.handleClick(value, props.userId, event);
-              handleClose();
+              validate(value, users);
+              //props.addProject(value);
+              //props.handleClick(value, props.userId, event);
+              //handleClose();
             }}
           >
             {props.add}
