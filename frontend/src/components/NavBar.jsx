@@ -7,6 +7,8 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import { Link } from "react-router-dom";
 import DeveloperModeIcon from '@mui/icons-material/DeveloperMode';
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
 
 export default function ButtonAppBar() {
 
@@ -29,6 +31,15 @@ export default function ButtonAppBar() {
             component="div"
             sx={{ flexGrow: 1 }}
           ></Typography>
+
+          {/* {props.userId ? (
+           <ListItemAvatar>
+              <Avatar src="/static/images/avatar/1.jpg" />
+            </ListItemAvatar>
+
+          ) : (
+            null
+          )} */}
 
 
         </Toolbar>

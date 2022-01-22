@@ -82,7 +82,7 @@ export default function CommentSection(props) {
                     variant="body2"
                     color="text.primary"
                   >
-                    {row.date_created}
+                    {row.date_created.replace(/\.[0-9]{3}/, '').replace('T', '').replace('Z', '')}
                   </Typography>
                   <br />
                   {row.note}
