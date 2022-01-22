@@ -7,7 +7,11 @@ import FormLabel from "@mui/material/FormLabel";
 
 export default function RadioBtn(props) {
   return (
-    <FormControl>
+    <FormControl
+      style={{
+        marginLeft: "15px",
+      }}
+    >
       {props.statusArr && (
         <>
           <FormLabel id="demo-row-radio-buttons-group-label">Status</FormLabel>
@@ -106,6 +110,14 @@ export default function RadioBtn(props) {
               }}
             />
           </RadioGroup>
+          <section
+            style={{
+              marginLeft: "1px",
+              color: "red",
+            }}
+          >
+            {props.errorPriority}
+          </section>
         </>
       )}
       {props.ticketState && (

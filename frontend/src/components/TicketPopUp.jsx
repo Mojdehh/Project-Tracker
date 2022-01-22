@@ -54,12 +54,14 @@ BootstrapDialogTitle.propTypes = {
 };
 
 export default function TicketPopUp(props) {
+  const { project_id } = useParams();
   const [open, setOpen] = React.useState(false);
   const [name, setName] = React.useState("");
   const [description, setDescription] = React.useState("");
   const [priority, setPriority] = React.useState();
-  const { project_id } = useParams();
-
+  const [error, setError] = React.useState("");
+  const [errorDescription, setErrorDescription] = React.useState("");
+  const [errorPriority, setErrorPriority] = React.useState("");
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -67,13 +69,38 @@ export default function TicketPopUp(props) {
   const handleClickClose = () => {
     setName("");
     setDescription("");
+    setPriority();
     setOpen(false);
   };
   const handleClose = () => {
     addTicket();
-
+    setName("");
+    setDescription("");
+    setPriority();
     setOpen(false);
   };
+  console.log("priority", priority);
+  function validate(users) {
+    if (name === "") {
+      setError("Please Enter Ticket Name");
+      return;
+    }
+    if (description === "") {
+      setError("");
+      setErrorDescription("Please Enter A Description");
+      return;
+    }
+    if (priority === undefined) {
+      setError("");
+      setErrorDescription("");
+      setErrorPriority("Please Select Priority");
+      return;
+    }
+    setError("");
+    setErrorDescription("");
+    setErrorPriority("");
+    handleClose();
+  }
 
   function addTicket() {
     return axios
@@ -149,6 +176,14 @@ export default function TicketPopUp(props) {
                   setName(event.target.value);
                 }}
               />
+              <section
+                style={{
+                  marginLeft: "15px",
+                  color: "red",
+                }}
+              >
+                {error}
+              </section>
               <br />
               <TextField
                 id=""
@@ -160,13 +195,25 @@ export default function TicketPopUp(props) {
                   setDescription(event.target.value);
                 }}
               />
+              <section
+                style={{
+                  marginLeft: "15px",
+                  color: "red",
+                }}
+              >
+                {errorDescription}
+              </section>
               <br />
-              <RadioBtn priority={"priority"} setPriority={setPriority} />
+              <RadioBtn
+                priority={"priority"}
+                setPriority={setPriority}
+                errorPriority={errorPriority}
+              />
             </div>
           </Box>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose}>
+          <Button autoFocus onClick={validate}>
             Create New Ticket
           </Button>
         </DialogActions>
