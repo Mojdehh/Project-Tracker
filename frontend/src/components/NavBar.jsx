@@ -25,6 +25,14 @@ export default function ButtonAppBar() {
       })
   }, [])
 
+  const handleLogoutClick = () => {
+    // useEffect(() => {
+      axios.post('http://localhost:8080/api/logout')
+        .then(() => {
+          {window.location.href = '/login'}
+        })
+  };
+
 
   return (
 
@@ -54,7 +62,7 @@ export default function ButtonAppBar() {
               <Button 
                 variant="contained" 
                 color="success" 
-                // onClick={() => {window.location.href = '/login'}}
+                onClick={() => handleLogoutClick()}
                 >
                 Logout
               </Button>
