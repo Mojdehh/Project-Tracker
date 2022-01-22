@@ -12,8 +12,7 @@ import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import { useState } from 'react';
-import { useEffect } from "react";
-
+import { useEffect } from 'react';
 
 const bull = (
   <Box
@@ -42,13 +41,19 @@ export default function BasicCard() {
       email, password
     })
     .then((response) => {
-      window.location.href = '/'});
+      window.location.href = '/'
+    });
   }
 
   useEffect(() => {
     axios.get('http://localhost:8080/api/login')
       .then((response) => {
-        console.log(response);
+        // console.log(response);
+        // console.log(response.data.user.full_name);
+        if (response.data.loggedIn === true) {
+          const username = response.data.user.full_name
+          window.location.href = '/'
+        }
       })
   }, [])
   

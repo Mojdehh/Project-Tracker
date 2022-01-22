@@ -9,8 +9,21 @@ import { Link } from "react-router-dom";
 import DeveloperModeIcon from '@mui/icons-material/DeveloperMode';
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
+import { useEffect } from "react";
+import axios from "axios";
+import { useState } from "react";
 
 export default function ButtonAppBar() {
+  const [username, setUsername] = useState("")
+
+  useEffect(() => {
+    axios.get('http://localhost:8080/api/login')
+      .then((response) => {
+        if (response.data.loggedIn === true) {
+          setUsername(response.data.user.full_name)
+        }
+      })
+  }, [])
 
   return (
 
@@ -32,14 +45,13 @@ export default function ButtonAppBar() {
             sx={{ flexGrow: 1 }}
           ></Typography>
 
-          {/* {props.userId ? (
+          {username !== "" ? (
            <ListItemAvatar>
-              <Avatar src="/static/images/avatar/1.jpg" />
+              <Avatar alt={username} src="/static/images/avatar/1.jpg" />
             </ListItemAvatar>
-
           ) : (
             null
-          )} */}
+          )}
 
 
         </Toolbar>
