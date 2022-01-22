@@ -70,6 +70,9 @@ export default function TicketPopUp(props) {
     setName("");
     setDescription("");
     setPriority();
+    setError("");
+    setErrorDescription("");
+    setErrorPriority("");
     setOpen(false);
   };
   const handleClose = () => {
