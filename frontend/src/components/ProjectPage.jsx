@@ -32,7 +32,7 @@ export default function ProjectPage() {
       })
       .then((response) => {
         console.log("response project pg", response.data);
-        setSearchResults(response.data);
+        setProjects(response.data);
       })
       .catch((err) => console.log(err));
   }
