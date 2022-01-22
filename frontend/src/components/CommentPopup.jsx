@@ -55,6 +55,7 @@ BootstrapDialogTitle.propTypes = {
 export default function CustomizedDialogs(props) {
   const [open, setOpen] = React.useState(false);
   const [comment, setComment] = React.useState("");
+  const [error, setError] = React.useState("");
   let { project_id, ticket_id } = useParams();
 
   const handleClickOpen = () => {
@@ -63,14 +64,25 @@ export default function CustomizedDialogs(props) {
 
   const handleClickClose = () => {
     setComment("");
+    setError("");
     setOpen(false);
   };
+
   const handleClose = (event) => {
     event.preventDefault();
     addComment();
     setComment("");
     setOpen(false);
   };
+
+  function validate(event) {
+    if (comment === "") {
+      setError("Please Enter A Comment");
+      return;
+    }
+    setError("");
+    handleClose(event);
+  }
 
   function addComment() {
     console.log("comment", comment);
@@ -142,12 +154,20 @@ export default function CustomizedDialogs(props) {
                   setComment(event.target.value);
                 }}
               />
+              <section
+                style={{
+                  marginLeft: "15px",
+                  color: "red",
+                }}
+              >
+                {error}
+              </section>
               <br />
             </div>
           </Box>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose}>
+          <Button autoFocus onClick={validate}>
             Submit comment
           </Button>
         </DialogActions>

@@ -205,7 +205,7 @@ module.exports = (db) => {
     return db
     .query(query, values)
     .then((result) => {
-      console.log('result.rows', result.rows);
+      // console.log('result.rows', result.rows);
       return result.rows[0]})
     .then(result => {
       if (result !== undefined && result.password === password) {
