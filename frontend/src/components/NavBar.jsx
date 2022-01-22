@@ -25,6 +25,7 @@ export default function ButtonAppBar() {
       })
   }, [])
 
+
   return (
 
     <Box sx={{ flexGrow: 1 }}>
@@ -46,11 +47,26 @@ export default function ButtonAppBar() {
           ></Typography>
 
           {username !== "" ? (
-           <ListItemAvatar>
-              <Avatar alt={username} src="/static/images/avatar/1.jpg" />
-            </ListItemAvatar>
+            <>
+            <ListItemAvatar>
+                <Avatar alt={username} src="/static/images/avatar/1.jpg" />
+              </ListItemAvatar>
+              <Button 
+                variant="contained" 
+                color="success" 
+                // onClick={() => {window.location.href = '/login'}}
+                >
+                Logout
+              </Button>
+            </>
           ) : (
-            null
+            <Button 
+              variant="contained" 
+              color="success" 
+              onClick={() => {window.location.href = '/login'}}
+              >
+              Login
+            </Button>
           )}
 
 
