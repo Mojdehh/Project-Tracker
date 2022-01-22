@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cookieSession = require('cookie-session');
 const logger = require("morgan");
@@ -28,12 +29,13 @@ const usersRouter = require("./routes/users");
 
 const app = express();
 
-app.use(cors({origin: true, credentials: true}));
+app.use(cors({origin: "http://localhost:3000", credentials: true}));
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true}));
 app.use(cookieSession({
   name: "session",
   keys: ["key1", "key2"]

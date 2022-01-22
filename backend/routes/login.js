@@ -9,17 +9,27 @@ const {
 module.exports = ({
   login
 }) => {
+
+  router.get("/login", (req, res) => {
+    if (req.session.user) {
+      res.send({ loggedIn: true, user: req.session.user });
+    } else {
+      res.send({ loggedIn: false });
+    }
+  });
+  
+
   router.post("/login", (req, res) => {
-    console.log('req.session', req.session);
+    // console.log('req.session', req.session);
     const {email, password} = req.body;
     login(email, password)
     .then(user => {
       if (!user) {
         res.status(401);
-        return res.send('User not found! please try again!')
+        return res.send({message : 'Wrong username/password combination!'})
       }
       req.session.user = user;
-      // console.log("req.session.user ", req.session.user );
+      console.log("req.session.user ", req.session.user);
       res.json(user);
 
     })
