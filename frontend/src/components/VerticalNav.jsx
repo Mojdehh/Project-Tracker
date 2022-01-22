@@ -4,16 +4,17 @@ import ProjectPopUp from "./ProjectPopUp";
 import useApplicationData from "../hooks/useApplicationData";
 import axios from "axios";
 import SearchField from "./SearchField";
+import ButtonSort from "./ButtonSort";
 
 export default function VerticalNav(props) {
-  const [tableRow, setTableRows] = React.useState([]);
   const [userId, setUserId] = React.useState([]);
   const { state } = useApplicationData();
   const [searchTerm, setSearchTerm] = React.useState("");
-  const [searchResults, setSearchResults] = React.useState([]);
+  const [projects, setProjects] = React.useState([]);
+  const [filterSelected, setFilterSelected] = React.useState("All")
 
   React.useEffect(() => {
-    setTableRows(state);
+    setProjects(state);
   }, [state]);
 
   function addProject(value) {
@@ -25,7 +26,7 @@ export default function VerticalNav(props) {
         (response) => {
           // if userId.length > 1 for each run post request
           // if not just run once
-          console.log("res", response);
+          // console.log("res", response);
           const projectID = response.data[0].id;
           const projectTitle = response.data[0].name;
           userId.forEach((user) => {
@@ -41,8 +42,8 @@ export default function VerticalNav(props) {
                 axios
                   .get("http://localhost:8080/api/projects/details")
                   .then((details) => {
-                    console.log("detials", details.data);
-                    setTableRows(details.data);
+                    // console.log("detials", details.data);
+                    setProjects(details.data);
                   });
                 return state;
               });
@@ -60,22 +61,27 @@ export default function VerticalNav(props) {
     //addProject(value);
   };
 
+  const filteredSearchResults = () => {
+    if(filterSelected === "All") {
+      return projects;
+    }
+    console.log("SRCH RESULT ---- ", projects);
+    return projects.filter((result) => {
+      console.log("RESULT---", result)
+      return result.status === filterSelected;
+    })
+
+  }
+
   return (
     <>
       <SearchField
         label="Search Projects"
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
-        searchResults={searchResults}
-        setSearchResults={setSearchResults}
+        projects={projects}
+        setProjects={setProjects}
         state={state}
-      />
-      <BasicTable
-        name="Project Name"
-        number="Number of Tickets"
-        status="Project Status"
-        date="Date Created"
-        state={searchTerm.length < 1 ? tableRow : searchResults}
       />
       <ProjectPopUp
         name="Add a Project"
@@ -84,6 +90,18 @@ export default function VerticalNav(props) {
         setUserId={setUserId}
         handleClick={handleClick}
         addProject={addProject}
+      />
+      <ButtonSort
+        label="Radio Filter"
+        filterSelected={filterSelected}
+        setFilterSelected={setFilterSelected}
+      />
+      <BasicTable
+        name="Project Name"
+        number="Number of Tickets"
+        status="Project Status"
+        date="Date Created"
+        state={filteredSearchResults()}
       />
     </>
   );

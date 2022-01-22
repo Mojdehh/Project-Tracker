@@ -14,7 +14,7 @@ export default function BasicTable(props) {
   function refresh() {
     return pageLoad;
   }
-
+  
   return (
     <TableContainer component={Paper}>
       <h1>{props.counter}</h1>

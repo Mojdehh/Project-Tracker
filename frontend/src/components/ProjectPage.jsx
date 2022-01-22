@@ -32,7 +32,7 @@ export default function ProjectPage() {
       })
       .then((response) => {
         console.log("response project pg", response.data);
-        setProjects(response.data);
+        setSearchResults(response.data);
       })
       .catch((err) => console.log(err));
   }
@@ -69,8 +69,8 @@ export default function ProjectPage() {
         label="Search Tickets"
         searchTerm={searchTerm} 
         setSearchTerm={setSearchTerm}
-        searchResults={searchResults} 
-        setSearchResults={setSearchResults}
+        state={searchResults} 
+        setProjects={setSearchResults}
         state={tickets}
       />
       {tickets.length > 0 
@@ -80,7 +80,7 @@ export default function ProjectPage() {
             priority="Priority"
             status="Status"
             date="Date Created"
-            tickets={searchTerm.length < 1 ? tickets : searchResults}
+            tickets={searchTerm.length < 1 ? tickets : projects}
             setTickets={setTickets}
           />
         : "No Tickets Found!"

@@ -17,9 +17,9 @@ export default function SearchField(props) {
             .toLowerCase()
             .includes(props.searchTerm.toLowerCase());
         });
-        props.setSearchResults(filteredResult);
+        props.setProjects(filteredResult);
       } else {
-        props.setSearchResults(props.state);
+        props.setProjects(props.state);
       }
   };
 
