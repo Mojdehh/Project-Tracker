@@ -168,6 +168,7 @@ module.exports = (db) => {
       .then((result) => result.rows)
       .catch((err) => err);
   };
+
   const addComment = (comment, user_id, ticket_id) => {
     const query = {
       text: `INSERT INTO comments (note, user_id, ticket_id) VALUES ($1, $2, $3) RETURNING *;`,

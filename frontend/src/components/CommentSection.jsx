@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 import CommentIcon from '@mui/icons-material/Comment';
 import Grid from '@mui/material/Grid';
 import CommentPopUp from "./CommentPopup";
+// import DeleteComment from "./DeleteComment";
 
 export default function CommentSection(props) {
   let { project_id, ticket_id } = useParams();
@@ -68,7 +69,7 @@ export default function CommentSection(props) {
     
       {props.comments.map((row) => (
         <>
-          <ListItem key={row.id} alignItems="flex-start">
+          <ListItem key={row.id} id={row.id} alignItems="flex-start">
             <ListItemAvatar>
               <Avatar alt={row.username} src="/static/images/avatar/1.jpg" />
             </ListItemAvatar>
@@ -86,6 +87,7 @@ export default function CommentSection(props) {
                   </Typography>
                   <br />
                   {row.note}
+                  {/* <DeleteComment id={row.id} setComments={props.setComments}/> */}
                 </React.Fragment>
               }
             />

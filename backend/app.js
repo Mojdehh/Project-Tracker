@@ -22,6 +22,7 @@ const addCommentRouter = require("./routes/tickets");
 const addLoginRouter = require("./routes/login");
 const editTicketRouter = require("./routes/tickets");
 
+
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 
@@ -53,7 +54,7 @@ app.use("/api/projects", addTicketRouter(dbHelpers));
 app.use("/api/users", getUsersRouter(dbHelpers));
 app.use("/api/projects", addCommentRouter(dbHelpers));
 app.use("/api", addLoginRouter(dbHelpers));
-
 app.use("/api/projects", editTicketRouter(dbHelpers));
+
 
 module.exports = app;
