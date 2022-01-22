@@ -12,6 +12,8 @@ import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import { useState } from 'react';
+import { useEffect } from "react";
+
 
 const bull = (
   <Box
@@ -41,10 +43,14 @@ export default function BasicCard() {
     })
     .then((response) => {
       window.location.href = '/'});
-
   }
 
- 
+  useEffect(() => {
+    axios.get('http://localhost:8080/api/login')
+      .then((response) => {
+        console.log(response);
+      })
+  }, [])
   
   return (
     <Grid >
