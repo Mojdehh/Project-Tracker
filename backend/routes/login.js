@@ -18,11 +18,9 @@ module.exports = ({
         res.status(401);
         return res.send('User not found! please try again!')
       }
-      req.session.user_id = user.id;
-      // console.log("req.session.user_id", req.session.user_id);
-      console.log("session", req.session);
+      req.session.user = user;
+      // console.log("req.session.user ", req.session.user );
       res.json(user);
-      // console.log(user);
 
     })
     .catch(err => res.send(err));

@@ -6,6 +6,9 @@ import NavBar from "./components/NavBar";
 import ProjectPage from "./components/ProjectPage";
 import TicketPage from "./components/TicketPage";
 import Login from "./components/Login";
+import axios from "axios";
+axios.defaults.withCredentials = true
+
 
 function App() {
   return (
