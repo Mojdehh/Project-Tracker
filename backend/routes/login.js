@@ -37,5 +37,10 @@ module.exports = ({
     
   })
 
+  router.post('/', (req, res) => {
+		res.session = null; // delete user cookies
+		res.send({});
+	});
+
   return router;
 };
