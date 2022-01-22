@@ -9,9 +9,12 @@ export default function SearchField(props) {
   const inputE1 = useRef("");
 
   const searchHandler = () => {
+    console.log("INPUT OMG", inputE1.current.value);
+    
     props.setSearchTerm(inputE1.current.value);
+    
     console.log("!!!", props.searchTerm);
-      if(props.searchTerm) {
+      if(inputE1.current.value) {
         const filteredResult = props.state.filter((project) => {
           return Object.values(project)
             .join(" ")
@@ -20,7 +23,9 @@ export default function SearchField(props) {
         });
         props.setProjects(filteredResult);
       } else {
+        
         props.setProjects(props.state);
+
       }
   };
 
