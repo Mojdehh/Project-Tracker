@@ -64,6 +64,10 @@ export default function CustomizedDialogs(props) {
     setOpen(true);
   };
   const handleClose = () => {
+    setValue("");
+    setUsers([]);
+    setError("");
+    setErrorNoDevs("");
     setOpen(false);
   };
 
