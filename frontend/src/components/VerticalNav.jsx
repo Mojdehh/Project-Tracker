@@ -8,7 +8,7 @@ import ButtonSort from "./ButtonSort";
 
 export default function VerticalNav(props) {
   const [userId, setUserId] = React.useState([]);
-  const { state } = useApplicationData();
+  const { state, setState } = useApplicationData();
   const [searchTerm, setSearchTerm] = React.useState("");
   const [projects, setProjects] = React.useState([]);
   const [filterSelected, setFilterSelected] = React.useState("All")
@@ -18,6 +18,7 @@ export default function VerticalNav(props) {
   }, [state]);
 
   function addProject(value) {
+    console.log("xxxxxxxxxxxxx", value);
     return axios
       .post("http://localhost:8080/api/projects", {
         projectName: value,
@@ -42,8 +43,9 @@ export default function VerticalNav(props) {
                 axios
                   .get("http://localhost:8080/api/projects/details")
                   .then((details) => {
-                    // console.log("detials", details.data);
-                    setProjects(details.data);
+                    console.log("details++++++++++++++++", details.data);
+                    setState(details.data);
+                    // setProjects(details.data);
                   });
                 return state;
               });

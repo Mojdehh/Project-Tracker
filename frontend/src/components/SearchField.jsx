@@ -23,7 +23,7 @@ export default function SearchField(props) {
         });
         props.setProjects(filteredResult);
       } else {
-        
+       
         props.setProjects(props.state);
 
       }

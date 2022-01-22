@@ -83,6 +83,7 @@ export default function CustomizedDialogs(props) {
   console.log("users state", users);
 
   function validate(value, users) {
+    
     if (value === "") {
       setError("Please Enter Project Name");
       return;
