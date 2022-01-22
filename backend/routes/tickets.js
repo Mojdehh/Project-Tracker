@@ -63,7 +63,7 @@ module.exports = ({
 
   router.post("/:project_id", (req, res) => {
     const projectID = req.params.project_id;
-    const userID = 4;
+    const userID = req.session.user.id;
     const description = req.body.description;
     const priority = req.body.priority;
     const name = req.body.ticketName;
@@ -79,7 +79,7 @@ module.exports = ({
   router.post("/:project_id/tickets/:ticket_id/comments", (req, res) => {
     const projectID = req.params.project_id;
     const ticketID = req.params.ticket_id;
-    const userID = 3;
+    const userID = req.session.user.id;
     const comment = req.body.comment;
     addComment(comment, userID, ticketID)
       .then((comment) => res.json(comment))
@@ -94,7 +94,7 @@ module.exports = ({
   router.put("/:project_id/tickets/:ticket_id", (req, res) => {
     const projectID = req.params.project_id;
     const ticketID = req.params.ticket_id;
-    const userID = 4;
+    const userID = req.session.user.id;
     const name = req.body.name;
     const description = req.body.description;
     const priority = req.body.priority;
