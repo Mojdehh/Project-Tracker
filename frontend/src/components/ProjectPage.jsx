@@ -80,7 +80,7 @@ export default function ProjectPage() {
             priority="Priority"
             status="Status"
             date="Date Created"
-            tickets={searchTerm.length < 1 ? tickets : projects}
+            tickets={searchTerm.length < 1 ? tickets : searchResults}
             setTickets={setTickets}
           />
         : "No Tickets Found!"

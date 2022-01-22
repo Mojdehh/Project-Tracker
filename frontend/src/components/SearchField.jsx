@@ -10,7 +10,8 @@ export default function SearchField(props) {
 
   const searchHandler = () => {
     props.setSearchTerm(inputE1.current.value);
-      if(props.searchTerm !== "") {
+    console.log("!!!", props.searchTerm);
+      if(props.searchTerm) {
         const filteredResult = props.state.filter((project) => {
           return Object.values(project)
             .join(" ")
