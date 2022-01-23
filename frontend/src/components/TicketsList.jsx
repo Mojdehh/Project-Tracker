@@ -50,23 +50,6 @@ export default function TicketsList(props) {
                   sx={{ display: "flex", flexDirection: "row" }}
                   dense={dense}
                 >
-                  {/* <ListItem>
-            <ListItemText 
-              primary="Description"
-              primaryTypographyProps={{
-                display: 'flex',
-                textalign: 'center',
-                justifyContent: 'center',
-              }}
-              secondary={props.ticket[0].description}
-              secondaryTypographyProps={{
-                display: 'flex',
-                textalign: 'center',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            />
-          </ListItem> */}
                   <ListItem>
                     <ListItemText
                       primary="Status"
@@ -115,6 +98,26 @@ export default function TicketsList(props) {
                       }}
                     />
                   </ListItem>
+                  {props.ticket[0].date_updated && (
+                    <ListItem>
+                      <ListItemText
+                        primary="Date Updated"
+                        primaryTypographyProps={{
+                          display: "flex",
+                          textalign: "center",
+                          justifyContent: "center",
+                        }}
+                        secondary={
+                          props.ticket[0].date_updated.match(/(.*)T/)[1]
+                        }
+                        secondaryTypographyProps={{
+                          display: "flex",
+                          textalign: "center",
+                          justifyContent: "center",
+                        }}
+                      />
+                    </ListItem>
+                  )}
                   <ListItem>
                     <ListItemText
                       primary="Last Updated By"

@@ -6,27 +6,26 @@ import axios from "axios";
 import SearchField from "./SearchField";
 import ButtonSort from "./ButtonSort";
 import Paper from "@mui/material/Paper";
-import Box from '@mui/material/Box';
+import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { Typography } from "@mui/material";
-import ContentPasteRoundedIcon from '@mui/icons-material/ContentPasteRounded';
+import ContentPasteRoundedIcon from "@mui/icons-material/ContentPasteRounded";
 
 export default function VerticalNav(props) {
   const [userId, setUserId] = React.useState([]);
   const { state, setState } = useApplicationData();
   const [searchTerm, setSearchTerm] = React.useState("");
   const [projects, setProjects] = React.useState([]);
-  const [filterSelected, setFilterSelected] = React.useState("All")
+  const [filterSelected, setFilterSelected] = React.useState("All");
 
   // If the user is not logged in, user will be redirected to login page
   React.useEffect(() => {
-    axios.get('http://localhost:8080/api/login')
-      .then((response) => {
-        if (response.data.loggedIn === false) {
-          window.location.href = '/login'
-        }
-      })
-  }, [])
+    axios.get("http://localhost:8080/api/login").then((response) => {
+      if (response.data.loggedIn === false) {
+        window.location.href = "/login";
+      }
+    });
+  }, []);
 
   React.useEffect(() => {
     setProjects(state);
@@ -47,7 +46,7 @@ export default function VerticalNav(props) {
           const projectTitle = response.data[0].name;
           userId.forEach((user) => {
             axios
-              .post("http://localhost:8080/api/projects/users", {
+              .post("http://localhost:8080/api/projects/user_project", {
                 project_id: projectID,
                 project_name: projectTitle,
                 user_id: user,
@@ -79,113 +78,103 @@ export default function VerticalNav(props) {
   };
 
   const filteredSearchResults = () => {
-    if(filterSelected === "All") {
+    if (filterSelected === "All") {
       return projects;
     }
     console.log("SRCH RESULT ---- ", projects);
     return projects.filter((result) => {
-      console.log("RESULT---", result)
+      console.log("RESULT---", result);
       return result.status === filterSelected;
-    })
-
-  }
+    });
+  };
 
   return (
-    
     <>
-    
-<div >
-<Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        flexDirection: 'row',
-        '& > :not(style)': {
-          m: 1,
-          
-          width: 1000,
-          height: 57,
-        },
-      }}
-    >
-      <Paper elevation={1} >
-        <Grid container>
-          <ContentPasteRoundedIcon sx={{mt: 1.5}} fontSize="large" />
-        <div>
-          <Typography variant="h6" align='left' >
-            Project Dashboard
-          </Typography>
-          <Typography
-            
-          >
-            A curated list of all your projects
-          </Typography>
-        </div>
-</Grid>
-      </Paper>
-      </Box>
-</div>
+      <div>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            flexDirection: "row",
+            "& > :not(style)": {
+              m: 1,
 
-    <div>
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        flexDirection: 'row',
-        
-        // flexWrap: 'wrap',
-        '& > :not(style)': {
-          m: 1,
-          pt: 1.5,
-          width: 1000,
-          height: 120,
-        },
-      }}
-    >
-
-      <Paper elevation={4}>
-        <Grid container justifyContent='space-around'>
-      <SearchField
-        label="Search Projects"
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-        projects={projects}
-        setProjects={setProjects}
-        state={state}
-      />
-        <ButtonSort
-          label="Radio Filter"
-          filterSelected={filterSelected}
-          setFilterSelected={setFilterSelected}
-        />
-        </Grid>
-        
-        <Grid container sx={{ ml: 10 }}>
-        <ProjectPopUp
-          name="Add a Project"
-          add="create new project"
-          userId={userId}
-          setUserId={setUserId}
-          handleClick={handleClick}
-          addProject={addProject}
-        />
-        </Grid>
-        <br />
-        
-    
-    <Grid containder sc={{ height: 100 }}>
-      <BasicTable
-        name="Project Name"
-        number="Number of Tickets"
-        status="Project Status"
-        date="Date Created"
-        state={filteredSearchResults()}
-        />
-        </Grid>
-        </Paper>
-  </Box>
+              width: 1000,
+              height: 57,
+            },
+          }}
+        >
+          <Paper elevation={1}>
+            <Grid container>
+              <ContentPasteRoundedIcon sx={{ mt: 1.5 }} fontSize="large" />
+              <div>
+                <Typography variant="h6" align="left">
+                  Project Dashboard
+                </Typography>
+                <Typography>A curated list of all your projects</Typography>
+              </div>
+            </Grid>
+          </Paper>
+        </Box>
       </div>
 
+      <div>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            flexDirection: "row",
+
+            // flexWrap: 'wrap',
+            "& > :not(style)": {
+              m: 1,
+              pt: 1.5,
+              width: 1000,
+              height: 120,
+            },
+          }}
+        >
+          <Paper elevation={4}>
+            <Grid container justifyContent="space-around">
+              <SearchField
+                label="Search Projects"
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
+                projects={projects}
+                setProjects={setProjects}
+                state={state}
+              />
+              <ButtonSort
+                label="Radio Filter"
+                filterSelected={filterSelected}
+                setFilterSelected={setFilterSelected}
+              />
+            </Grid>
+
+            <Grid container sx={{ ml: 10 }}>
+              <ProjectPopUp
+                name="Add a Project"
+                add="create new project"
+                userId={userId}
+                setUserId={setUserId}
+                handleClick={handleClick}
+                addProject={addProject}
+              />
+            </Grid>
+            <br />
+
+            <Grid containder sc={{ height: 100 }}>
+              <BasicTable
+                name="Project Name"
+                number="Number of Tickets"
+                status="Project Status"
+                date="Date Created"
+                state={filteredSearchResults()}
+              />
+            </Grid>
+          </Paper>
+        </Box>
+      </div>
     </>
   );
 }

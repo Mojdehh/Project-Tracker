@@ -13,13 +13,19 @@ import { useRadioGroup } from "@mui/material";
 export default function ProjectPage() {
   let { project_id } = useParams();
 
-  const { projects, setProjects, projectName, setProjectName } =
-    useProjectDetail(project_id);
+  const {
+    projects,
+    setProjects,
+    projectName,
+    setProjectName,
+    status,
+    setStatus,
+  } = useProjectDetail(project_id);
   // const [ticketRow, setTicketRows] = React.useState([]);
 
   const { tickets, setTickets } = useTicketsData(project_id);
   const [resetName, setResetName] = React.useState();
-  const [status, setStatus] = React.useState();
+  //const [status, setStatus] = React.useState();
   const [searchTerm, setSearchTerm] = React.useState("");
   const [searchResults, setSearchResults] = React.useState([]);
   const [userId, setUserId] = React.useState([]);
@@ -40,6 +46,7 @@ export default function ProjectPage() {
 
   function editProject(projectName, event, status, ids) {
     console.log("userId", ids);
+    console.log("status on edit pro", status);
     return axios
       .put(`http://localhost:8080/api/projects/${project_id}`, {
         projectName,
@@ -86,7 +93,7 @@ export default function ProjectPage() {
 
   return (
     <>
-      <BreadCrumbs projectName={projectName} />
+      <BreadCrumbs projectName={projectName} projects={projects} />
       <InteractiveList
         resetName={resetName}
         projects={projects}
