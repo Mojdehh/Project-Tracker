@@ -38,8 +38,9 @@ export default function BasicTable(props) {
             <TableRow
               key={row.name}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              hover role="checkbox" tabIndex={-1} key={row.code}
             >
-              <TableCell component="th" scope="row">
+              <TableCell align="center" component="th" scope="row">
                 <Link to={`/projects/${row.id}`}>{row.name}</Link>
               </TableCell>
               <TableCell align="center">{row.number_of_tickets}</TableCell>
