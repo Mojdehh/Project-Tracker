@@ -113,6 +113,8 @@ GET /api/user_project/:user_id/:project_id (get user for specific project) ?
 - "/project/:project_id" => (shows one project and list of tickets associated with that project)
 - "/project/:project_id/ticket/:ticket_id" => specific ticket within a project, with notes listed
 
+### **Trello Board:**
+https://trello.com/b/VDhf8QJx/final-project-planning
 
 
 
