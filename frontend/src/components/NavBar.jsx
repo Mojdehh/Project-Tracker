@@ -25,7 +25,7 @@ const theme = createTheme({
     },
     secondary: {
       // This is green.A700 as hex.
-      main: '#00675b',
+      main: '#004c40',
     },
     typography: {
       fontFamily: [
@@ -67,12 +67,10 @@ export default function ButtonAppBar() {
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ mr: 2, fontFamily: 'Anton',  }}
+            sx={{ mr: 2,  fontFamily: 'Anton',  }}
           >
-            <CodeOffOutlinedIcon sx={{ color: '#424242', fontSize: 40 }} /> 
-            
+            <CodeOffOutlinedIcon sx={{ mr: 2, color: '#424242', fontSize: 40 }} /> 
             Project Tracker
-            
           </IconButton>
           <Typography
             variant="h6"
@@ -83,11 +81,15 @@ export default function ButtonAppBar() {
           {username !== "" ? (
             <>
             <ListItemAvatar>
-                <Avatar alt={username} src="/static/images/avatar/1.jpg" />
+                <Avatar  
+                sx={{ bgcolor: "#52c7b8" }}
+                >
+                  {username.charAt(0)}
+                </Avatar>
               </ListItemAvatar>
               <Button 
               color="secondary"
-                variant="contained" 
+                variant="outlined" 
                  
                 onClick={() => handleLogoutClick()}
                 >
@@ -96,7 +98,7 @@ export default function ButtonAppBar() {
             </>
           ) : (
             <Button 
-              variant="contained" 
+              variant="outlined" 
               color="success" 
               onClick={() => {window.location.href = '/login'}}
               >

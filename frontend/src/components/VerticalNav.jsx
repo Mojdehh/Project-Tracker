@@ -10,6 +10,8 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { Typography } from "@mui/material";
 import ContentPasteRoundedIcon from "@mui/icons-material/ContentPasteRounded";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
 
 export default function VerticalNav(props) {
   const [userId, setUserId] = React.useState([]);
@@ -100,6 +102,7 @@ export default function VerticalNav(props) {
               m: 1,
               pt: 2,
               pb: 2,
+              mt: 3,
 
               width: 1000,
               height: 57,
@@ -107,14 +110,27 @@ export default function VerticalNav(props) {
           }}
         >
           <Paper elevation={4}>
-            <Grid container>
-              <ContentPasteRoundedIcon sx={{ mt: 1.5, pl: 10 }} fontSize="large" />
+            <Grid container sx={{display: "flex", flexDirection: "row",  color: "#004d40"}}>
+              <ContentPasteRoundedIcon  sx={{  fontSize: 55 }}  />
               <div>
-                <Typography variant="h6" align="left">
+                
+              
+                <Typography variant="h5" alignItems="left" >
                   Project Dashboard
                 </Typography>
                 <Typography>A curated list of all your projects</Typography>
               </div>
+              <Grid  sx={{ ml: 100, mt: -5.8 }}>
+              <ProjectPopUp
+                name="Add a Project"
+                add="create new project"
+                userId={userId}
+                setUserId={setUserId}
+                handleClick={handleClick}
+                addProject={addProject}
+                color={"#004d40"}
+              />
+            </Grid>
             </Grid>
           </Paper>
         </Box>
@@ -130,14 +146,14 @@ export default function VerticalNav(props) {
             // flexWrap: 'wrap',
             "& > :not(style)": {
               mt: 3,
-              pt: 1,
+              pt: 2.5,
               width: 1000,
-              height: 120,
+              height: 90,
             },
           }}
         >
           <Paper elevation={4}>
-            <Grid container sx={{ }} justifyContent="space-around">
+            <Grid container justifyContent="space-around">
               <SearchField
                 label="Search Projects"
                 searchTerm={searchTerm}
@@ -147,13 +163,14 @@ export default function VerticalNav(props) {
                 state={state}
               />
               <ButtonSort
+            
                 label="Radio Filter"
                 filterSelected={filterSelected}
                 setFilterSelected={setFilterSelected}
               />
             </Grid>
 
-            <Grid container sx={{ ml: 10 }}>
+            {/* <Grid container sx={{ ml: 100 }}>
               <ProjectPopUp
                 name="Add a Project"
                 add="create new project"
@@ -162,7 +179,9 @@ export default function VerticalNav(props) {
                 handleClick={handleClick}
                 addProject={addProject}
               />
-            </Grid>
+            </Grid> */}
+           
+            <br />
             <br />
             {/* <Paper elevation={4}> */}
             <Grid containder sx={{  height: 450 }}>

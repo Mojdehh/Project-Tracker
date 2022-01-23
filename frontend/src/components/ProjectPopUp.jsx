@@ -12,6 +12,7 @@ import Typography from "@mui/material/Typography";
 import TextInput from "./TextInput";
 import useProjectsData from "../hooks/useProjectsData";
 import useApplicationData from "../hooks/useApplicationData";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -51,6 +52,23 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      // Purple and green play nicely together.
+      main: '#00675b',
+    },
+    secondary: {
+      // This is green.A700 as hex.
+      main: '#00675b',
+    },
+    typography: {
+      fontFamily: [
+        '"Anton"',
+      ].join(','),
+    },
+  },
+});
 export default function CustomizedDialogs(props) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
@@ -105,8 +123,9 @@ export default function CustomizedDialogs(props) {
     setUsers([]);
   };
   return (
+    <ThemeProvider theme={theme}>
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button variant="contained" color="primary" onClick={handleClickOpen}>
         {props.name}
       </Button>
       <BootstrapDialog
@@ -149,5 +168,6 @@ export default function CustomizedDialogs(props) {
         </DialogActions>
       </BootstrapDialog>
     </div>
+    </ThemeProvider>
   );
 }

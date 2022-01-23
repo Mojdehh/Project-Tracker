@@ -42,18 +42,34 @@ export default function RowRadioButtonsGroup(props) {
         name="row-radio-buttons-group"
         value={props.filterSelected}
         onChange={handleRadioChange}
+        
       >
         <FormControlLabel 
           value="All" 
-          control={<Radio />} 
+          control={<Radio sx={{
+            color: "#009688",
+            "&.Mui-checked": {
+              color: "#009688",
+            },
+          }}/>} 
           label="All" />
         <FormControlLabel 
           value="Closed" 
-          control={<Radio />} 
+          control={<Radio sx={{
+            color: "#009688",
+            "&.Mui-checked": {
+              color: "#009688",
+            },
+          }}/>} 
           label="Closed" />
         <FormControlLabel 
           value="Open" 
-          control={<Radio />} 
+          control={<Radio sx={{
+            color: "#009688",
+            "&.Mui-checked": {
+              color: "#009688",
+            },
+          }}/>} 
           label="Open" />
         
       </RadioGroup>
