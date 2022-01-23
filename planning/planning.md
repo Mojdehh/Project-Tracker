@@ -10,7 +10,12 @@ Project Tracker is an app to help developers track and communicate the progress 
 ### **Target Audience:**
 Software developers who want to track their projects
 
-
+### **Tech Stack:**
+- React
+- Express
+- Node.js
+- PostgreSQL
+***
 ### **MVP:**
 - Add project
 - List all projects
@@ -54,6 +59,60 @@ As a user, I can update the status of a project, so that the team is aware if a 
 - Ticket Specific Page
 - Comment/Notes Pop up
 - Login/User Authentication
+
+****
+
+### **API Routes:**
+**Projects:**
+
+GET /api/projects (get list of projects)
+
+
+POST /api/projects (add to list of projects)
+
+
+GET /api/projects/:project_id (get specific project)
+
+
+PUT /api/projects/:project_id (edit specific project)
+* adding users to a project?
+
+
+
+**Tickets:**
+
+POST /api/project/:project_id/tickets (add to list of tickets of a specific project)
+
+
+GET /api/project/:project_id/tickets (get tickets for a specific project)
+
+
+GET /api/project/:project_id/tickets/:ticket_id (get one ticket)
+
+
+PUT /api/project/:project_id/tickets/:ticket_id (edit one ticket)
+
+**Comments:**
+
+GET /api/project/:project_id/tickets/:ticket_id/comments (list all comments of a specific ticket)
+
+
+POST /api/project/:project_id/tickets/:ticket_id/comments (add to list of comments of a specific ticket)
+
+
+PUT /api/project/:project_id/tickets/:ticket_id/comments/:comments_id (edit one comment)
+
+GET /api/user_project/:user_id/:project_id (get user for specific project) ?
+
+
+### **Routes:**
+- "/"
+- "/login"
+- "/register"
+- "/dashboard" => (shows all projects)
+- "/project/:project_id" => (shows one project and list of tickets associated with that project)
+- "/project/:project_id/ticket/:ticket_id" => specific ticket within a project, with notes listed
+
 
 
 
