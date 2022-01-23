@@ -13,6 +13,16 @@ export default function VerticalNav(props) {
   const [projects, setProjects] = React.useState([]);
   const [filterSelected, setFilterSelected] = React.useState("All")
 
+  // If the user is not logged in, user will be redirected to login page
+  React.useEffect(() => {
+    axios.get('http://localhost:8080/api/login')
+      .then((response) => {
+        if (response.data.loggedIn === false) {
+          window.location.href = '/login'
+        }
+      })
+  }, [])
+
   React.useEffect(() => {
     setProjects(state);
   }, [state]);
