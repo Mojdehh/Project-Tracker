@@ -1,6 +1,13 @@
 .App {
   text-align: center;
   font-family: Roboto;
+  /* background-color: #efdcd5; */
+  height: calc(100vh);
+}
+
+.NavBar {
+  font-family: 'Anton', sans-serif;
+  color: black;
 }
 
 .App-logo {

@@ -167,6 +167,7 @@ export default function VerticalNav(props) {
             {/* <Paper elevation={4}> */}
             <Grid containder sx={{  height: 450 }}>
               <BasicTable
+              
                 name="Project Name"
                 number="Number of Tickets"
                 status="Project Status"
