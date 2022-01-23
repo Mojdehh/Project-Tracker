@@ -127,6 +127,7 @@ export default function VerticalNav(props) {
         <br />
         
     
+    <Grid containder sc={{ height: 100 }}>
       <BasicTable
         name="Project Name"
         number="Number of Tickets"
@@ -134,6 +135,7 @@ export default function VerticalNav(props) {
         date="Date Created"
         state={filteredSearchResults()}
         />
+        </Grid>
         </Paper>
   </Box>
       </div>
