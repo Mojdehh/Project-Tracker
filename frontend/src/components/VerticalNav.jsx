@@ -7,6 +7,7 @@ import SearchField from "./SearchField";
 import ButtonSort from "./ButtonSort";
 import Paper from "@mui/material/Paper";
 import Box from '@mui/material/Box';
+import Grid from "@mui/material/Grid";
 
 export default function VerticalNav(props) {
   const [userId, setUserId] = React.useState([]);
@@ -79,20 +80,25 @@ export default function VerticalNav(props) {
 
   return (
     <>
+    <br />
     <div>
     <Box
       sx={{
         display: 'flex',
         justifyContent: 'center',
+        flexDirection: 'row',
+        
         // flexWrap: 'wrap',
         '& > :not(style)': {
           m: 1,
-          width: 752,
-          height: 250,
+          pt: 1.5,
+          width: 1000,
+          height: 120,
         },
       }}
     >
       <Paper elevation={4}>
+        <Grid container justifyContent='space-around'>
       <SearchField
         label="Search Projects"
         searchTerm={searchTerm}
@@ -101,29 +107,37 @@ export default function VerticalNav(props) {
         setProjects={setProjects}
         state={state}
       />
-      <ProjectPopUp
-        name="Add a Project"
-        add="create new project"
-        userId={userId}
-        setUserId={setUserId}
-        handleClick={handleClick}
-        addProject={addProject}
-      />
-      <ButtonSort
-        label="Radio Filter"
-        filterSelected={filterSelected}
-        setFilterSelected={setFilterSelected}
-      />
-      </Paper>
-</Box>
-    </div>
+        <ButtonSort
+          label="Radio Filter"
+          filterSelected={filterSelected}
+          setFilterSelected={setFilterSelected}
+        />
+        </Grid>
+        
+        <Grid container sx={{ ml: 10 }}>
+        <ProjectPopUp
+          name="Add a Project"
+          add="create new project"
+          userId={userId}
+          setUserId={setUserId}
+          handleClick={handleClick}
+          addProject={addProject}
+        />
+        </Grid>
+        <br />
+        
+    
       <BasicTable
         name="Project Name"
         number="Number of Tickets"
         status="Project Status"
         date="Date Created"
         state={filteredSearchResults()}
-      />
+        />
+        </Paper>
+  </Box>
+      </div>
+
     </>
   );
 }
