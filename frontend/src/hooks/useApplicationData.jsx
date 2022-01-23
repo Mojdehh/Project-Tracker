@@ -39,5 +39,5 @@ export default function useApplicationData(initial) {
       .catch((err) => console.log(err));
   }, []);
   console.log("state->", state);
-  return { state };
+  return { state, setState };
 }

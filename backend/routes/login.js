@@ -37,8 +37,8 @@ module.exports = ({
     
   })
 
-  router.post('/', (req, res) => {
-		res.session = null; // delete user cookies
+  router.post("/logout", (req, res) => {
+		req.session = null; // delete user cookies
 		res.send({});
 	});
 

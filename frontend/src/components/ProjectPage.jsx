@@ -141,8 +141,8 @@ export default function ProjectPage() {
         label="Search Tickets"
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
-        searchResults={searchResults}
-        setSearchResults={setSearchResults}
+        state={searchResults}
+        setProjects={setSearchResults}
         state={tickets}
       />
       {tickets.length > 0 ? (

@@ -50,6 +50,7 @@ export default function TicketPage(props) {
       .catch((err) => console.log(err));
   }
 
+  console.log("@!!!", ticket);
   const handleSaveChanges = () => editTicket();
   return (
     <>

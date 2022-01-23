@@ -9,17 +9,23 @@ export default function SearchField(props) {
   const inputE1 = useRef("");
 
   const searchHandler = () => {
+    console.log("INPUT OMG", inputE1.current.value);
+    
     props.setSearchTerm(inputE1.current.value);
-      if(props.searchTerm !== "") {
+    
+    console.log("!!!", props.searchTerm);
+      if(inputE1.current.value) {
         const filteredResult = props.state.filter((project) => {
           return Object.values(project)
             .join(" ")
             .toLowerCase()
             .includes(props.searchTerm.toLowerCase());
         });
-        props.setSearchResults(filteredResult);
+        props.setProjects(filteredResult);
       } else {
-        props.setSearchResults(props.state);
+       
+        props.setProjects(props.state);
+
       }
   };
 
