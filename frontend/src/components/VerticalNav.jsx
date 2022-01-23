@@ -98,15 +98,17 @@ export default function VerticalNav(props) {
             flexDirection: "row",
             "& > :not(style)": {
               m: 1,
+              pt: 2,
+              pb: 2,
 
               width: 1000,
               height: 57,
             },
           }}
         >
-          <Paper elevation={1}>
+          <Paper elevation={4}>
             <Grid container>
-              <ContentPasteRoundedIcon sx={{ mt: 1.5 }} fontSize="large" />
+              <ContentPasteRoundedIcon sx={{ mt: 1.5, pl: 10 }} fontSize="large" />
               <div>
                 <Typography variant="h6" align="left">
                   Project Dashboard
@@ -127,15 +129,15 @@ export default function VerticalNav(props) {
 
             // flexWrap: 'wrap',
             "& > :not(style)": {
-              m: 1,
-              pt: 1.5,
+              mt: 3,
+              pt: 1,
               width: 1000,
               height: 120,
             },
           }}
         >
           <Paper elevation={4}>
-            <Grid container justifyContent="space-around">
+            <Grid container sx={{ }} justifyContent="space-around">
               <SearchField
                 label="Search Projects"
                 searchTerm={searchTerm}
@@ -162,16 +164,21 @@ export default function VerticalNav(props) {
               />
             </Grid>
             <br />
-
-            <Grid containder sc={{ height: 100 }}>
+            {/* <Paper elevation={4}> */}
+            <Grid containder sx={{  height: 450 }}>
               <BasicTable
                 name="Project Name"
                 number="Number of Tickets"
                 status="Project Status"
                 date="Date Created"
                 state={filteredSearchResults()}
-              />
+                />
             </Grid>
+            {/* </Paper> */}
+            
+           
+           
+
           </Paper>
         </Box>
       </div>
