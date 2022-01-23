@@ -13,6 +13,7 @@ import TextField from "@mui/material/TextField";
 import EditDropDown from "./EditDropDown";
 import RadioBtn from "./RadioBtn";
 import CircularUnderLoad from "./CircularUnderLoad";
+import axios from "axios";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -55,25 +56,63 @@ BootstrapDialogTitle.propTypes = {
 export default function CustomizedDialogs(props) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(props.title);
-  const [users, setUsers] = React.useState([props.devs]);
+  const [users, setUsers] = React.useState(props.arrOfDevs);
   const [state, updateState] = React.useState();
   const forceUpdate = React.useCallback(() => updateState({}), []);
+
   console.log("users", users);
+
   if (props.projects.length === 0) return <CircularUnderLoad />;
 
   const handleClickOpen = () => {
     //props.setProjectName(props.projectName);
+    //props.setUserId();
     props.setResetName(props.projectName);
     setOpen(true);
   };
   console.log("props.resetName---", props.resetName);
+
   const handleClose = (event) => {
     event.preventDefault();
     props.setProjectName(props.resetName);
+    setUsers(props.arrOfDevs);
+    props.setUserId(getIds(props.arrOfDevs));
     setOpen(false);
   };
 
+  //console.log("on close ids", getIds(users));
   const statusArr = ["Open", "Closed"];
+  const findIdByUserName = (name) => {
+    console.log("names pop up", props.names);
+    console.log("name pop up", name);
+    const user = props.names.find((id) => id.full_name === name);
+    //console.log(user);
+    return user.id;
+  };
+  // const findIdByUserName = (name) => {
+  //   console.log("names", props.names);
+  //   console.log("before user", name);
+  //   const user = props.names.find((id) => {
+  //     console.log("object name", id.full_name);
+  //     console.log("after user", name);
+  //   });
+  //   console.log(user);
+  //   //return user.id;
+  // };
+
+  const getIds = (arr) => {
+    const idArr = [];
+    console.log("arr", arr);
+    for (let item of arr) {
+      console.log("item", item);
+      if (!idArr.includes(item)) {
+        idArr.push(findIdByUserName(item));
+      }
+    }
+    return idArr;
+  };
+  //console.log("project pop ids", getIds(users));
+
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
@@ -132,6 +171,11 @@ export default function CustomizedDialogs(props) {
                 devs={props.devs}
                 users={users}
                 setUsers={setUsers}
+                arrOfDevs={props.arrOfDevs}
+                userId={props.userId}
+                setUserId={props.setUserId}
+                names={props.names}
+                setNames={props.setNames}
               />
               <RadioBtn
                 statusArr={statusArr}
@@ -146,11 +190,13 @@ export default function CustomizedDialogs(props) {
           <Button
             autoFocus
             onClick={(event) => {
+              const ids = getIds(users);
+              console.log("on save ids", ids);
               props.handleSaveChanges(
                 props.projectName,
-                props.userId,
                 event,
-                props.status
+                props.status,
+                ids
               );
               setOpen(false);
             }}

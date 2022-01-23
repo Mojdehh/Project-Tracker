@@ -2,7 +2,7 @@ const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const cookieSession = require('cookie-session');
+const cookieSession = require("cookie-session");
 const logger = require("morgan");
 const db = require("./db");
 const dbHelpers = require("./helpers/dbHelpers")(db);
@@ -22,7 +22,9 @@ const addTicketRouter = require("./routes/tickets");
 const addCommentRouter = require("./routes/tickets");
 const addLoginRouter = require("./routes/login");
 const editTicketRouter = require("./routes/tickets");
-
+const editUserProjectsRouter = require("./routes/projects");
+const deleteUser_ProjectRouter = require("./routes/projects");
+const getUser_ProjectIdsRouter = require("./routes/projects");
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
@@ -35,11 +37,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: true}));
-app.use(cookieSession({
-  name: "session",
-  keys: ["key1", "key2"]
-}));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(
+  cookieSession({
+    name: "session",
+    keys: ["key1", "key2"],
+  })
+);
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
@@ -57,6 +61,8 @@ app.use("/api/users", getUsersRouter(dbHelpers));
 app.use("/api/projects", addCommentRouter(dbHelpers));
 app.use("/api", addLoginRouter(dbHelpers));
 app.use("/api/projects", editTicketRouter(dbHelpers));
-
+app.use("/api/projects", editUserProjectsRouter(dbHelpers));
+app.use("/api/projects", deleteUser_ProjectRouter(dbHelpers));
+app.use("/api/projects", getUser_ProjectIdsRouter(dbHelpers));
 
 module.exports = app;

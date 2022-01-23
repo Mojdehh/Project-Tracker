@@ -7,7 +7,6 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Chip from "@mui/material/Chip";
-import axios from "axios";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -31,22 +30,37 @@ function getStyles(name, personName, theme) {
 
 export default function MultipleSelectChip(props) {
   const theme = useTheme();
-  const [personName, setPersonName] = React.useState([]);
-  const [names, setNames] = React.useState([]);
+  const [personName, setPersonName] = React.useState(props.arrOfDevs);
 
-  React.useEffect(() => {
-    return axios
-      .get("http://localhost:8080/api/users")
-      .then((users) => {
-        console.log("users", users.data);
-        setNames(users.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  // React.useEffect(() => {
+  //   return axios
+  //     .get("http://localhost:8080/api/users")
+  //     .then((users) => {
+  //       setNames(users.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
 
-  console.log("names", names);
+  const findIdByUserName = (name) => {
+    console.log("names drop down", props.names);
+    console.log("name drop down", name);
+    const user = props.names.find((id) => id.full_name === name);
+    //console.log(user);
+    return user.id;
+  };
+
+  const getIds = (arr) => {
+    const idArr = [];
+    for (let item of arr) {
+      if (!idArr.includes(item)) {
+        idArr.push(findIdByUserName(item));
+      }
+    }
+    return idArr;
+  };
+
   const handleChange = (event) => {
     const {
       target: { value },
@@ -56,17 +70,34 @@ export default function MultipleSelectChip(props) {
       typeof value === "string" ? value.split(",") : value
     );
     props.setUsers(value);
+    console.log("users drop down", props.users);
+    // const newArr = names.find(
+    //   (name) => name.full_name === value[value.length - 1]
+    // );
+
+    //console.log("newArr", newArr);
+    console.log("value", value);
+    const ids = getIds(value);
+    props.setUserId(ids);
+    console.log("Ids", ids);
+    console.log("props.id", props.userId);
   };
 
-  const arrDevs = (devs) => {
+  const arrDevs = (arr) => {
     const newArr = [];
-    for (let item of devs) {
+    for (let item of arr) {
       newArr.push(item.devs);
     }
     return newArr;
   };
-  //setPersonName(arrDevs(props.devs));
-  console.log(arrDevs(props.devs));
+  console.log(props.names);
+
+  //console.log(findIdByUserName("Alice Smith"));
+  //const valueDevs = arrDevs(props.devs);
+  //console.log("setUsers", props.users);
+  //setPersonName(valueDevs);
+  //console.log("personName", personName);
+  //console.log(arrDevs(props.devs));
   function sort(arr1, arr2) {}
   return (
     <div>
@@ -78,7 +109,7 @@ export default function MultipleSelectChip(props) {
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
           multiple
-          value={arrDevs(props.devs)}
+          value={personName}
           onChange={handleChange}
           input={
             <OutlinedInput
@@ -95,9 +126,10 @@ export default function MultipleSelectChip(props) {
           )}
           MenuProps={MenuProps}
         >
-          {names.map((name) => (
+          {props.names.map((name) => (
             <MenuItem
               key={name.id}
+              id={name.id}
               value={name.full_name}
               style={getStyles(name, personName, theme)}
               onClick={(event) => {

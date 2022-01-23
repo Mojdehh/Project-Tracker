@@ -8,7 +8,9 @@ const {
   addProject,
   addProjectUsers,
   editProject,
-  
+  editUserProjects,
+  getUser_ProjectIds,
+  deleteUser_Project,
 } = require("../helpers/dbHelpers.js");
 
 /* GET all projects. */
@@ -20,7 +22,9 @@ module.exports = ({
   addProject,
   addProjectUsers,
   editProject,
-  
+  editUserProjects,
+  getUser_ProjectIds,
+  deleteUser_Project,
 }) => {
   router.get("/", (req, res) => {
     getProjects()
@@ -67,6 +71,18 @@ module.exports = ({
     const projectID = req.params.project_id;
     getProjectTickets(projectID)
       .then((projects) => res.json(projects))
+      .catch((err) =>
+        res.status(500).json({
+          error: err.message,
+        })
+      );
+  });
+
+  router.get("/:project_id/user_project", (req, res) => {
+    const projectID = req.params.project_id;
+    //const userID = req.params.user_id;
+    getUser_ProjectIds(projectID)
+      .then((result) => res.json(result))
       .catch((err) =>
         res.status(500).json({
           error: err.message,
@@ -122,6 +138,29 @@ module.exports = ({
       );
   });
 
+  router.put("/:project_id", (req, res) => {
+    const projectID = req.body.project_id;
+    const userID = req.body.user_id;
+    const projectName = req.body.project_name;
+    editUserProjects(id, userID, projectName, projectID)
+      .then((projects) => res.json(projects))
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
+
+  router.delete("/:project_id/:user_id", (req, res) => {
+    const userID = req.body.user_id;
+    deleteUser_Project(userID)
+      .then((response) => res.json(response))
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
 
   return router;
 };
