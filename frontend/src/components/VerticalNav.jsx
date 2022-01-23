@@ -5,6 +5,8 @@ import useApplicationData from "../hooks/useApplicationData";
 import axios from "axios";
 import SearchField from "./SearchField";
 import ButtonSort from "./ButtonSort";
+import Paper from "@mui/material/Paper";
+import Box from '@mui/material/Box';
 
 export default function VerticalNav(props) {
   const [userId, setUserId] = React.useState([]);
@@ -77,6 +79,20 @@ export default function VerticalNav(props) {
 
   return (
     <>
+    <div>
+    <Box
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        // flexWrap: 'wrap',
+        '& > :not(style)': {
+          m: 1,
+          width: 752,
+          height: 250,
+        },
+      }}
+    >
+      <Paper elevation={4}>
       <SearchField
         label="Search Projects"
         searchTerm={searchTerm}
@@ -98,6 +114,9 @@ export default function VerticalNav(props) {
         filterSelected={filterSelected}
         setFilterSelected={setFilterSelected}
       />
+      </Paper>
+</Box>
+    </div>
       <BasicTable
         name="Project Name"
         number="Number of Tickets"
