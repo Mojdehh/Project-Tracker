@@ -8,7 +8,7 @@ import useProjectDetail from "../hooks/useProjectDetail";
 import useCommentsData from "../hooks/useCommentsData";
 import { useParams } from "react-router";
 import axios from "axios";
-import Grid from '@mui/material/Grid';
+import Grid from "@mui/material/Grid";
 
 export default function TicketPage(props) {
   let { project_id, ticket_id } = useParams();
@@ -44,10 +44,18 @@ export default function TicketPage(props) {
         }
       )
       .then((response) => {
-        console.log("response project pg", response.data);
-        setTicket(response.data);
-      })
-      .catch((err) => console.log(err));
+        // console.log("response project pg", response.data);
+        // setTicket(response.data);
+        axios
+          .get(
+            `http://localhost:8080/api/projects/${project_id}/tickets/${ticket_id}`
+          )
+          .then((details) => {
+            console.log(details.data);
+            setTicket(details.data);
+          })
+          .catch((err) => console.log(err));
+      });
   }
 
   console.log("@!!!", ticket);
@@ -71,7 +79,7 @@ export default function TicketPage(props) {
         handleSaveChanges={handleSaveChanges}
       />
       <br />
-      <br />    
+      <br />
       <CommentSection
         ticket={ticket}
         setTicket={setTicket}

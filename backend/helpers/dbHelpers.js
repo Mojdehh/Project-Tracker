@@ -276,11 +276,11 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
-  const deleteUser_Project = (user_id) => {
+  const deleteUser_Project = (project_id) => {
     const query = {
-      text: `DELETE FROM user_project WHERE user_id = $1 RETURNING *;`,
+      text: `DELETE FROM user_project WHERE project_id = $1 RETURNING *;`,
     };
-    const values = [user_id];
+    const values = [project_id];
     return db
       .query(query, values)
       .then((result) => result.rows)

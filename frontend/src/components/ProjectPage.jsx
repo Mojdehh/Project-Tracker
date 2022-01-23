@@ -37,9 +37,7 @@ export default function ProjectPage() {
         console.log(error);
       });
   }, []);
-  // users = [2, 3, 4] projectID = 2
-  // users = 2, 3, 5 projectID = 2
-  // axios.get(`http://localhost:8080/api/projects/${project_id}/user_project)
+
   function editProject(projectName, event, status, ids) {
     console.log("userId", ids);
     return axios
@@ -50,58 +48,30 @@ export default function ProjectPage() {
       .then((response) => {
         console.log(response);
         axios
-          .get(`http://localhost:8080/api/projects/${project_id}/user_project`)
+          .delete(
+            `http://localhost:8080/api/projects/${project_id}/user_project`
+          )
           .then((response) => {
-            ids.forEach((id) => {});
-          });
-        ids.forEach((id) => {
-          console.log("line 50 id", id);
-          axios
-            .get(`http://localhost:8080/api/projects/${project_id}/${id}`)
-            .then((response) => {
-              console.log("line 55 res", response);
-              if (response.data.length === 0) {
-                return axios
-                  .post("http://localhost:8080/api/projects/users", {
-                    project_id,
-                    project_name: projectName,
-                    user_id: id,
-                  })
-                  .then((response) => {
-                    console.log(response);
-                  });
-              } else {
-                console.log(response.data);
-                const user_projectID = response.data[0].id;
-                axios
-                  .put(`http://localhost:8080/api/projects/${project_id}`, {
-                    project_id,
-                    user_id: id,
-                    projectName,
-                    user_project_id: user_projectID,
-                  })
-                  .then((response) => {
-                    console.log(response);
-                  });
-              }
+            ids.forEach((id) => {
+              axios
+                .post("http://localhost:8080/api/projects/user_project", {
+                  project_id,
+                  project_name: projectName,
+                  user_id: id,
+                })
+                .then((response) => {
+                  console.log("new user_project table", response);
+                  axios
+                    .get(`http://localhost:8080/api/projects/${project_id}`)
+                    .then((details) => {
+                      setProjects(details.data);
+                    })
+                    .catch((err) => console.log(err));
+                });
             });
-        });
-
-        // console.log("response project pg", response.data);
-        // ids.forEach((user) => {
-        //   axios
-        //     .put("http://localhost:8080/api/projects/users", {
-        //       project_id: project_id,
-        //       projectName,
-        //       user_id: user,
-        //     })
-        //     .then((response) => {
-        //       console.log(response);
-        //       setProjects(response.data);
-        //     });
-        // });
-      })
-      .catch((err) => console.log(err));
+          })
+          .catch((err) => console.log(err));
+      });
   }
 
   const handleSaveChanges = (projectName, event, status, ids) =>

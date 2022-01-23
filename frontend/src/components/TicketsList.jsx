@@ -117,7 +117,7 @@ export default function TicketsList(props) {
                   </ListItem>
                   <ListItem>
                     <ListItemText
-                      primary="Created By"
+                      primary="Last Updated By"
                       primaryTypographyProps={{
                         display: "flex",
                         textalign: "center",

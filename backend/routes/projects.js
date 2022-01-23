@@ -124,7 +124,7 @@ module.exports = ({
       );
   });
 
-  router.post("/users", (req, res) => {
+  router.post("/user_project", (req, res) => {
     const projectID = req.body.project_id;
     const userID = req.body.user_id;
     const projectTitle = req.body.project_name;
@@ -138,10 +138,11 @@ module.exports = ({
       );
   });
 
-  router.put("/:project_id", (req, res) => {
+  router.put("/:project_id/user_project", (req, res) => {
     const projectID = req.body.project_id;
     const userID = req.body.user_id;
     const projectName = req.body.project_name;
+    const id = req.body.user_project_id;
     editUserProjects(id, userID, projectName, projectID)
       .then((projects) => res.json(projects))
       .catch((err) =>
@@ -151,9 +152,9 @@ module.exports = ({
       );
   });
 
-  router.delete("/:project_id/:user_id", (req, res) => {
-    const userID = req.body.user_id;
-    deleteUser_Project(userID)
+  router.delete("/:project_id/user_project", (req, res) => {
+    const projectID = req.params.project_id;
+    deleteUser_Project(projectID)
       .then((response) => res.json(response))
       .catch((err) =>
         res.json({
