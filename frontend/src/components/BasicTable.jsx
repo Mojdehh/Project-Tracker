@@ -9,6 +9,24 @@ import Paper from "@mui/material/Paper";
 import useApplicationData from "../hooks/useApplicationData";
 import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme({
+  components: {
+    
+    TableHead: {
+      styleOverrides: {
+        // Name of the slot
+        root: {
+          // Some CSS
+          backgroundColor: '#00867d',
+        },
+      },
+    },
+  },
+});
+
+
 
 export default function BasicTable(props) {
   const pageLoad = useApplicationData();
@@ -16,7 +34,9 @@ export default function BasicTable(props) {
     return pageLoad;
   }
   
+
   return (
+    
   //   <Box
   //   sx={{
   //     display: "flex",
@@ -32,12 +52,13 @@ export default function BasicTable(props) {
   //     },
   //   }}
   // >
+  <ThemeProvider theme={theme}>
     <Paper display="flex" elevation={4} justifyContent="center" sx={{ mt: 3}} >
     <TableContainer style={{ maxHeight: 430 }} component={Paper}>
       <h1>{props.counter}</h1>
       <Table stickyHeader sx={{ minWidth: 500 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
+        <TableHead  >
+          <TableRow >
             <TableCell align="center">{props.name}</TableCell>
             {props.number && (
               <TableCell align="center">{props.number}</TableCell>
@@ -69,6 +90,7 @@ export default function BasicTable(props) {
       </Table>
     </TableContainer>
     </Paper>
+  </ThemeProvider>
     // </Box>
   );
 }
