@@ -132,6 +132,19 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
+  const getUser_ProjectIds = (project_id) => {
+    const query = {
+      // text: `SELECT * from user_project WHERE project_id = $1 AND user_id = $2;`,
+      text: `SELECT * FROM user_project WHERE project_id = $1;`,
+    };
+    const values = [project_id];
+
+    return db
+      .query(query, values)
+      .then((result) => result.rows)
+      .catch((err) => err);
+  };
+
   const addProject = (name) => {
     const query = {
       text: `INSERT INTO projects (name) VALUES ($1) RETURNING *;`,
@@ -188,7 +201,6 @@ module.exports = (db) => {
       UPDATE SET name = $2, status = $3, date_updated = $4 
       RETURNING *;`,
     };
-
     const values = [id, name, status, project_id];
     return db
       .query(query, values)
@@ -196,26 +208,40 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
+  const editUserProjects = (id, user_id, project_name, project_id) => {
+    const query = {
+      text: `INSERT INTO user_project (id, user_id, project_name, project_id)
+      VALUES ($1, $2, $3, $4)
+      ON CONFLICT (id) DO
+      UPDATE SET user_id = $2, project_name = $3, project_id = $4
+      RETURNING *;`,
+    };
+    const values = [id, user_id, project_name, project_id];
+    return db
+      .query(query, values)
+      .then((result) => result.rows)
+      .catch((err) => err);
+  };
 
   const login = (email, password) => {
     const query = {
-      text: `SELECT * FROM users WHERE email = $1;`
+      text: `SELECT * FROM users WHERE email = $1;`,
     };
     const values = [email];
     return db
-    .query(query, values)
-    .then((result) => {
-      // console.log('result.rows[0]', result.rows[0]);
-      return result.rows[0]})
-    .then(result => {
-      if (result !== undefined && result.password === password) {
-        return result
-      }
-      return null;
-    })
-    .catch((err) => err);
+      .query(query, values)
+      .then((result) => {
+        // console.log('result.rows[0]', result.rows[0]);
+        return result.rows[0];
+      })
+      .then((result) => {
+        if (result !== undefined && result.password === password) {
+          return result;
+        }
+        return null;
+      })
+      .catch((err) => err);
   };
-
 
   const editTicket = (
     id,
@@ -250,6 +276,17 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
+  const deleteUser_Project = (user_id) => {
+    const query = {
+      text: `DELETE FROM user_project WHERE user_id = $1 RETURNING *;`,
+    };
+    const values = [user_id];
+    return db
+      .query(query, values)
+      .then((result) => result.rows)
+      .catch((err) => err);
+  };
+
   return {
     getUsers,
     getProjects,
@@ -266,5 +303,8 @@ module.exports = (db) => {
     editProject,
     login,
     editTicket,
+    editUserProjects,
+    getUser_ProjectIds,
+    deleteUser_Project,
   };
 };

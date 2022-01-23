@@ -29,6 +29,18 @@ export default function InteractiveList(props) {
     return devs.join(", ");
   };
 
+  const arrAssignedDevs = (project) => {
+    const devs = [];
+    for (let item of project) {
+      devs.push(item.devs);
+    }
+    return devs;
+  };
+
+  console.log("not iterable", props.projects);
+  //console.log(assignedDevs(props.projects));
+  const arrOfDevs = arrAssignedDevs(props.projects);
+
   if (props.projects.length === 0) return <CircularUnderLoad />;
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
@@ -78,32 +90,36 @@ export default function InteractiveList(props) {
                         textalign: "center",
                         justifyContent: "center",
                       }}
-                      secondary={props.projects[0].date_created.match(/(.*)T/)[1]}
+                      secondary={
+                        props.projects[0].date_created.match(/(.*)T/)[1]
+                      }
                       secondaryTypographyProps={{
                         display: "flex",
                         textalign: "center",
                         justifyContent: "center",
                       }}
                     />
+                  </ListItem>
+                  {props.projects[0].date_updated && (
+                    <ListItem>
+                      <ListItemText
+                        primary="Date Updated"
+                        primaryTypographyProps={{
+                          display: "flex",
+                          textalign: "center",
+                          justifyContent: "center",
+                        }}
+                        secondary={
+                          props.projects[0].date_updated.match(/(.*)T/)[1]
+                        }
+                        secondaryTypographyProps={{
+                          display: "flex",
+                          textalign: "center",
+                          justifyContent: "center",
+                        }}
+                      />
                     </ListItem>
-                    {props.projects[0].date_updated && (
-                      <ListItem>
-                        <ListItemText
-                          primary="Date Updated"
-                          primaryTypographyProps={{
-                            display: "flex",
-                            textalign: "center",
-                            justifyContent: "center",
-                          }}
-                          secondary={props.projects[0].date_updated.match(/(.*)T/)[1]}
-                          secondaryTypographyProps={{
-                            display: "flex",
-                            textalign: "center",
-                            justifyContent: "center",
-                          }}
-                        />
-                      </ListItem>
-                    )}
+                  )}
                   <ListItem>
                     <ListItemText
                       primary="Assigned Developers"
@@ -138,6 +154,11 @@ export default function InteractiveList(props) {
             handleSaveChanges={props.handleSaveChanges}
             status={props.status}
             setStatus={props.setStatus}
+            arrOfDevs={arrOfDevs}
+            userId={props.userId}
+            setUserId={props.setUserId}
+            names={props.names}
+            setNames={props.setNames}
           />
         </CardContent>
       </Card>
