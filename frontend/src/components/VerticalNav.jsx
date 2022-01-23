@@ -8,6 +8,8 @@ import ButtonSort from "./ButtonSort";
 import Paper from "@mui/material/Paper";
 import Box from '@mui/material/Box';
 import Grid from "@mui/material/Grid";
+import { Typography } from "@mui/material";
+import ContentPasteRoundedIcon from '@mui/icons-material/ContentPasteRounded';
 
 export default function VerticalNav(props) {
   const [userId, setUserId] = React.useState([]);
@@ -79,8 +81,41 @@ export default function VerticalNav(props) {
   }
 
   return (
+    
     <>
-    <br />
+    
+<div >
+<Box
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        flexDirection: 'row',
+        '& > :not(style)': {
+          m: 1,
+          
+          width: 1000,
+          height: 57,
+        },
+      }}
+    >
+      <Paper elevation={1} >
+        <Grid container>
+          <ContentPasteRoundedIcon sx={{mt: 1.5}} fontSize="large" />
+        <div>
+          <Typography variant="h6" align='left' >
+            Project Dashboard
+          </Typography>
+          <Typography
+            
+          >
+            A curated list of all your projects
+          </Typography>
+        </div>
+</Grid>
+      </Paper>
+      </Box>
+</div>
+
     <div>
     <Box
       sx={{
@@ -97,6 +132,7 @@ export default function VerticalNav(props) {
         },
       }}
     >
+
       <Paper elevation={4}>
         <Grid container justifyContent='space-around'>
       <SearchField
