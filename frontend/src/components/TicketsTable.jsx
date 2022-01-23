@@ -50,16 +50,16 @@ export default function TicketsTable(props) {
               key={row.id}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-              <TableCell component="th" scope="row">
+              <TableCell align="center" component="th" scope="row">
                 <Link to={`/projects/${project_id}/tickets/${row.id}`}>
                   {row.name}
                 </Link>
                 {/* {row.name} */}
               </TableCell>
-              <TableCell align="right">{row.priority}</TableCell>
-              <TableCell align="right">{row.description}</TableCell>
-              <TableCell align="right">{row.status}</TableCell>
-              <TableCell align="right">{row.date_created.replace(/\.[0-9]{3}/, '').replace('T', '').replace('Z', '')}</TableCell>
+              <TableCell align="center">{row.priority}</TableCell>
+              <TableCell align="center">{row.description}</TableCell>
+              <TableCell align="center">{row.status}</TableCell>
+              <TableCell align="center">{row.date_created.replace(/\.[0-9]{3}/, '').replace('T', '').replace('Z', '')}</TableCell>
             </TableRow>
           ))}
         </TableBody>
