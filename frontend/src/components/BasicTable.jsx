@@ -42,9 +42,9 @@ export default function BasicTable(props) {
               <TableCell component="th" scope="row">
                 <Link to={`/projects/${row.id}`}>{row.name}</Link>
               </TableCell>
-              <TableCell align="right">{row.number_of_tickets}</TableCell>
-              <TableCell align="right">{row.status}</TableCell>
-              <TableCell align="right">{row.date_created.replace(/\.[0-9]{3}/, '').replace('T', '').replace('Z', '')}</TableCell>
+              <TableCell align="center">{row.number_of_tickets}</TableCell>
+              <TableCell align="center">{row.status}</TableCell>
+              <TableCell align="center">{row.date_created.replace(/\.[0-9]{3}/, '').replace('T', '').replace('Z', '')}</TableCell>
             </TableRow>
           ))}
         </TableBody>
