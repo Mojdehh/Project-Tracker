@@ -10,6 +10,7 @@ Project Tracker is an app to help developers track and communicate the progress 
 ### **Target Audience:**
 Software developers who want to track their projects
 
+
 ### **MVP:**
 - Add project
 - List all projects
@@ -42,5 +43,17 @@ As a user I can search for a specific project, so that I can quickly navigate to
 As a user, I can comment on a ticket, so that I can leave notes/updates about the progress of my work
 
 As a user, I can update the status of a project, so that the team is aware if a project is ongoing or is completed for now
+
+
+### **List of Features:**
+- Nav Bar 
+- Project Dashboard
+- New Project Pop up
+- Project Specific Page
+- New Ticket Pop up
+- Ticket Specific Page
+- Comment/Notes Pop up
+- Login/User Authentication
+
 
 
