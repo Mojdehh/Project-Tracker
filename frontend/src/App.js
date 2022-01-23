@@ -5,6 +5,7 @@ import { Route, Link, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import ProjectPage from "./components/ProjectPage";
 import TicketPage from "./components/TicketPage";
+import PageNotFound from "./components/PageNotFound";
 import Login from "./components/Login";
 import axios from "axios";
 axios.defaults.withCredentials = true;
@@ -51,6 +52,7 @@ function App() {
               </>
             }
           ></Route>
+          <Route path="*" element={<PageNotFound />}></Route>
         </Routes>
       </>
     </div>

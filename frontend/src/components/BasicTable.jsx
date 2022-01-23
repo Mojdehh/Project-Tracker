@@ -16,9 +16,9 @@ export default function BasicTable(props) {
   }
   
   return (
-    <TableContainer component={Paper}>
+    <TableContainer style={{ maxHeight: 430 }} component={Paper}>
       <h1>{props.counter}</h1>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <Table stickyHeader sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell align="center">{props.name}</TableCell>
@@ -42,9 +42,9 @@ export default function BasicTable(props) {
               <TableCell component="th" scope="row">
                 <Link to={`/projects/${row.id}`}>{row.name}</Link>
               </TableCell>
-              <TableCell align="right">{row.number_of_tickets}</TableCell>
-              <TableCell align="right">{row.status}</TableCell>
-              <TableCell align="right">{row.date_created.replace(/\.[0-9]{3}/, '').replace('T', '').replace('Z', '')}</TableCell>
+              <TableCell align="center">{row.number_of_tickets}</TableCell>
+              <TableCell align="center">{row.status}</TableCell>
+              <TableCell align="center">{row.date_created.replace(/\.[0-9]{3}/, '').replace('T', '').replace('Z', '')}</TableCell>
             </TableRow>
           ))}
         </TableBody>

@@ -8,6 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import { Link } from "react-router-dom";
 import DeveloperModeIcon from '@mui/icons-material/DeveloperMode';
 import ListItemAvatar from "@mui/material/ListItemAvatar";
+import PestControlOutlinedIcon from '@mui/icons-material/PestControlOutlined';
 import Avatar from "@mui/material/Avatar";
 import { useEffect } from "react";
 import axios from "axios";
@@ -46,7 +47,7 @@ export default function ButtonAppBar() {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            <DeveloperModeIcon sx={{ fontSize: 40 }} /> Project Tracker
+            <PestControlOutlinedIcon sx={{ fontSize: 40 }} /> Project Tracker
           </IconButton>
           <Typography
             variant="h6"
