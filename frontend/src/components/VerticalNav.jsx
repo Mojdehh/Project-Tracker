@@ -111,7 +111,7 @@ export default function VerticalNav(props) {
         >
           <Paper elevation={4}>
             <Grid container sx={{display: "flex", flexDirection: "row",  color: "#004d40"}}>
-              <ContentPasteRoundedIcon  sx={{  fontSize: 55 }}  />
+              <ContentPasteRoundedIcon  sx={{ ml: 5, fontSize: 55 }}  />
               <div>
                 
               
@@ -181,6 +181,7 @@ export default function VerticalNav(props) {
               />
             </Grid> */}
            
+            <br />
             <br />
             <br />
             {/* <Paper elevation={4}> */}

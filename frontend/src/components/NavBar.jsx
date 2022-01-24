@@ -17,6 +17,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import NextWeekOutlinedIcon from '@mui/icons-material/NextWeekOutlined';
 import CodeOffOutlinedIcon from '@mui/icons-material/CodeOffOutlined';
 
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -82,7 +83,7 @@ export default function ButtonAppBar() {
             <>
             <ListItemAvatar>
                 <Avatar  
-                sx={{ bgcolor: "#52c7b8" }}
+                sx={{ bgcolor: "#80cbc4" }}
                 >
                   {username.charAt(0)}
                 </Avatar>
