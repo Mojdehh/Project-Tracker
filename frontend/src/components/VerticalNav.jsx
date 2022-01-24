@@ -115,7 +115,7 @@ export default function VerticalNav(props) {
               <div>
                 
               
-                <Typography variant="h5" alignItems="left" >
+                <Typography variant="h5" display="flex" alignItems="left" justifyContent="left" >
                   Project Dashboard
                 </Typography>
                 <Typography>A curated list of all your projects</Typography>
