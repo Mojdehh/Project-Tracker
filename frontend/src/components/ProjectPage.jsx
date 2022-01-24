@@ -115,7 +115,6 @@ export default function ProjectPage() {
           }}
         > */}
 
-        <Paper elevation={4}>
           {/* <Grid containder sx={{ height: 1000 }}> */}
           {/* <Grid container sx={{display: "flex", flexDirection: "row",  color: "#004d40"}}> */}
           <div>
@@ -135,7 +134,6 @@ export default function ProjectPage() {
             />
           </div>
           {/* </Grid > */}
-        </Paper>
           {/* </Box> */}
       </div>
 
@@ -160,7 +158,7 @@ export default function ProjectPage() {
 
             <Grid container rowSpacing={10} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
 
-              <Grid item xs={6}>
+              <Grid item sx={{ml: 7}}>
                 <SearchField
                   label="Search Tickets"
                   searchTerm={searchTerm}
@@ -171,7 +169,7 @@ export default function ProjectPage() {
                 />
               </Grid>
 
-              <Grid item xs={3}>
+              <Grid item sx={{ml: 33, mt: 2}}>
                 <TicketPopUp
                   name="Add a Ticket"
                   add="Create new Ticket"

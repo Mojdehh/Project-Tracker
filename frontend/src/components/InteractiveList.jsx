@@ -11,6 +11,7 @@ import CircularUnderLoad from "./CircularUnderLoad";
 
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import { Grid } from "@mui/material";
 const Demo = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
 }));
@@ -37,33 +38,48 @@ export default function InteractiveList(props) {
     return devs;
   };
 
-  console.log("not iterable", props.projects);
+  // console.log("not iterable", props.projects);
   //console.log(assignedDevs(props.projects));
   const arrOfDevs = arrAssignedDevs(props.projects);
 
   if (props.projects.length === 0) return <CircularUnderLoad />;
   return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        flexDirection: "row",
+        "& > :not(style)": {
+          m: 1,
+          pt: 2,
+          pb: 2,
+          mt: 2,
+          width: 1000,
+          height: 230,
+        },
+      }}
+    >
       <Card
         elevation={4}
-        sx={{ mt: 3, mb: 2, display: "block", width: "60vw" }}
+        sx={{ mt: 1, mb: 2, display: "block", width: "60vw" }}
       >
         <CardContent>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <Box
               sx={{
                 flexGrow: 1,
-                maxWidth: 752,
+                maxWidth: 1000,
                 justifyContent: "center",
                 alignItems: "center",
               }}
             >
-              <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
+              <Typography sx={{ mt: 1, mb: 1 }} variant="h6" component="div">
                 {props.projects[0].name}
               </Typography>
               <Demo>
                 <List
-                  sx={{ display: "flex", flexDirection: "row" }}
+                  sx={{ display: "flex", flexDirection: "row", justifyContent: "space-around"
+                }}
                   dense={dense}
                 >
                   <ListItem>
@@ -78,6 +94,23 @@ export default function InteractiveList(props) {
                       secondaryTypographyProps={{
                         display: "flex",
                         textalign: "center",
+                        justifyContent: "center",
+                      }}
+                    />
+                  </ListItem>
+                  <ListItem>
+                    <ListItemText
+                      primary="Assigned Developers"
+                      primaryTypographyProps={{
+                        display: "flex",
+                        textalign: "center",
+                        justifyContent: "center",
+                      }}
+                      secondary={assignedDevs(props.projects)}
+                      secondaryTypographyProps={{
+                        display: "flex",
+                        textalign: "center",
+                        noWrap: true,
                         justifyContent: "center",
                       }}
                     />
@@ -120,48 +153,35 @@ export default function InteractiveList(props) {
                       />
                     </ListItem>
                   )}
-                  <ListItem>
-                    <ListItemText
-                      primary="Assigned Developers"
-                      primaryTypographyProps={{
-                        display: "flex",
-                        textalign: "center",
-                        justifyContent: "center",
-                      }}
-                      secondary={assignedDevs(props.projects)}
-                      secondaryTypographyProps={{
-                        display: "flex",
-                        textalign: "center",
-                        justifyContent: "center",
-                      }}
-                    />
-                  </ListItem>
+
                 </List>
               </Demo>
             </Box>
           </div>
-          <EditProjectPopUp
-            name="Edit Project"
-            add="Edit Project"
-            title={props.projects[0].name}
-            devs={props.projects}
-            projects={props.projects}
-            setProjects={props.setProjects}
-            projectName={props.projectName}
-            setProjectName={props.setProjectName}
-            resetName={props.resetName}
-            setResetName={props.setResetName}
-            handleSaveChanges={props.handleSaveChanges}
-            status={props.status}
-            setStatus={props.setStatus}
-            arrOfDevs={arrOfDevs}
-            userId={props.userId}
-            setUserId={props.setUserId}
-            names={props.names}
-            setNames={props.setNames}
-          />
+          <Grid sx={{mt:4}}>
+            <EditProjectPopUp 
+              name="Edit Project"
+              add="Edit Project"
+              title={props.projects[0].name}
+              devs={props.projects}
+              projects={props.projects}
+              setProjects={props.setProjects}
+              projectName={props.projectName}
+              setProjectName={props.setProjectName}
+              resetName={props.resetName}
+              setResetName={props.setResetName}
+              handleSaveChanges={props.handleSaveChanges}
+              status={props.status}
+              setStatus={props.setStatus}
+              arrOfDevs={arrOfDevs}
+              userId={props.userId}
+              setUserId={props.setUserId}
+              names={props.names}
+              setNames={props.setNames}
+            />
+          </Grid>
         </CardContent>
       </Card>
-    </div>
+    </Box >
   );
 }
