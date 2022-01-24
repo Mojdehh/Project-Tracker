@@ -13,8 +13,31 @@ import Avatar from "@mui/material/Avatar";
 import { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import NextWeekOutlinedIcon from '@mui/icons-material/NextWeekOutlined';
+import CodeOffOutlinedIcon from '@mui/icons-material/CodeOffOutlined';
+
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      // Purple and green play nicely together.
+      main: '#009688',
+    },
+    secondary: {
+      // This is green.A700 as hex.
+      main: '#004c40',
+    },
+    typography: {
+      fontFamily: [
+        '"Anton"',
+      ].join(','),
+    },
+  },
+});
 
 export default function ButtonAppBar() {
+  
   const [username, setUsername] = useState("")
 
   useEffect(() => {
@@ -36,18 +59,19 @@ export default function ButtonAppBar() {
 
 
   return (
-
+<ThemeProvider theme={theme}>
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar className="NavBar" position="static">
         <Toolbar>
           <IconButton
             size="medium"
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ mr: 2 }}
+            sx={{ mr: 2,  fontFamily: 'Anton',  }}
           >
-            <PestControlOutlinedIcon sx={{ fontSize: 40 }} /> Project Tracker
+            <CodeOffOutlinedIcon sx={{ mr: 2, color: '#424242', fontSize: 40 }} /> 
+            Project Tracker
           </IconButton>
           <Typography
             variant="h6"
@@ -58,11 +82,16 @@ export default function ButtonAppBar() {
           {username !== "" ? (
             <>
             <ListItemAvatar>
-                <Avatar alt={username} src="/static/images/avatar/1.jpg" />
+                <Avatar  
+                sx={{ bgcolor: "#80cbc4" }}
+                >
+                  {username.charAt(0)}
+                </Avatar>
               </ListItemAvatar>
               <Button 
-                variant="contained" 
-                color="success" 
+              color="secondary"
+                variant="outlined" 
+                 
                 onClick={() => handleLogoutClick()}
                 >
                 Logout
@@ -70,7 +99,7 @@ export default function ButtonAppBar() {
             </>
           ) : (
             <Button 
-              variant="contained" 
+              variant="outlined" 
               color="success" 
               onClick={() => {window.location.href = '/login'}}
               >
@@ -82,5 +111,6 @@ export default function ButtonAppBar() {
         </Toolbar>
       </AppBar>
     </Box>
+    </ThemeProvider>
   );
 }

@@ -49,6 +49,7 @@ export default function TicketsTable(props) {
             <TableRow
               key={row.id}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              hover role="checkbox" tabIndex={-1} key={row.code}
             >
               <TableCell align="center" component="th" scope="row">
                 <Link to={`/projects/${project_id}/tickets/${row.id}`}>
