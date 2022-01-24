@@ -28,7 +28,7 @@ const theme = createTheme({
   palette: {
     primary: {
       // Purple and green play nicely together.
-      main: '#009688',
+      main: '#004c40',
     },
     secondary: {
       // This is green.A700 as hex.
@@ -85,7 +85,7 @@ export default function BasicCard() {
               Login
             </Typography>
           <CardActions style={{ justifyContent: 'center' }}>
-              <Avatar sx={{ mb: 6}} style={avatarStyle}><LockOutlinedIcon /></Avatar>
+              <Avatar sx={{ mb: 6, height: 50, width: 50}} style={avatarStyle}><LockOutlinedIcon /></Avatar>
             </CardActions>
             <TextField
               id="Username"
@@ -106,20 +106,20 @@ export default function BasicCard() {
               value={password}
               onChange={(event)=> {setPassword(event.target.value)}}
             />
-            <Typography sx={{ mt: 6}}>
-            <Link to="#" >
-              Forgot Password?
+          <CardActions style={{ justifyContent: 'center' }}>
+            <Button onClick={handleClick} size="large" variant="contained" >Login</Button>
+          </CardActions>
+            <Typography sx={{ mt: 3}}>
+            <Link to="#" style={{ color: "#004d40" }} >
+              Forgot Username/Password?
               </Link>
             </Typography>
             <Typography>
-            <Link to="#" >
-              Register
+            <Link to="#" style={{ color: "#004d40" }}>
+              Sign Up
               </Link>
             </Typography>
           </CardContent>
-          <CardActions style={{ justifyContent: 'center' }}>
-            <Button onClick={handleClick} size="medium" variant="contained" >Login</Button>
-          </CardActions>
         </Card>
       </div>
       </Grid>
