@@ -98,13 +98,14 @@ export default function ButtonAppBar() {
               </Button>
             </>
           ) : (
-            <Button 
-              variant="outlined" 
-              color="success" 
-              onClick={() => {window.location.href = '/login'}}
-              >
-              Login
-            </Button>
+            null
+            // <Button 
+            //   variant="outlined" 
+            //   color="success" 
+            //   onClick={() => {window.location.href = '/login'}}
+            //   >
+            //   Login
+            // </Button>
           )}
 
 

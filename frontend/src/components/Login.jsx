@@ -8,24 +8,42 @@ import Typography from '@mui/material/Typography';
 import TextField from "@mui/material/TextField";
 import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
-import LockOpenIcon from '@mui/icons-material/LockOpen';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
-  >
-    •
-  </Box>
-);
+// const bull = (
+//   <Box
+//     component="span"
+//     sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
+//   >
+//     •
+//   </Box>
+// );
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      // Purple and green play nicely together.
+      main: '#009688',
+    },
+    secondary: {
+      // This is green.A700 as hex.
+      main: '#00675b',
+    },
+    typography: {
+      fontFamily: [
+        '"Anton"',
+      ].join(','),
+    },
+  },
+});
 
 export default function BasicCard() {
-  const avatarStyle = { display: 'flex', backgroundColor: '#4caf50', justifyContent: 'center', alignItems: 'center' }
+  const avatarStyle = { display: 'flex', backgroundColor: '#009688', justifyContent: 'center', alignItems: 'center' }
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   
@@ -58,18 +76,17 @@ export default function BasicCard() {
   }, [])
   
   return (
-    <Grid >
+    <ThemeProvider theme={theme}>
+   <Grid>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <Card elevation={4} sx={{ mt: 6, mb: 2, display: 'block', width: '30vw' }}>
+        <Card elevation={4} sx={{ mt: 8, mb: 2, display: 'block', width: '30vw'}}>
           <CardContent>
-          <Typography variant="h5" component="div" sx={{fontWeight: 'bold'}}>
+          <Typography variant="h5" component="div" sx={{ color: "#004d40", mt: 3, fontWeight: 'bold'}}>
               Login
             </Typography>
           <CardActions style={{ justifyContent: 'center' }}>
-              <Avatar style={avatarStyle}><LockOpenIcon /></Avatar>
+              <Avatar sx={{ mb: 6}} style={avatarStyle}><LockOutlinedIcon /></Avatar>
             </CardActions>
-            <br />
-
             <TextField
               id="Username"
               name="email"
@@ -89,10 +106,7 @@ export default function BasicCard() {
               value={password}
               onChange={(event)=> {setPassword(event.target.value)}}
             />
-            
-            <br />
-            <br />
-            <Typography>
+            <Typography sx={{ mt: 6}}>
             <Link to="#" >
               Forgot Password?
               </Link>
@@ -104,15 +118,12 @@ export default function BasicCard() {
             </Typography>
           </CardContent>
           <CardActions style={{ justifyContent: 'center' }}>
-
-            {/* <form action = "/login"  method = "POST"> */}
-
-            <Button onClick={handleClick} size="small" variant="contained" >Login</Button>
-            {/* </form> */}
-
+            <Button onClick={handleClick} size="medium" variant="contained" >Login</Button>
           </CardActions>
         </Card>
       </div>
-    </Grid>
+      </Grid>
+    
+    </ThemeProvider>
   );
 }
