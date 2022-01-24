@@ -14,6 +14,7 @@ import TextField from "@mui/material/TextField";
 import RadioBtn from "./RadioBtn";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -143,9 +144,27 @@ export default function TicketPopUp(props) {
   //       props.setTicketRows(result.data);
   // }
 
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#00675b',
+      },
+      secondary: {
+        main: '#00675b',
+      },
+      typography: {
+        fontFamily: [
+          '"Anton"',
+        ].join(','),
+      },
+    },
+  });
+
+
   return (
+    <ThemeProvider theme={theme}>
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button variant="contained" color="primary" onClick={handleClickOpen}>
         Add a Ticket
       </Button>
       <BootstrapDialog
@@ -222,5 +241,6 @@ export default function TicketPopUp(props) {
         </DialogActions>
       </BootstrapDialog>
     </div>
+    </ThemeProvider>
   );
 }
