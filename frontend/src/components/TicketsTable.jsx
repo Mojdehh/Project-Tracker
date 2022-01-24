@@ -69,10 +69,10 @@ export default function TicketsTable(props) {
                 <TableCell align="center">{row.description}</TableCell>
                 <TableCell align="center">{row.status}</TableCell>
                 <TableCell align="center">
-                  {row.date_created
-                    .replace(/\.[0-9]{3}/, "")
+                  {row.date_created.match(/(.*)T/)[1]}
+                    {/* .replace(/\.[0-9]{3}/, "")
                     .replace("T", "")
-                    .replace("Z", "")}
+                    .replace("Z", "")} */}
                 </TableCell>
               </TableRow>
             ))}

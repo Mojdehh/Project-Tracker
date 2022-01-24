@@ -65,10 +65,10 @@ export default function CommentSection(props) {
                               {row.username}
                             </Typography>
                             <br />
-                            {row.date_created
-                              .replace(/\.[0-9]{3}/, "")
+                            {row.date_created.match(/(.*)T/)[1]}
+                              {/* .replace(/\.[0-9]{3}/, "")
                               .replace("T", "")
-                              .replace("Z", "")}
+                              .replace("Z", "")} */}
                           </React.Fragment>
                         }
                       />

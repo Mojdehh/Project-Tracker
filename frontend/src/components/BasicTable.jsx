@@ -106,10 +106,10 @@ export default function BasicTable(props) {
                 <TableCell align="center">{row.number_of_tickets}</TableCell>
                 <TableCell align="center">{row.status}</TableCell>
                 <TableCell align="center">
-                  {row.date_created
-                    .replace(/\.[0-9]{3}/, "")
-                    .replace("T", "")
-                    .replace("Z", "")}
+                  {row.date_created.match(/(.*)T/)[1]}
+                    {/* // .replace(/\.[0-9]{3}/, "")
+                    // .replace("T", "")
+                    // .replace("Z", "")} */}
                 </TableCell>
               </TableRow>
             ))}
