@@ -1,37 +1,25 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import TextField from "@mui/material/TextField";
-import Grid from '@mui/material/Grid';
-import Avatar from '@mui/material/Avatar';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { Link } from 'react-router-dom';
-import axios from "axios";
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import axios from "axios";
+import Card from '@mui/material/Card';
+import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
+import Avatar from '@mui/material/Avatar';
+import TextField from "@mui/material/TextField";
+import Typography from '@mui/material/Typography';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-// const bull = (
-//   <Box
-//     component="span"
-//     sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
-//   >
-//     •
-//   </Box>
-// );
 
 const theme = createTheme({
   palette: {
     primary: {
-      // Purple and green play nicely together.
       main: '#004c40',
     },
     secondary: {
-      // This is green.A700 as hex.
       main: '#00675b',
     },
     typography: {
@@ -47,12 +35,10 @@ export default function BasicCard() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   
-
   const handleClick = () => {
     login();
   }
 
-  
   function login() {
     return axios
     .post(`http://localhost:8080/api/login`, {
@@ -66,8 +52,6 @@ export default function BasicCard() {
   useEffect(() => {
     axios.get('http://localhost:8080/api/login')
       .then((response) => {
-        // console.log(response);
-        // console.log(response.data.user.full_name);
         if (response.data.loggedIn === true) {
           const username = response.data.user.full_name
           window.location.href = '/'
@@ -123,7 +107,6 @@ export default function BasicCard() {
         </Card>
       </div>
       </Grid>
-    
     </ThemeProvider>
   );
 }
