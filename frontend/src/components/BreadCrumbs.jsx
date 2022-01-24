@@ -11,7 +11,16 @@ function handleClick(event) {
 export default function BreadCrumbs(props) {
   console.log("props.projectName", props.projectName);
   return (
-    <div role="presentation" onClick={handleClick}>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "start",
+        marginLeft: 20,
+        marginTop: 10,
+      }}
+      role="presentation"
+      onClick={handleClick}
+    >
       <Breadcrumbs aria-label="breadcrumb">
         <Link underline="hover" color="inherit" href="/">
           Projects

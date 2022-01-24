@@ -11,7 +11,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import RadioBtn from "./RadioBtn";
-import Input from "@mui/material/Input";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -53,6 +53,19 @@ BootstrapDialogTitle.propTypes = {
 
 const ariaLabel = { "aria-label": "description" };
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      // Purple and green play nicely together.
+      main: "#00675b",
+    },
+    secondary: {
+      // This is green.A700 as hex.
+      main: "#00675b",
+    },
+  },
+});
+
 export default function CustomizedDialogs(props) {
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
@@ -76,127 +89,93 @@ export default function CustomizedDialogs(props) {
   };
   console.log("props.ticketState", props.ticketState);
   return (
-    <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Edit Ticket
-      </Button>
-      <BootstrapDialog
-        onClose={handleClose}
-        aria-labelledby="customized-dialog-title"
-        open={open}
-      >
-        <BootstrapDialogTitle
-          id="customized-dialog-title"
-          onClose={handleClose}
-        >
+    <ThemeProvider theme={theme}>
+      <div>
+        <Button variant="contained" onClick={handleClickOpen}>
           Edit Ticket
-        </BootstrapDialogTitle>
-        <DialogContent dividers>
-          <Box
-            component="form"
-            sx={{
-              "& .MuiTextField-root": { m: 1, width: "50ch" },
-            }}
-            noValidate
-            autoComplete="off"
+        </Button>
+        <BootstrapDialog
+          onClose={handleClose}
+          aria-labelledby="customized-dialog-title"
+          open={open}
+        >
+          <BootstrapDialogTitle
+            id="customized-dialog-title"
+            onClose={handleClose}
           >
-            <div>
-              {/* <Input
-                placeholder="Edit Ticket Name"
-                inputProps={ariaLabel}
-                value={props.ticketState.name}
-                onChange={(event) => {
-                  props.setTicketState({ name: event.target.value });
-                }}
-              /> */}
-              <TextField
-                required
-                id="ticketName"
-                label={"Ticket Name"}
-                //placeholder="Edit Ticket Name"
-                //multiline
-                value={props.ticketState.name}
-                onChange={(event) => {
-                  props.setTicketState({ name: event.target.value });
-                }}
-              />
-              <br />
-              {/* <Input
-                placeholder="Edit Description"
-                inputProps={ariaLabel}
-                value={props.ticketState.description}
-                onChange={(event) => {
-                  props.setTicketState({ description: event.target.value });
-                }}
-              /> */}
-              <TextField
-                required
-                id="ticketDescription"
-                label={"Ticket Description"}
-                //placeholder="Edit Ticket Description"
-                //multiline
-                helperText="Enter Ticket Description"
-                value={props.ticketState.description}
-                onChange={(event) => {
-                  props.setTicketState({ description: event.target.value });
-                }}
-              />
-            </div>
-            <div>
-              <br />
-              {/* <RadioBtn
+            Edit Ticket
+          </BootstrapDialogTitle>
+          <DialogContent dividers>
+            <Box
+              component="form"
+              sx={{
+                "& .MuiTextField-root": { m: 1, width: "50ch" },
+              }}
+              noValidate
+              autoComplete="off"
+            >
+              <div>
+                <TextField
+                  required
+                  id="ticketName"
+                  label={"Ticket Name"}
+                  //placeholder="Edit Ticket Name"
+                  //multiline
+                  value={props.ticketState.name}
+                  onChange={(event) => {
+                    props.setTicketState({ name: event.target.value });
+                  }}
+                />
+                <br />
+                <TextField
+                  required
+                  id="ticketDescription"
+                  label={"Ticket Description"}
+                  //placeholder="Edit Ticket Description"
+                  //multiline
+                  helperText="Enter Ticket Description"
+                  value={props.ticketState.description}
+                  onChange={(event) => {
+                    props.setTicketState({ description: event.target.value });
+                  }}
+                />
+              </div>
+              <div>
+                <br />
+                {/* <RadioBtn
                 //priority={"priority"}
                 //setPriority={props.setPriority}
                 setTicketState={props.setTicketState}
                 ticketState={props.ticketState}
               /> */}
-              <RadioBtn
-                //ticketStatus={"priority"}
-                resetTicketState={props.resetTicketState}
-                ticketState={props.ticketState}
-                setTicketState={props.setTicketState}
-              />
-            </div>
-          </Box>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            autoFocus
-            onClick={(event) => {
-              props.handleSaveChanges(
-                props.ticketState.name,
-                props.ticketState.description,
-                props.ticketState.status,
-                event,
-                props.priority
-              );
-              setOpen(false);
-            }}
-          >
-            Save changes
-          </Button>
-        </DialogActions>
-      </BootstrapDialog>
-    </div>
+                <RadioBtn
+                  //ticketStatus={"priority"}
+                  resetTicketState={props.resetTicketState}
+                  ticketState={props.ticketState}
+                  setTicketState={props.setTicketState}
+                />
+              </div>
+            </Box>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              autoFocus
+              onClick={(event) => {
+                props.handleSaveChanges(
+                  props.ticketState.name,
+                  props.ticketState.description,
+                  props.ticketState.status,
+                  event,
+                  props.priority
+                );
+                setOpen(false);
+              }}
+            >
+              Save changes
+            </Button>
+          </DialogActions>
+        </BootstrapDialog>
+      </div>
+    </ThemeProvider>
   );
 }
-
-// const ariaLabel = { 'aria-label': 'description' };
-
-// export default function Inputs() {
-//   return (
-//     <Box
-//       component="form"
-//       sx={{
-//         '& > :not(style)': { m: 1 },
-//       }}
-//       noValidate
-//       autoComplete="off"
-//     >
-//       <Input defaultValue="Hello world" inputProps={ariaLabel} />
-//       <Input placeholder="Placeholder" inputProps={ariaLabel} />
-//       <Input disabled defaultValue="Disabled" inputProps={ariaLabel} />
-//       <Input defaultValue="Error" error inputProps={ariaLabel} />
-//     </Box>
-//   );
-// }

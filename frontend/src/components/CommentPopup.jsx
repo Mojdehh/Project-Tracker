@@ -13,6 +13,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -51,6 +52,19 @@ BootstrapDialogTitle.propTypes = {
   children: PropTypes.node,
   onClose: PropTypes.func.isRequired,
 };
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      // Purple and green play nicely together.
+      main: "#00675b",
+    },
+    secondary: {
+      // This is green.A700 as hex.
+      main: "#00675b",
+    },
+  },
+});
 
 export default function CustomizedDialogs(props) {
   const [open, setOpen] = React.useState(false);
@@ -119,59 +133,61 @@ export default function CustomizedDialogs(props) {
   }
 
   return (
-    <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Add a comment
-      </Button>
-      <BootstrapDialog
-        onClose={handleClickClose}
-        aria-labelledby="customized-dialog-title"
-        open={open}
-      >
-        <BootstrapDialogTitle
-          id="customized-dialog-title"
+    <ThemeProvider theme={theme}>
+      <div>
+        <Button size="small" variant="outlined" onClick={handleClickOpen}>
+          Add a comment
+        </Button>
+        <BootstrapDialog
           onClose={handleClickClose}
+          aria-labelledby="customized-dialog-title"
+          open={open}
         >
-          Post Comment
-        </BootstrapDialogTitle>
-        <DialogContent dividers>
-          <Box
-            component="form"
-            sx={{
-              "& .MuiTextField-root": { m: 1, width: "50ch" },
-            }}
-            noValidate
-            autoComplete="off"
+          <BootstrapDialogTitle
+            id="customized-dialog-title"
+            onClose={handleClickClose}
           >
-            <div>
-              <TextField
-                id=""
-                label="Comment"
-                placeholder="Type a comment"
-                multiline
-                value={comment}
-                onChange={(event) => {
-                  setComment(event.target.value);
-                }}
-              />
-              <section
-                style={{
-                  marginLeft: "15px",
-                  color: "red",
-                }}
-              >
-                {error}
-              </section>
-              <br />
-            </div>
-          </Box>
-        </DialogContent>
-        <DialogActions>
-          <Button autoFocus onClick={validate}>
-            Submit comment
-          </Button>
-        </DialogActions>
-      </BootstrapDialog>
-    </div>
+            Post Comment
+          </BootstrapDialogTitle>
+          <DialogContent dividers>
+            <Box
+              component="form"
+              sx={{
+                "& .MuiTextField-root": { m: 1, width: "50ch" },
+              }}
+              noValidate
+              autoComplete="off"
+            >
+              <div>
+                <TextField
+                  id=""
+                  label="Comment"
+                  placeholder="Type a comment"
+                  multiline
+                  value={comment}
+                  onChange={(event) => {
+                    setComment(event.target.value);
+                  }}
+                />
+                <section
+                  style={{
+                    marginLeft: "15px",
+                    color: "red",
+                  }}
+                >
+                  {error}
+                </section>
+                <br />
+              </div>
+            </Box>
+          </DialogContent>
+          <DialogActions>
+            <Button autoFocus onClick={validate}>
+              Submit comment
+            </Button>
+          </DialogActions>
+        </BootstrapDialog>
+      </div>
+    </ThemeProvider>
   );
 }

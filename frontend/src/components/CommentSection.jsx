@@ -10,6 +10,10 @@ import { useParams } from "react-router-dom";
 import CommentIcon from "@mui/icons-material/Comment";
 import Grid from "@mui/material/Grid";
 import CommentPopUp from "./CommentPopup";
+import Paper from "@mui/material/Paper";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
 // import DeleteComment from "./DeleteComment";
 
 export default function CommentSection(props) {
@@ -18,7 +22,7 @@ export default function CommentSection(props) {
 
   const avatarStyle = {
     display: "flex",
-    backgroundColor: "#4caf50",
+    backgroundColor: "#00675b",
     justifyContent: "center",
     alignItems: "center",
   };
@@ -26,81 +30,112 @@ export default function CommentSection(props) {
   // if (props.comments.length === 0) return "No Comments";
   console.log("props.comments", props.comments);
   return (
-    <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
-      {props.comments.length === 0 ? (
-        <Grid container direction="row" alignItems="center">
-          <Grid item>
-            <Avatar sx={{ ml: 2, mb: 4 }} style={avatarStyle}>
-              <CommentIcon />
-            </Avatar>
-          </Grid>
-          <Grid item>
-            <Typography sx={{ mt: 2, mb: 2, ml: 1 }} variant="h6">
-              Comments
-              <Grid item>
-                <CommentPopUp
-                  ticket={props.ticket}
-                  setTicket={props.setTicket}
-                  comments={props.comments}
-                  setComments={props.setComments}
-                />
-              </Grid>
-            </Typography>
-          </Grid>
-        </Grid>
-      ) : (
-        <Grid container direction="row" alignItems="center">
-          <Grid item>
-            <Avatar sx={{ ml: 2, mb: 4 }} style={avatarStyle}>
-              <CommentIcon />
-            </Avatar>
-          </Grid>
-          <Grid item>
-            <Typography sx={{ mt: 2, mb: 2, ml: 1 }} variant="h6">
-              Comments
-              <Grid item>
-                <CommentPopUp
-                  ticket={props.ticket}
-                  setTicket={props.setTicket}
-                  comments={props.comments}
-                  setComments={props.setComments}
-                />
-              </Grid>
-            </Typography>
-          </Grid>
-        </Grid>
-      )}
+    <div style={{ display: "flex", justifyContent: "center" }}>
+      <Card
+        elevation={4}
+        sx={{ mt: 3, mb: 10, display: "block", width: "60vw" }}
+      >
+        <CardContent>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Box
+              sx={{
+                flexGrow: 1,
+                maxWidth: 752,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <List
+                elevation={4}
+                sx={{ width: "55vw", bgcolor: "background.paper" }}
+              >
+                {props.comments.length === 0 ? (
+                  <Grid container direction="row" alignItems="center">
+                    <Grid item>
+                      <Avatar sx={{ ml: 2, mb: 4 }} style={avatarStyle}>
+                        <CommentIcon />
+                      </Avatar>
+                    </Grid>
+                    <Grid item>
+                      <Typography sx={{ mt: 2, mb: 2, ml: 1 }} variant="h6">
+                        Comments
+                        <Grid item>
+                          <CommentPopUp
+                            ticket={props.ticket}
+                            setTicket={props.setTicket}
+                            comments={props.comments}
+                            setComments={props.setComments}
+                          />
+                        </Grid>
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                ) : (
+                  <Grid container direction="row" alignItems="center">
+                    <Grid item>
+                      <Avatar
+                        sx={{ ml: 2, mb: 4, bgcolor: "blue" }}
+                        style={avatarStyle}
+                      >
+                        <CommentIcon />
+                      </Avatar>
+                    </Grid>
+                    <Grid item>
+                      <Typography sx={{ mt: 2, mb: 2, ml: 1 }} variant="h6">
+                        Comments
+                        {/* <Grid item> */}
+                        {/* </Grid> */}
+                      </Typography>
+                    </Grid>
+                    <Grid item sx={{ ml: 50 }}>
+                      <CommentPopUp
+                        ticket={props.ticket}
+                        setTicket={props.setTicket}
+                        comments={props.comments}
+                        setComments={props.setComments}
+                      />
+                    </Grid>
+                    {/* <Divider variant="middle" component="li" /> */}
+                  </Grid>
+                )}
 
-      {props.comments.map((row) => (
-        <>
-          <ListItem key={row.id} id={row.id} alignItems="flex-start">
-            <ListItemAvatar>
-              <Avatar alt={row.username} src="/static/images/avatar/1.jpg" />
-            </ListItemAvatar>
-            <ListItemText
-              primary={row.note}
-              secondary={
-                <React.Fragment>
-                  <Typography
-                    sx={{ display: "inline" }}
-                    component="span"
-                    variant="body2"
-                    color="text.primary"
-                  >
-                    {row.username}
-                  </Typography>
-                  <br />
-                  {row.date_created
-                    .replace(/\.[0-9]{3}/, "")
-                    .replace("T", "")
-                    .replace("Z", "")}
-                </React.Fragment>
-              }
-            />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-        </>
-      ))}
-    </List>
+                {props.comments.map((row) => (
+                  <>
+                    <ListItem key={row.id} id={row.id} alignItems="flex-start">
+                      <ListItemAvatar>
+                        <Avatar sx={{ bgcolor: "#80cbc4" }}>
+                          {row.username.charAt(0)}
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText
+                        primary={row.note}
+                        secondary={
+                          <React.Fragment>
+                            <Typography
+                              sx={{ display: "inline" }}
+                              component="span"
+                              variant="body2"
+                              color="text.primary"
+                            >
+                              {row.username}
+                            </Typography>
+                            <br />
+                            {row.date_created
+                              .replace(/\.[0-9]{3}/, "")
+                              .replace("T", "")
+                              .replace("Z", "")}
+                          </React.Fragment>
+                        }
+                      />
+                    </ListItem>
+                    <Divider variant="middle" component="li" />
+                  </>
+                ))}
+              </List>
+            </Box>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   );
 }

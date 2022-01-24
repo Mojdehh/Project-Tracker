@@ -2,17 +2,26 @@
   text-align: center;
   font-family: Roboto;
   background-color: #e0e0e0;
-  height: calc(100vh);
+  /* height: calc(100vh); */
 }
 
 .NavBar {
-  font-family: 'Anton', sans-serif;
+  font-family: "Anton", sans-serif;
   color: black;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+.low {
+  background-color: #ffd700;
+}
+.medium {
+  background-color: #ff8c00;
+}
+.high {
+  background-color: #ff402c;
 }
 
 @media (prefers-reduced-motion: no-preference) {
