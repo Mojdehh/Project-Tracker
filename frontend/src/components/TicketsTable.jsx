@@ -11,38 +11,56 @@ import { useParams, Link } from "react-router-dom";
 
 export default function TicketsTable(props) {
   let { project_id } = useParams();
-   const { tickets, setTickets } = useTicketsData(project_id);
+  const { tickets, setTickets } = useTicketsData(project_id);
 
   return (
-    <Paper display="flex" elevation={4} justifyContent="center"  >
+    <Paper display="flex" elevation={4} justifyContent="center">
       <TableContainer style={{ maxHeight: 430 }} component={Paper}>
         <Table stickyHeader sx={{ minWidth: 500 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell sx={{ backgroundColor: '#80cbc4'}}  align="center">{props.name}</TableCell>
+              <TableCell sx={{ backgroundColor: "#80cbc4" }} align="center">
+                {props.name}
+              </TableCell>
               {props.number && (
-              <TableCell sx={{ backgroundColor: '#80cbc4'}}  align="center">{props.number}</TableCell>
+                <TableCell sx={{ backgroundColor: "#80cbc4" }} align="center">
+                  {props.number}
+                </TableCell>
               )}
               {props.priority && (
-                <TableCell sx={{ backgroundColor: '#80cbc4'}}  align="center">{props.priority}</TableCell>
+                <TableCell sx={{ backgroundColor: "#80cbc4" }} align="center">
+                  {props.priority}
+                </TableCell>
               )}
               {props.description && (
-                <TableCell sx={{ backgroundColor: '#80cbc4'}}  align="center">{props.description}</TableCell>
+                <TableCell sx={{ backgroundColor: "#80cbc4" }} align="center">
+                  {props.description}
+                </TableCell>
               )}
-              <TableCell sx={{ backgroundColor: '#80cbc4'}}  align="center">{props.status}</TableCell>
-              <TableCell sx={{ backgroundColor: '#80cbc4'}}  align="center">{props.date}</TableCell>
+              <TableCell sx={{ backgroundColor: "#80cbc4" }} align="center">
+                {props.status}
+              </TableCell>
+              <TableCell sx={{ backgroundColor: "#80cbc4" }} align="center">
+                {props.date}
+              </TableCell>
             </TableRow>
           </TableHead>
 
           <TableBody>
             {props.tickets.map((row) => (
               <TableRow
+                hover
                 key={row.id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                hover role="checkbox" tabIndex={-1} key={row.code}
+                role="checkbox"
+                tabIndex={-1}
+                key={row.code}
               >
                 <TableCell align="center" component="th" scope="row">
-                  <Link style={{textDecoration: "none", color: "black"}} to={`/projects/${project_id}/tickets/${row.id}`}>
+                  <Link
+                    style={{ textDecoration: "none", color: "black" }}
+                    to={`/projects/${project_id}/tickets/${row.id}`}
+                  >
                     {row.name}
                   </Link>
                   {/* {row.name} */}
@@ -50,10 +68,14 @@ export default function TicketsTable(props) {
                 <TableCell align="center">{row.priority}</TableCell>
                 <TableCell align="center">{row.description}</TableCell>
                 <TableCell align="center">{row.status}</TableCell>
-                <TableCell align="center">{row.date_created.replace(/\.[0-9]{3}/, '').replace('T', '').replace('Z', '')}</TableCell>
+                <TableCell align="center">
+                  {row.date_created
+                    .replace(/\.[0-9]{3}/, "")
+                    .replace("T", "")
+                    .replace("Z", "")}
+                </TableCell>
               </TableRow>
-              ))
-            }
+            ))}
           </TableBody>
         </Table>
       </TableContainer>

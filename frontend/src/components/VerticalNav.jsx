@@ -10,8 +10,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { Typography } from "@mui/material";
 import ContentPasteRoundedIcon from "@mui/icons-material/ContentPasteRounded";
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 export default function VerticalNav(props) {
   const [userId, setUserId] = React.useState([]);
@@ -110,27 +109,33 @@ export default function VerticalNav(props) {
           }}
         >
           <Paper elevation={4}>
-            <Grid container sx={{display: "flex", flexDirection: "row",  color: "#004d40"}}>
-              <ContentPasteRoundedIcon  sx={{ ml: 5, fontSize: 55 }}  />
+            <Grid
+              container
+              sx={{ display: "flex", flexDirection: "row", color: "#004d40" }}
+            >
+              <ContentPasteRoundedIcon sx={{ ml: 5, fontSize: 55 }} />
               <div>
-                
-              
-                <Typography variant="h5" display="flex" alignItems="left" justifyContent="left" >
+                <Typography
+                  variant="h5"
+                  display="flex"
+                  alignItems="left"
+                  justifyContent="left"
+                >
                   Project Dashboard
                 </Typography>
                 <Typography>A curated list of all your projects</Typography>
               </div>
-              <Grid  sx={{ ml: 100, mt: -5.8 }}>
-              <ProjectPopUp
-                name="Add a Project"
-                add="create new project"
-                userId={userId}
-                setUserId={setUserId}
-                handleClick={handleClick}
-                addProject={addProject}
-                color={"#004d40"}
-              />
-            </Grid>
+              <Grid sx={{ ml: 100, mt: -5.8 }}>
+                <ProjectPopUp
+                  name="Add a Project"
+                  add="create new project"
+                  userId={userId}
+                  setUserId={setUserId}
+                  handleClick={handleClick}
+                  addProject={addProject}
+                  color={"#004d40"}
+                />
+              </Grid>
             </Grid>
           </Paper>
         </Box>
@@ -163,7 +168,6 @@ export default function VerticalNav(props) {
                 state={state}
               />
               <ButtonSort
-            
                 label="Radio Filter"
                 filterSelected={filterSelected}
                 setFilterSelected={setFilterSelected}
@@ -180,26 +184,22 @@ export default function VerticalNav(props) {
                 addProject={addProject}
               />
             </Grid> */}
-           
+
             <br />
             <br />
             <br />
             {/* <Paper elevation={4}> */}
-            <Grid containder sx={{  height: 450 }}>
+            <Grid containder sx={{ height: 450 }}>
               <BasicTable
-              
                 name="Project Name"
                 number="Number of Tickets"
                 status="Project Status"
                 date="Date Created"
                 state={filteredSearchResults()}
-                />
+              />
             </Grid>
+            <br />
             {/* </Paper> */}
-            
-           
-           
-
           </Paper>
         </Box>
       </div>

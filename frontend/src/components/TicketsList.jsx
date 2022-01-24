@@ -26,22 +26,37 @@ export default function TicketsList(props) {
   //console.log("ticketlistticket", ticket);
   if (props.ticket.length === 0) return <CircularUnderLoad />;
   return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        flexDirection: "row",
+        "& > :not(style)": {
+          m: 1,
+          pt: 2,
+          pb: 2,
+          mt: 2,
+          width: 1000,
+          height: 230,
+        },
+      }}
+    >
+      {/* <div style={{ display: "flex", justifyContent: "center" }}> */}
       <Card
         elevation={4}
-        sx={{ mt: 3, mb: 2, display: "block", width: "60vw" }}
+        sx={{ mt: 1, mb: 2, display: "block", width: "60vw" }}
       >
         <CardContent>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <Box
               sx={{
                 flexGrow: 1,
-                maxWidth: 752,
+                maxWidth: 1000,
                 justifyContent: "center",
                 alignItems: "center",
               }}
             >
-              <Typography sx={{ mt: 2, mb: 2 }} variant="h6" component="div">
+              <Typography sx={{ mt: 1, mb: 1 }} variant="h6" component="div">
                 Ticket: {props.ticket[0].name}
               </Typography>
               <Typography>Details: {props.ticket[0].description}</Typography>
@@ -151,6 +166,7 @@ export default function TicketsList(props) {
           />
         </CardContent>
       </Card>
-    </div>
+      {/* </div> */}
+    </Box>
   );
 }

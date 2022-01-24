@@ -9,9 +9,10 @@ import { useParams } from "react-router";
 import axios from "axios";
 import SearchField from "./SearchField";
 import { useRadioGroup } from "@mui/material";
-import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
+import Chip from "@mui/material/Chip";
 
 export default function ProjectPage() {
   let { project_id } = useParams();
@@ -98,22 +99,22 @@ export default function ProjectPage() {
     <>
       <div>
         <BreadCrumbs projectName={projectName} projects={projects} />
-          <div>
-            <InteractiveList
-              resetName={resetName}
-              projects={projects}
-              projectName={projectName}
-              setProjectName={setProjectName}
-              setResetName={setResetName}
-              handleSaveChanges={handleSaveChanges}
-              status={status}
-              setStatus={setStatus}
-              userId={userId}
-              setUserId={setUserId}
-              names={names}
-              setNames={setNames}
-            />
-          </div>
+        <div>
+          <InteractiveList
+            resetName={resetName}
+            projects={projects}
+            projectName={projectName}
+            setProjectName={setProjectName}
+            setResetName={setResetName}
+            handleSaveChanges={handleSaveChanges}
+            status={status}
+            setStatus={setStatus}
+            userId={userId}
+            setUserId={setUserId}
+            names={names}
+            setNames={setNames}
+          />
+        </div>
       </div>
 
       <div>
@@ -122,7 +123,7 @@ export default function ProjectPage() {
             display: "flex",
             justifyContent: "center",
             flexDirection: "row",
-            
+
             // flexWrap: 'wrap',
             "& > :not(style)": {
               mt: 3,
@@ -130,11 +131,15 @@ export default function ProjectPage() {
               width: 1000,
               height: 90,
             },
-          }}>
-
+          }}
+        >
           <Paper elevation={4}>
-            <Grid container rowSpacing={10} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-              <Grid item sx={{ml: 7}}>
+            <Grid
+              container
+              rowSpacing={10}
+              columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+            >
+              <Grid item sx={{ ml: 7 }}>
                 <SearchField
                   label="Search Tickets"
                   searchTerm={searchTerm}
@@ -144,7 +149,7 @@ export default function ProjectPage() {
                   state={tickets}
                 />
               </Grid>
-              <Grid item sx={{ml: 33, mt: 2}}>
+              <Grid item sx={{ ml: 33, mt: 2 }}>
                 <TicketPopUp
                   name="Add a Ticket"
                   add="Create new Ticket"
@@ -152,7 +157,7 @@ export default function ProjectPage() {
                   setTickets={setTickets}
                 />
               </Grid>
-            </Grid >
+            </Grid>
 
             <br />
             <br />
@@ -169,8 +174,10 @@ export default function ProjectPage() {
                 setTickets={setTickets}
               />
             ) : (
-              "No Tickets Found!"
+              <Chip label="No Tickets Added" />
             )}
+            <br />
+            <br />
           </Paper>
         </Box>
       </div>

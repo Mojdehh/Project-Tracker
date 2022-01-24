@@ -135,7 +135,7 @@ export default function CustomizedDialogs(props) {
   return (
     <ThemeProvider theme={theme}>
       <div>
-        <Button size="small" variant="outlined" onClick={handleClickOpen}>
+        <Button size="medium" variant="contained" onClick={handleClickOpen}>
           Add a comment
         </Button>
         <BootstrapDialog

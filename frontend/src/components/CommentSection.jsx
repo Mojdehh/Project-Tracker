@@ -31,74 +31,19 @@ export default function CommentSection(props) {
   console.log("props.comments", props.comments);
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
-      <Card
-        elevation={4}
-        sx={{ mt: 3, mb: 10, display: "block", width: "60vw" }}
-      >
+      <Card elevation={4} sx={{ mt: 3, mb: 10, display: "block", width: 1000 }}>
         <CardContent>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <Box
               sx={{
                 flexGrow: 1,
-                maxWidth: 752,
+                ml: 5,
+                mr: 5,
                 justifyContent: "center",
                 alignItems: "center",
               }}
             >
-              <List
-                elevation={4}
-                sx={{ width: "55vw", bgcolor: "background.paper" }}
-              >
-                {props.comments.length === 0 ? (
-                  <Grid container direction="row" alignItems="center">
-                    <Grid item>
-                      <Avatar sx={{ ml: 2, mb: 4 }} style={avatarStyle}>
-                        <CommentIcon />
-                      </Avatar>
-                    </Grid>
-                    <Grid item>
-                      <Typography sx={{ mt: 2, mb: 2, ml: 1 }} variant="h6">
-                        Comments
-                        <Grid item>
-                          <CommentPopUp
-                            ticket={props.ticket}
-                            setTicket={props.setTicket}
-                            comments={props.comments}
-                            setComments={props.setComments}
-                          />
-                        </Grid>
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                ) : (
-                  <Grid container direction="row" alignItems="center">
-                    <Grid item>
-                      <Avatar
-                        sx={{ ml: 2, mb: 4, bgcolor: "blue" }}
-                        style={avatarStyle}
-                      >
-                        <CommentIcon />
-                      </Avatar>
-                    </Grid>
-                    <Grid item>
-                      <Typography sx={{ mt: 2, mb: 2, ml: 1 }} variant="h6">
-                        Comments
-                        {/* <Grid item> */}
-                        {/* </Grid> */}
-                      </Typography>
-                    </Grid>
-                    <Grid item sx={{ ml: 50 }}>
-                      <CommentPopUp
-                        ticket={props.ticket}
-                        setTicket={props.setTicket}
-                        comments={props.comments}
-                        setComments={props.setComments}
-                      />
-                    </Grid>
-                    {/* <Divider variant="middle" component="li" /> */}
-                  </Grid>
-                )}
-
+              <List elevation={4} sx={{ bgcolor: "background.paper" }}>
                 {props.comments.map((row) => (
                   <>
                     <ListItem key={row.id} id={row.id} alignItems="flex-start">
