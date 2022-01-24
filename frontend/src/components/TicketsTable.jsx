@@ -29,18 +29,18 @@ export default function TicketsTable(props) {
       >
         <TableHead>
           <TableRow>
-            <TableCell align="center">{props.name}</TableCell>
+            <TableCell sx={{ backgroundColor: '#80cbc4'}}  align="center">{props.name}</TableCell>
             {props.number && (
-              <TableCell align="center">{props.number}</TableCell>
+              <TableCell sx={{ backgroundColor: '#80cbc4'}}  align="center">{props.number}</TableCell>
             )}
             {props.priority && (
-              <TableCell align="center">{props.priority}</TableCell>
+              <TableCell sx={{ backgroundColor: '#80cbc4'}}  align="center">{props.priority}</TableCell>
             )}
             {props.description && (
-              <TableCell align="center">{props.description}</TableCell>
+              <TableCell sx={{ backgroundColor: '#80cbc4'}}  align="center">{props.description}</TableCell>
             )}
-            <TableCell align="center">{props.status}</TableCell>
-            <TableCell align="center">{props.date}</TableCell>
+            <TableCell sx={{ backgroundColor: '#80cbc4'}}  align="center">{props.status}</TableCell>
+            <TableCell sx={{ backgroundColor: '#80cbc4'}}  align="center">{props.date}</TableCell>
           </TableRow>
         </TableHead>
 
