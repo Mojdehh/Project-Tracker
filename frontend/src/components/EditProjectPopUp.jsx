@@ -14,6 +14,7 @@ import EditDropDown from "./EditDropDown";
 import RadioBtn from "./RadioBtn";
 import CircularUnderLoad from "./CircularUnderLoad";
 import axios from "axios";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -70,7 +71,7 @@ export default function CustomizedDialogs(props) {
     props.setResetName(props.projectName);
     setOpen(true);
   };
-  console.log("props.resetName---", props.resetName);
+  // console.log("props.resetName---", props.resetName);
 
   const handleClose = (event) => {
     event.preventDefault();
@@ -111,11 +112,27 @@ export default function CustomizedDialogs(props) {
     }
     return idArr;
   };
-  //console.log("project pop ids", getIds(users));
+
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#00675b',
+      },
+      secondary: {
+        main: '#00675b',
+      },
+      typography: {
+        fontFamily: [
+          '"Anton"',
+        ].join(','),
+      },
+    },
+  });
 
   return (
+    <ThemeProvider theme={theme}>
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button variant="contained" color="primary" onClick={handleClickOpen}>
         {props.name}
       </Button>
       <BootstrapDialog
@@ -206,5 +223,7 @@ export default function CustomizedDialogs(props) {
         </DialogActions>
       </BootstrapDialog>
     </div>
+    </ThemeProvider>
+
   );
 }
