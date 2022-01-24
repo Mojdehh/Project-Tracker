@@ -4,16 +4,13 @@ import TextField from '@mui/material/TextField';
 import { useRef } from "react";
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 export default function SearchField(props) {
   const inputE1 = useRef("");
 
-  const searchHandler = () => {
-    console.log("INPUT OMG", inputE1.current.value);
-    
+  const searchHandler = () => {    
     props.setSearchTerm(inputE1.current.value);
-    
-    console.log("!!!", props.searchTerm);
       if(inputE1.current.value) {
         const filteredResult = props.state.filter((project) => {
           return Object.values(project)
@@ -23,17 +20,27 @@ export default function SearchField(props) {
         });
         props.setProjects(filteredResult);
       } else {
-       
         props.setProjects(props.state);
-
       }
   };
 
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#009688',
+      },
+      secondary: {
+        main: '#004c40',
+      },
+    },
+  });
+
   return (
+    <ThemeProvider theme={theme}>
     <Box
       component="form"
       sx={{
-        '& > :not(style)': { m: 1, width: '50ch' },
+        '& > :not(style)': { m: 1, width: '50ch' }, color: 'inherit'
       }}
       noValidate
       autoComplete="off"
@@ -54,6 +61,7 @@ export default function SearchField(props) {
         }}
       />
     </Box>
+    </ThemeProvider>
   );
 
 }

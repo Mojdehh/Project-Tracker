@@ -90,6 +90,10 @@ export default function BasicTable(props) {
                 hover
                 key={row.name}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                hover
+                role="checkbox"
+                tabIndex={-1}
+                key={row.code}
               >
                 <TableCell align="center" component="th" scope="row">
                   <Link

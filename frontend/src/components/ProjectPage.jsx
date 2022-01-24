@@ -9,6 +9,9 @@ import { useParams } from "react-router";
 import axios from "axios";
 import SearchField from "./SearchField";
 import { useRadioGroup } from "@mui/material";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
 
 export default function ProjectPage() {
   let { project_id } = useParams();
@@ -88,53 +91,119 @@ export default function ProjectPage() {
   //   setTicketRows(state);
   // }, [ticketRow]);
   // console.log("projects page", projects);
-  console.log("tickets length", tickets.length);
-  console.log("tickets ", tickets);
+  // console.log("tickets length", tickets.length);
+  // console.log("tickets ", tickets);
 
   return (
     <>
-      <BreadCrumbs projectName={projectName} projects={projects} />
-      <InteractiveList
-        resetName={resetName}
-        projects={projects}
-        projectName={projectName}
-        setProjectName={setProjectName}
-        setResetName={setResetName}
-        handleSaveChanges={handleSaveChanges}
-        status={status}
-        setStatus={setStatus}
-        userId={userId}
-        setUserId={setUserId}
-        names={names}
-        setNames={setNames}
-      />
-      <TicketPopUp
-        name="Add a Ticket"
-        add="Create new Ticket"
-        tickets={tickets}
-        setTickets={setTickets}
-      />
-      <SearchField
-        label="Search Tickets"
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-        state={searchResults}
-        setProjects={setSearchResults}
-        state={tickets}
-      />
-      {tickets.length > 0 ? (
-        <TicketsTable
-          name="Ticket Name"
-          description="Description"
-          priority="Priority"
-          status="Status"
-          date="Date Created"
-          tickets={searchTerm.length < 1 ? tickets : searchResults}
-          setTickets={setTickets}
-        />
-      ) : (
-        "No Tickets Found!"
-      )}
+      <div>
+        <BreadCrumbs projectName={projectName} projects={projects} />
+        {/* <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            flexDirection: "row",
+            "& > :not(style)": {
+              m: 1,
+              pt: 2,
+              pb: 2,
+              mt: 3,
+
+              width: 1000,
+              height: 57,
+            },
+          }}
+        > */}
+
+          {/* <Grid containder sx={{ height: 1000 }}> */}
+          {/* <Grid container sx={{display: "flex", flexDirection: "row",  color: "#004d40"}}> */}
+          <div>
+            <InteractiveList
+              resetName={resetName}
+              projects={projects}
+              projectName={projectName}
+              setProjectName={setProjectName}
+              setResetName={setResetName}
+              handleSaveChanges={handleSaveChanges}
+              status={status}
+              setStatus={setStatus}
+              userId={userId}
+              setUserId={setUserId}
+              names={names}
+              setNames={setNames}
+            />
+          </div>
+          {/* </Grid > */}
+          {/* </Box> */}
+      </div>
+
+      <div>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            flexDirection: "row",
+            
+            // flexWrap: 'wrap',
+            "& > :not(style)": {
+              mt: 3,
+              pt: 2.5,
+              width: 1000,
+              height: 90,
+            },
+          }}>
+
+          <Paper elevation={4}>
+          {/* <Grid  sx={{ ml: 100, mt: 10 }}> */}
+
+            <Grid container rowSpacing={10} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+
+              <Grid item sx={{ml: 7}}>
+                <SearchField
+                  label="Search Tickets"
+                  searchTerm={searchTerm}
+                  setSearchTerm={setSearchTerm}
+                  state={searchResults}
+                  setProjects={setSearchResults}
+                  state={tickets}
+                />
+              </Grid>
+
+              <Grid item sx={{ml: 33, mt: 2}}>
+                <TicketPopUp
+                  name="Add a Ticket"
+                  add="Create new Ticket"
+                  tickets={tickets}
+                  setTickets={setTickets}
+                />
+              </Grid>
+
+            </Grid >
+         {/* </Grid > */}
+
+            <br />
+            <br />
+            <br />
+
+          {/* <Grid containder sx={{  height: 450 }}> */}
+
+            {tickets.length > 0 ? (
+              <TicketsTable
+                name="Ticket Name"
+                description="Description"
+                priority="Priority"
+                status="Status"
+                date="Date Created"
+                tickets={searchTerm.length < 1 ? tickets : searchResults}
+                setTickets={setTickets}
+              />
+            ) : (
+              "No Tickets Found!"
+            )}
+            {/* </Grid > */}
+          </Paper>
+        </Box>
+      </div>
     </>
   );
 }
