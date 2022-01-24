@@ -98,25 +98,6 @@ export default function ProjectPage() {
     <>
       <div>
         <BreadCrumbs projectName={projectName} projects={projects} />
-        {/* <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            flexDirection: "row",
-            "& > :not(style)": {
-              m: 1,
-              pt: 2,
-              pb: 2,
-              mt: 3,
-
-              width: 1000,
-              height: 57,
-            },
-          }}
-        > */}
-
-          {/* <Grid containder sx={{ height: 1000 }}> */}
-          {/* <Grid container sx={{display: "flex", flexDirection: "row",  color: "#004d40"}}> */}
           <div>
             <InteractiveList
               resetName={resetName}
@@ -133,8 +114,6 @@ export default function ProjectPage() {
               setNames={setNames}
             />
           </div>
-          {/* </Grid > */}
-          {/* </Box> */}
       </div>
 
       <div>
@@ -154,10 +133,7 @@ export default function ProjectPage() {
           }}>
 
           <Paper elevation={4}>
-          {/* <Grid  sx={{ ml: 100, mt: 10 }}> */}
-
             <Grid container rowSpacing={10} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-
               <Grid item sx={{ml: 7}}>
                 <SearchField
                   label="Search Tickets"
@@ -168,7 +144,6 @@ export default function ProjectPage() {
                   state={tickets}
                 />
               </Grid>
-
               <Grid item sx={{ml: 33, mt: 2}}>
                 <TicketPopUp
                   name="Add a Ticket"
@@ -177,15 +152,11 @@ export default function ProjectPage() {
                   setTickets={setTickets}
                 />
               </Grid>
-
             </Grid >
-         {/* </Grid > */}
 
             <br />
             <br />
             <br />
-
-          {/* <Grid containder sx={{  height: 450 }}> */}
 
             {tickets.length > 0 ? (
               <TicketsTable
@@ -200,7 +171,6 @@ export default function ProjectPage() {
             ) : (
               "No Tickets Found!"
             )}
-            {/* </Grid > */}
           </Paper>
         </Box>
       </div>
