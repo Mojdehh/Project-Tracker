@@ -4,9 +4,9 @@ Project Tracker is an app designed to help keep developers organized.  Whether i
 
  Developers can add new projects to their dashboard, create tickets for bug tracking, feature requests and more.  Communicate with your team via comment section when you've updated a feature, or squashed a bug!
 
+***
 
-
-### How it works
+## How it works
 Once a developer logs in, they are directed to their Project Dashboard.
 
 Here, users can see their list of projects, search through and filter by project status.  Most importantly, here is where developers will add a project to their dashboard.
@@ -23,7 +23,31 @@ Add a ticket with ease and flexibility!  Whether there is feature request, bug f
 
 ** edit project.gif
 
+Each ticket has it's own comment section so updates can be communicated in an organized way.
 
+Below you will see William commented that he will reopen the ticket to complete some testing, but the ticket remained Resolved.  Alice will go in and edit the ticket to reflect the correct status, and provide more ticket details while she is there.
+
+** edit ticket.gif
+
+
+
+## Tech Stack
+- React
+- Express
+- Node.js
+- PostgreSQL
+
+***
+
+## Dependencies
+- axios
+- bcryptjs
+- body-parser
+- cookie-parser
+- cookie-session
+- pg-native
+- morgan
+- nodemon
 
 
 
