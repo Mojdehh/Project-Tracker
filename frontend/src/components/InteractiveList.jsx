@@ -12,6 +12,8 @@ import CircularUnderLoad from "./CircularUnderLoad";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { Grid } from "@mui/material";
+import { formatDateTime } from "../Helper/dateHelperFuncs.ts"
+
 const Demo = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
 }));
@@ -124,7 +126,7 @@ export default function InteractiveList(props) {
                         justifyContent: "center",
                       }}
                       secondary={
-                        props.projects[0].date_created.match(/(.*)T/)[1]
+                        formatDateTime(props.projects[0].date_created)
                       }
                       secondaryTypographyProps={{
                         display: "flex",
@@ -143,7 +145,7 @@ export default function InteractiveList(props) {
                           justifyContent: "center",
                         }}
                         secondary={
-                          props.projects[0].date_updated.match(/(.*)T/)[1]
+                          formatDateTime(props.projects[0].date_updated)
                         }
                         secondaryTypographyProps={{
                           display: "flex",

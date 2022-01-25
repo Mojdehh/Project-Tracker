@@ -10,6 +10,7 @@ import useApplicationData from "../hooks/useApplicationData";
 import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { formatDateTime } from "../Helper/dateHelperFuncs.ts"
 
 // const theme = createTheme({
 //   components: {
@@ -87,13 +88,11 @@ export default function BasicTable(props) {
           <TableBody>
             {props.state.map((row) => (
               <TableRow
+                key={row.id}
                 hover
-                key={row.name}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                hover
                 role="checkbox"
                 tabIndex={-1}
-                key={row.code}
               >
                 <TableCell align="center" component="th" scope="row">
                   <Link
@@ -106,10 +105,7 @@ export default function BasicTable(props) {
                 <TableCell align="center">{row.number_of_tickets}</TableCell>
                 <TableCell align="center">{row.status}</TableCell>
                 <TableCell align="center">
-                  {row.date_created
-                    .replace(/\.[0-9]{3}/, "")
-                    .replace("T", "")
-                    .replace("Z", "")}
+                  {formatDateTime(row.date_created)}
                 </TableCell>
               </TableRow>
             ))}

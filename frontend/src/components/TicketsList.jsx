@@ -9,7 +9,7 @@ import useTicketDetails from "../hooks/useTicketDetails";
 import { useParams } from "react-router-dom";
 import EditTicketPopUp from "./EditTicketPopUp";
 import CircularUnderLoad from "./CircularUnderLoad";
-
+import {formatDateTime} from "../Helper/dateHelperFuncs.ts"
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 
@@ -105,7 +105,7 @@ export default function TicketsList(props) {
                         textalign: "center",
                         justifyContent: "center",
                       }}
-                      secondary={props.ticket[0].date_created.match(/(.*)T/)[1]}
+                      secondary={formatDateTime(props.ticket[0].date_created)}
                       secondaryTypographyProps={{
                         display: "flex",
                         textalign: "center",
@@ -122,9 +122,7 @@ export default function TicketsList(props) {
                           textalign: "center",
                           justifyContent: "center",
                         }}
-                        secondary={
-                          props.ticket[0].date_updated.match(/(.*)T/)[1]
-                        }
+                        secondary={formatDateTime(props.ticket[0].date_updated)}
                         secondaryTypographyProps={{
                           display: "flex",
                           textalign: "center",

@@ -14,7 +14,8 @@ import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-// import DeleteComment from "./DeleteComment";
+import { formatTimeAgo } from "../Helper/dateHelperFuncs.ts";
+
 
 export default function CommentSection(props) {
   let { project_id, ticket_id } = useParams();
@@ -45,8 +46,8 @@ export default function CommentSection(props) {
             >
               <List elevation={4} sx={{ bgcolor: "background.paper" }}>
                 {props.comments.map((row) => (
-                  <>
-                    <ListItem key={row.id} id={row.id} alignItems="flex-start">
+                  <React.Fragment key={row.id}>
+                    <ListItem id={row.id} alignItems="flex-start">
                       <ListItemAvatar>
                         <Avatar sx={{ bgcolor: "#80cbc4" }}>
                           {row.username.charAt(0)}
@@ -60,21 +61,18 @@ export default function CommentSection(props) {
                               sx={{ display: "inline" }}
                               component="span"
                               variant="body2"
-                              color="text.primary"
                             >
                               {row.username}
                             </Typography>
                             <br />
-                            {row.date_created
-                              .replace(/\.[0-9]{3}/, "")
-                              .replace("T", "")
-                              .replace("Z", "")}
+                            {formatTimeAgo(row.date_created)
+                            } ago
                           </React.Fragment>
                         }
                       />
                     </ListItem>
                     <Divider variant="middle" component="li" />
-                  </>
+                  </React.Fragment>
                 ))}
               </List>
             </Box>

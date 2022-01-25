@@ -8,6 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import useTicketsData from "../hooks/useTicketsData";
 import { useParams, Link } from "react-router-dom";
+import { formatDateTime } from "../Helper/dateHelperFuncs.ts"
 
 export default function TicketsTable(props) {
   let { project_id } = useParams();
@@ -69,10 +70,7 @@ export default function TicketsTable(props) {
                 <TableCell align="center">{row.description}</TableCell>
                 <TableCell align="center">{row.status}</TableCell>
                 <TableCell align="center">
-                  {row.date_created
-                    .replace(/\.[0-9]{3}/, "")
-                    .replace("T", "")
-                    .replace("Z", "")}
+                  {formatDateTime(row.date_created)}
                 </TableCell>
               </TableRow>
             ))}
