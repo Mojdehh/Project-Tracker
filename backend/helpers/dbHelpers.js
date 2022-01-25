@@ -50,7 +50,8 @@ module.exports = (db) => {
       text: `SELECT projects.*, count(tickets.*) 
           as number_of_tickets FROM projects 
           FULL OUTER JOIN tickets ON projects.id = project_id 
-          GROUP BY projects.id`,
+          GROUP BY projects.id
+          ORDER BY date_created DESC`,
     };
     return db
       .query(query)
