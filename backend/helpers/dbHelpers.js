@@ -227,8 +227,6 @@ module.exports = (db) => {
   };
 
   const login = (email, password) => {
-    const hashedPassword = bcrypt.hashSync(password, 10);
-    // console.log("Hashed###", hashedPassword);
     const query = {
       text: `SELECT * FROM users WHERE email = $1;`,
     };
@@ -239,7 +237,7 @@ module.exports = (db) => {
         return result.rows[0];
       })
       .then((result) => {
-        if (result !== undefined && bcrypt.compareSync(result.password, hashedPassword)) {
+        if (result !== undefined && bcrypt.compareSync(password, result.password)) {
           console.log("user with Hashhhh", result);
           return result;
         }
