@@ -1,3 +1,5 @@
+const bcrypt = require("bcryptjs");
+
 module.exports = (db) => {
   const getUsers = () => {
     const query = {
@@ -225,6 +227,8 @@ module.exports = (db) => {
   };
 
   const login = (email, password) => {
+    const hashedPassword = bcrypt.hashSync(password, 10);
+    // console.log("Hashed###", hashedPassword);
     const query = {
       text: `SELECT * FROM users WHERE email = $1;`,
     };
@@ -232,11 +236,11 @@ module.exports = (db) => {
     return db
       .query(query, values)
       .then((result) => {
-        // console.log('result.rows[0]', result.rows[0]);
         return result.rows[0];
       })
       .then((result) => {
-        if (result !== undefined && result.password === password) {
+        if (result !== undefined && bcrypt.compareSync(result.password, hashedPassword)) {
+          console.log("user with Hashhhh", result);
           return result;
         }
         return null;
