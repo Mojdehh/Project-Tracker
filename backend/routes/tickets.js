@@ -7,10 +7,8 @@ const {
   addTicket,
   addComment,
   editTicket,
-  
 } = require("../helpers/dbHelpers.js");
 
-/* GET all projects. */
 module.exports = ({
   getProjectTickets,
   getTicketComments,
@@ -18,7 +16,6 @@ module.exports = ({
   addTicket,
   addComment,
   editTicket,
-  
 }) => {
   router.get("/", (req, res) => {
     getProjectTickets()
@@ -29,14 +26,6 @@ module.exports = ({
         })
       );
   });
-
-  // router.get('/details', (req, res) => {
-  //   getProjectDetails()
-  //     .then((projects) => res.json(projects))
-  //     .catch((err) => res.json({
-  //       error: err.message
-  //     }));
-  // });
 
   router.get("/:project_id/tickets/:ticket_id/comments", (req, res) => {
     const ticketID = req.params.ticket_id;
@@ -89,7 +78,6 @@ module.exports = ({
         });
       });
   });
-
 
   router.put("/:project_id/tickets/:ticket_id", (req, res) => {
     const projectID = req.params.project_id;
