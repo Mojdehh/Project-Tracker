@@ -1,77 +1,54 @@
 import * as React from 'react';
 import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
 import Typography from '@mui/material/Typography';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControl from '@mui/material/FormControl';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 export default function RowRadioButtonsGroup(props) {
   const handleRadioChange = (e) => {
-    // e.preventDefault();
-    console.log("props", props);
     props.setFilterSelected(e.target.value);
-    console.log("VALUE", e.target.value)
-
-    // if(props.valueRadio ) {
-    //   const sortResult = props.state((project) => {
-    //     return Object.values(project)
-    //     .includes(props.valueRadio);
-        
-    //   });
-    //   props.setRadioResults(sortResult);
-    // } else {
-    //   props.setRadioResults(props.state);
-    // }
-
   }
-
- 
-  
 
   return (
     <FormControl>
-      {/* <FormLabel  id="demo-row-radio-buttons-group-label"> */}
       <Typography variant="caption" align="left" >
         Filter Projects By:
-        </Typography>
-        {/* </FormLabel> */}
+      </Typography>
       <RadioGroup
         row
         aria-labelledby="demo-row-radio-buttons-group-label"
         name="row-radio-buttons-group"
         value={props.filterSelected}
         onChange={handleRadioChange}
-        
       >
-        <FormControlLabel 
-          value="All" 
+        <FormControlLabel
+          value="All"
           control={<Radio sx={{
             color: "#009688",
             "&.Mui-checked": {
               color: "#009688",
             },
-          }}/>} 
+          }} />}
           label="All" />
-        <FormControlLabel 
-          value="Closed" 
+        <FormControlLabel
+          value="Closed"
           control={<Radio sx={{
             color: "#009688",
             "&.Mui-checked": {
               color: "#009688",
             },
-          }}/>} 
+          }} />}
           label="Closed" />
-        <FormControlLabel 
-          value="Open" 
+        <FormControlLabel
+          value="Open"
           control={<Radio sx={{
             color: "#009688",
             "&.Mui-checked": {
               color: "#009688",
             },
-          }}/>} 
+          }} />}
           label="Open" />
-        
       </RadioGroup>
     </FormControl>
   );

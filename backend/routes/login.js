@@ -22,7 +22,6 @@ module.exports = ({ login }) => {
           return res.send({ message: "Wrong username/password combination!" });
         }
         req.session.user = user;
-        console.log("req.session.user ", req.session.user);
         res.json(user);
       })
       .catch((err) => res.send(err));

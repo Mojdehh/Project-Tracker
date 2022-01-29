@@ -1,30 +1,25 @@
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import { Link } from "react-router-dom";
-import DeveloperModeIcon from "@mui/icons-material/DeveloperMode";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import PestControlOutlinedIcon from "@mui/icons-material/PestControlOutlined";
-import Avatar from "@mui/material/Avatar";
-import { useEffect } from "react";
-import axios from "axios";
 import { useState } from "react";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import NextWeekOutlinedIcon from "@mui/icons-material/NextWeekOutlined";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import Box from "@mui/material/Box";
+import AppBar from "@mui/material/AppBar";
+import Button from "@mui/material/Button";
+import Avatar from "@mui/material/Avatar";
+import Toolbar from "@mui/material/Toolbar";
 import CodeIcon from "@mui/icons-material/Code";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const theme = createTheme({
   palette: {
     primary: {
-      // Purple and green play nicely together.
       main: "#009688",
     },
     secondary: {
-      // This is green.A700 as hex.
       main: "#004c40",
     },
     typography: {
@@ -45,7 +40,6 @@ export default function ButtonAppBar() {
   }, []);
 
   const handleLogoutClick = () => {
-    // useEffect(() => {
     axios.post("http://localhost:8080/api/logout").then(() => {
       {
         window.location.href = "/login";
@@ -93,13 +87,6 @@ export default function ButtonAppBar() {
                   </Button>
                 </>
               ) : null
-              // <Button
-              //   variant="outlined"
-              //   color="success"
-              //   onClick={() => {window.location.href = '/login'}}
-              //   >
-              //   Login
-              // </Button>
             }
           </Toolbar>
         </AppBar>

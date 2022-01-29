@@ -1,18 +1,17 @@
 import * as React from "react";
-import InteractiveList from "./InteractiveList";
-import TicketsTable from "./TicketsTable";
+import axios from "axios";
+import { useParams } from "react-router";
 import TicketPopUp from "./TicketPopUp";
 import BreadCrumbs from "./BreadCrumbs";
+import SearchField from "./SearchField";
+import TicketsTable from "./TicketsTable";
+import InteractiveList from "./InteractiveList";
 import useTicketsData from "../hooks/useTicketsData";
 import useProjectDetail from "../hooks/useProjectDetail";
-import { useParams } from "react-router";
-import axios from "axios";
-import SearchField from "./SearchField";
-import { useRadioGroup } from "@mui/material";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
 import Chip from "@mui/material/Chip";
+import Paper from "@mui/material/Paper";
 
 export default function ProjectPage() {
   let { project_id } = useParams();
@@ -25,18 +24,14 @@ export default function ProjectPage() {
     status,
     setStatus,
   } = useProjectDetail(project_id);
-  // const [ticketRow, setTicketRows] = React.useState([]);
 
   const { tickets, setTickets } = useTicketsData(project_id);
   const [resetName, setResetName] = React.useState();
-  //const [status, setStatus] = React.useState();
   const [searchTerm, setSearchTerm] = React.useState("");
   const [searchResults, setSearchResults] = React.useState([]);
   const [userId, setUserId] = React.useState([]);
   const [names, setNames] = React.useState([]);
 
-  console.log("status project page", status);
-  console.log("setUserId", userId);
   React.useEffect(() => {
     return axios
       .get("http://localhost:8080/api/users")
@@ -49,8 +44,6 @@ export default function ProjectPage() {
   }, []);
 
   function editProject(projectName, event, status, ids) {
-    console.log("userId", ids);
-    console.log("status on edit pro", status);
     return axios
       .put(`http://localhost:8080/api/projects/${project_id}`, {
         projectName,
@@ -88,13 +81,6 @@ export default function ProjectPage() {
   const handleSaveChanges = (projectName, event, status, ids) =>
     editProject(projectName, event, status, ids);
 
-  // React.useEffect(() => {
-  //   setTicketRows(state);
-  // }, [ticketRow]);
-  // console.log("projects page", projects);
-  // console.log("tickets length", tickets.length);
-  // console.log("tickets ", tickets);
-
   return (
     <>
       <div>
@@ -123,8 +109,6 @@ export default function ProjectPage() {
             display: "flex",
             justifyContent: "center",
             flexDirection: "row",
-
-            // flexWrap: 'wrap',
             "& > :not(style)": {
               mt: 3,
               pt: 2.5,

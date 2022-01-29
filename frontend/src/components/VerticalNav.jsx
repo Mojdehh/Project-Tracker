@@ -1,16 +1,15 @@
 import React, { useRef } from "react";
+import axios from "axios";
 import BasicTable from "./BasicTable";
+import ButtonSort from "./ButtonSort";
+import SearchField from "./SearchField";
 import ProjectPopUp from "./ProjectPopUp";
 import useApplicationData from "../hooks/useApplicationData";
-import axios from "axios";
-import SearchField from "./SearchField";
-import ButtonSort from "./ButtonSort";
-import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
 import ContentPasteRoundedIcon from "@mui/icons-material/ContentPasteRounded";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 export default function VerticalNav(props) {
   const [userId, setUserId] = React.useState([]);
@@ -33,16 +32,12 @@ export default function VerticalNav(props) {
   }, [state]);
 
   function addProject(value) {
-    console.log("xxxxxxxxxxxxx", value);
     return axios
       .post("http://localhost:8080/api/projects", {
         projectName: value,
       })
       .then(
         (response) => {
-          // if userId.length > 1 for each run post request
-          // if not just run once
-          // console.log("res", response);
           const projectID = response.data[0].id;
           const projectTitle = response.data[0].name;
           userId.forEach((user) => {
@@ -53,14 +48,10 @@ export default function VerticalNav(props) {
                 user_id: user,
               })
               .then((response) => {
-                // if we dont want to make a second get request use line 73
-                //setTableRows([...tableRow, response.data[0]]);
                 axios
                   .get("http://localhost:8080/api/projects/details")
                   .then((details) => {
-                    console.log("details++++++++++++++++", details.data);
                     setState(details.data);
-                    // setProjects(details.data);
                   });
                 return state;
               });
@@ -74,17 +65,13 @@ export default function VerticalNav(props) {
 
   const handleClick = (value, id, event) => {
     event.preventDefault();
-    //validate(value);
-    //addProject(value);
   };
 
   const filteredSearchResults = () => {
     if (filterSelected === "All") {
       return projects;
     }
-    console.log("SRCH RESULT ---- ", projects);
     return projects.filter((result) => {
-      console.log("RESULT---", result);
       return result.status === filterSelected;
     });
   };
@@ -102,7 +89,6 @@ export default function VerticalNav(props) {
               pt: 2,
               pb: 2,
               mt: 3,
-
               width: 1000,
               height: 57,
             },
@@ -147,8 +133,6 @@ export default function VerticalNav(props) {
             display: "flex",
             justifyContent: "center",
             flexDirection: "row",
-
-            // flexWrap: 'wrap',
             "& > :not(style)": {
               mt: 3,
               pt: 2.5,
@@ -174,21 +158,10 @@ export default function VerticalNav(props) {
               />
             </Grid>
 
-            {/* <Grid container sx={{ ml: 100 }}>
-              <ProjectPopUp
-                name="Add a Project"
-                add="create new project"
-                userId={userId}
-                setUserId={setUserId}
-                handleClick={handleClick}
-                addProject={addProject}
-              />
-            </Grid> */}
+            <br />
+            <br />
+            <br />
 
-            <br />
-            <br />
-            <br />
-            {/* <Paper elevation={4}> */}
             <Grid containder sx={{ height: 450 }}>
               <BasicTable
                 name="Project Name"
@@ -199,7 +172,6 @@ export default function VerticalNav(props) {
               />
             </Grid>
             <br />
-            {/* </Paper> */}
           </Paper>
         </Box>
       </div>

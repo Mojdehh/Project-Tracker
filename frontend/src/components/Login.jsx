@@ -34,19 +34,19 @@ export default function BasicCard() {
   const avatarStyle = { display: 'flex', backgroundColor: '#009688', justifyContent: 'center', alignItems: 'center' }
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
+
   const handleClick = () => {
     login();
   }
 
   function login() {
     return axios
-    .post(`http://localhost:8080/api/login`, {
-      email, password
-    })
-    .then((response) => {
-      window.location.href = '/'
-    });
+      .post(`http://localhost:8080/api/login`, {
+        email, password
+      })
+      .then((response) => {
+        window.location.href = '/'
+      });
   }
 
   useEffect(() => {
@@ -58,54 +58,54 @@ export default function BasicCard() {
         }
       })
   }, [])
-  
+
   return (
     <ThemeProvider theme={theme}>
-   <Grid>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <Card elevation={4} sx={{ mt: 8, mb: 2, display: 'block', width: '30vw'}}>
-          <CardContent>
-          <Typography variant="h5" component="div" sx={{ color: "#004d40", mt: 3, fontWeight: 'bold'}}>
-              Login
-            </Typography>
-          <CardActions style={{ justifyContent: 'center' }}>
-              <Avatar sx={{ mb: 6, height: 50, width: 50}} style={avatarStyle}><LockOutlinedIcon /></Avatar>
-            </CardActions>
-            <TextField
-              id="Username"
-              name="email"
-              label="Username"
-              placeholder="Enter Username"
-              value={email}
-              onChange={(event)=> {setEmail(event.target.value)}}
-            />
-            <br />
-            <br />
-            <TextField
-              id="Password"
-              name="password"
-              label="Password"
-              placeholder="Enter Password"
-              type="password"
-              value={password}
-              onChange={(event)=> {setPassword(event.target.value)}}
-            />
-          <CardActions style={{ justifyContent: 'center' }}>
-            <Button onClick={handleClick} size="large" variant="contained" >Login</Button>
-          </CardActions>
-            <Typography sx={{ mt: 3}}>
-            <Link to="#" style={{ color: "#004d40" }} >
-              Forgot Username/Password?
-              </Link>
-            </Typography>
-            <Typography>
-            <Link to="#" style={{ color: "#004d40" }}>
-              Sign Up
-              </Link>
-            </Typography>
-          </CardContent>
-        </Card>
-      </div>
+      <Grid>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <Card elevation={4} sx={{ mt: 8, mb: 2, display: 'block', width: '30vw' }}>
+            <CardContent>
+              <Typography variant="h5" component="div" sx={{ color: "#004d40", mt: 3, fontWeight: 'bold' }}>
+                Login
+              </Typography>
+              <CardActions style={{ justifyContent: 'center' }}>
+                <Avatar sx={{ mb: 6, height: 50, width: 50 }} style={avatarStyle}><LockOutlinedIcon /></Avatar>
+              </CardActions>
+              <TextField
+                id="Username"
+                name="email"
+                label="Username"
+                placeholder="Enter Username"
+                value={email}
+                onChange={(event) => { setEmail(event.target.value) }}
+              />
+              <br />
+              <br />
+              <TextField
+                id="Password"
+                name="password"
+                label="Password"
+                placeholder="Enter Password"
+                type="password"
+                value={password}
+                onChange={(event) => { setPassword(event.target.value) }}
+              />
+              <CardActions style={{ justifyContent: 'center' }}>
+                <Button onClick={handleClick} size="large" variant="contained" >Login</Button>
+              </CardActions>
+              <Typography sx={{ mt: 3 }}>
+                <Link to="#" style={{ color: "#004d40" }} >
+                  Forgot Username/Password?
+                </Link>
+              </Typography>
+              <Typography>
+                <Link to="#" style={{ color: "#004d40" }}>
+                  Sign Up
+                </Link>
+              </Typography>
+            </CardContent>
+          </Card>
+        </div>
       </Grid>
     </ThemeProvider>
   );
