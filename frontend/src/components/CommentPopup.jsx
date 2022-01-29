@@ -8,7 +8,6 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { useParams } from "react-router-dom";
@@ -56,11 +55,9 @@ BootstrapDialogTitle.propTypes = {
 const theme = createTheme({
   palette: {
     primary: {
-      // Purple and green play nicely together.
       main: "#00675b",
     },
     secondary: {
-      // This is green.A700 as hex.
       main: "#00675b",
     },
   },
@@ -99,13 +96,11 @@ export default function CustomizedDialogs(props) {
   }
 
   function addComment() {
-    console.log("comment", comment);
     return axios
       .post(
         `http://localhost:8080/api/projects/${project_id}/tickets/${ticket_id}/comments`,
         {
           comment: comment,
-          // userId: someValue
         }
       )
       .then((response) => {
@@ -116,20 +111,9 @@ export default function CustomizedDialogs(props) {
           .then((response) => {
             console.log("response", response);
             props.setComments(response.data);
-            // props.setComments((prev) => {
-            //   const rows = [...prev];
-            //   rows.push(response.data[0]);
-            //   return rows;
           });
-        // props.setComments((prev) => {
-        //   const rows = [...prev];
-        //   rows.push(response.data[0]);
-        //   return rows;
-        // });
-        //console.log(response);
       })
       .catch((err) => console.log(err));
-    // });
   }
 
   return (

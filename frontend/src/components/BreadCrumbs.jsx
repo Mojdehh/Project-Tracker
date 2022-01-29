@@ -4,12 +4,10 @@ import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
 
 function handleClick(event) {
-  //event.preventDefault();
-  // console.info("You clicked a breadcrumb.");
+
 }
 
 export default function BreadCrumbs(props) {
-  console.log("props.projectName", props.projectName);
   return (
     <div
       style={{

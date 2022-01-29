@@ -8,24 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import useApplicationData from "../hooks/useApplicationData";
 import { Link } from "react-router-dom";
-import Box from "@mui/material/Box";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { formatDateTime } from "../Helper/dateHelperFuncs.ts"
-
-// const theme = createTheme({
-//   components: {
-
-//     TableHead: {
-//       styleOverrides: {
-//         // Name of the slot
-//         root: {
-//           // Some CSS
-//           backgroundColor: '#00867d',
-//         },
-//       },
-//     },
-//   },
-// });
+import { formatDateTime } from "../Helper/dateHelperFuncs.ts";
 
 const styles = (theme) => ({
   tableRow: {
@@ -42,22 +25,6 @@ export default function BasicTable(props) {
   }
 
   return (
-    //   <Box
-    //   sx={{
-    //     display: "flex",
-    //     justifyContent: "center",
-    //     flexDirection: "row",
-
-    //     // flexWrap: 'wrap',
-    //     "& > :not(style)": {
-    //       mt: 3,
-
-    //       width: 1000,
-    //       height: 450,
-    //     },
-    //   }}
-    // >
-    // <ThemeProvider theme={theme}>
     <Paper display="flex" elevation={4} justifyContent="center">
       <TableContainer style={{ maxHeight: 430 }} component={Paper}>
         <Table stickyHeader sx={{ minWidth: 500 }} aria-label="simple table">
@@ -113,7 +80,5 @@ export default function BasicTable(props) {
         </Table>
       </TableContainer>
     </Paper>
-    // </ThemeProvider>
-    // </Box>
   );
 }
