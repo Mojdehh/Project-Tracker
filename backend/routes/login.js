@@ -20,7 +20,6 @@ module.exports = ({
   
 
   router.post("/login", (req, res) => {
-    // console.log('req.session', req.session);
     const {email, password} = req.body;
     login(email, password)
     .then(user => {
@@ -29,7 +28,6 @@ module.exports = ({
         return res.send({message : 'Wrong username/password combination!'})
       }
       req.session.user = user;
-      console.log("req.session.user ", req.session.user);
       res.json(user);
 
     })

@@ -80,7 +80,6 @@ module.exports = ({
 
   router.get("/:project_id/user_project", (req, res) => {
     const projectID = req.params.project_id;
-    //const userID = req.params.user_id;
     getUser_ProjectIds(projectID)
       .then((result) => res.json(result))
       .catch((err) =>

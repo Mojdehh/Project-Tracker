@@ -30,14 +30,6 @@ module.exports = ({
       );
   });
 
-  // router.get('/details', (req, res) => {
-  //   getProjectDetails()
-  //     .then((projects) => res.json(projects))
-  //     .catch((err) => res.json({
-  //       error: err.message
-  //     }));
-  // });
-
   router.get("/:project_id/tickets/:ticket_id/comments", (req, res) => {
     const ticketID = req.params.ticket_id;
     getTicketComments(ticketID)
