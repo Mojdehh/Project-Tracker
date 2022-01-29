@@ -1,9 +1,9 @@
 import * as React from 'react';
+import { useRef } from "react";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { useRef } from "react";
-import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
+import InputAdornment from '@mui/material/InputAdornment';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 export default function SearchField(props) {

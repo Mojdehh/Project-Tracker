@@ -1,15 +1,14 @@
 import * as React from "react";
 import PropTypes from "prop-types";
+import TextInput from "./TextInput";
+import Dialog from "@mui/material/Dialog";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
-import Dialog from "@mui/material/Dialog";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
-import Typography from "@mui/material/Typography";
-import TextInput from "./TextInput";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({

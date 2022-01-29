@@ -1,16 +1,15 @@
 import React, { useRef } from "react";
+import axios from "axios";
 import BasicTable from "./BasicTable";
+import ButtonSort from "./ButtonSort";
+import SearchField from "./SearchField";
 import ProjectPopUp from "./ProjectPopUp";
 import useApplicationData from "../hooks/useApplicationData";
-import axios from "axios";
-import SearchField from "./SearchField";
-import ButtonSort from "./ButtonSort";
-import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
 import ContentPasteRoundedIcon from "@mui/icons-material/ContentPasteRounded";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 export default function VerticalNav(props) {
   const [userId, setUserId] = React.useState([]);

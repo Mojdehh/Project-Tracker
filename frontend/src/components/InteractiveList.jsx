@@ -1,17 +1,17 @@
 import * as React from "react";
+import { useParams } from "react-router-dom";
 import { styled } from "@mui/material/styles";
+import { formatDateTime } from "../Helper/dateHelperFuncs.ts"
 import Box from "@mui/material/Box";
+import { Grid } from "@mui/material";
 import List from "@mui/material/List";
+import Card from "@mui/material/Card";
 import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 import EditProjectPopUp from "./EditProjectPopUp";
-import { useParams } from "react-router-dom";
-import CircularUnderLoad from "./CircularUnderLoad";
-import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import { Grid } from "@mui/material";
-import { formatDateTime } from "../Helper/dateHelperFuncs.ts"
+import CircularUnderLoad from "./CircularUnderLoad";
+import ListItemText from "@mui/material/ListItemText";
 
 const Demo = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,

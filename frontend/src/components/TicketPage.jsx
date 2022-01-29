@@ -1,20 +1,20 @@
 import * as React from "react";
+import axios from "axios";
+import { useParams } from "react-router";
+import BreadCrumbs from "./BreadCrumbs";
 import TicketsList from "./TicketsList";
 import CommentPopUp from "./CommentPopup";
 import CommentSection from "./CommentSection";
-import BreadCrumbs from "./BreadCrumbs";
 import useTicketDetails from "../hooks/useTicketDetails";
 import useProjectDetail from "../hooks/useProjectDetail";
 import useCommentsData from "../hooks/useCommentsData";
-import { useParams } from "react-router";
-import axios from "axios";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import Chip from "@mui/material/Chip";
+import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
+import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import CommentIcon from "@mui/icons-material/Comment";
-import Avatar from "@mui/material/Avatar";
-import Chip from "@mui/material/Chip";
 
 export default function TicketPage(props) {
   let { project_id, ticket_id } = useParams();

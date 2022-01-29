@@ -1,17 +1,16 @@
 import * as React from "react";
+import { useParams } from "react-router-dom";
+import { formatTimeAgo } from "../Helper/dateHelperFuncs.ts";
+import Box from "@mui/material/Box";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
+import Card from "@mui/material/Card";
+import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
+import ListItem from "@mui/material/ListItem";
+import Typography from "@mui/material/Typography";
+import CardContent from "@mui/material/CardContent";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
-import Avatar from "@mui/material/Avatar";
-import Typography from "@mui/material/Typography";
-import { useParams } from "react-router-dom";
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import { formatTimeAgo } from "../Helper/dateHelperFuncs.ts";
-
 
 export default function CommentSection(props) {
   let { project_id, ticket_id } = useParams();

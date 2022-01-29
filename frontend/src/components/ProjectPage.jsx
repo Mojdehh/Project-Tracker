@@ -1,18 +1,17 @@
 import * as React from "react";
-import InteractiveList from "./InteractiveList";
-import TicketsTable from "./TicketsTable";
+import axios from "axios";
+import { useParams } from "react-router";
 import TicketPopUp from "./TicketPopUp";
 import BreadCrumbs from "./BreadCrumbs";
+import SearchField from "./SearchField";
+import TicketsTable from "./TicketsTable";
+import InteractiveList from "./InteractiveList";
 import useTicketsData from "../hooks/useTicketsData";
 import useProjectDetail from "../hooks/useProjectDetail";
-import { useParams } from "react-router";
-import axios from "axios";
-import SearchField from "./SearchField";
-import { useRadioGroup } from "@mui/material";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
 import Chip from "@mui/material/Chip";
+import Paper from "@mui/material/Paper";
 
 export default function ProjectPage() {
   let { project_id } = useParams();
