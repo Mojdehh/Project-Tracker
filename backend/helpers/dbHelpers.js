@@ -213,7 +213,6 @@ module.exports = (db) => {
       })
       .then((result) => {
         if (result !== undefined && bcrypt.compareSync(password, result.password)) {
-          console.log("user with Hashhhh", result);
           return result;
         }
         return null;

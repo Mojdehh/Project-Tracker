@@ -21,7 +21,6 @@ export default function InteractiveList(props) {
   const [dense, setDense] = React.useState(true);
   const [secondary, setSecondary] = React.useState(false);
   let { project_id } = useParams();
-  console.log(project_id);
 
   const assignedDevs = (projects) => {
     const devs = [];

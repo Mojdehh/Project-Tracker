@@ -127,7 +127,6 @@ module.exports = ({
     const projectID = req.body.project_id;
     const userID = req.body.user_id;
     const projectTitle = req.body.project_name;
-    console.log("projectID and userID: ", projectID, userID);
     addProjectUsers(userID, projectTitle, projectID)
       .then((projects) => res.json(projects))
       .catch((err) =>
