@@ -10,8 +10,6 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
 import TextInput from "./TextInput";
-import useProjectsData from "../hooks/useProjectsData";
-import useApplicationData from "../hooks/useApplicationData";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -55,11 +53,9 @@ BootstrapDialogTitle.propTypes = {
 const theme = createTheme({
   palette: {
     primary: {
-      // Purple and green play nicely together.
       main: '#00675b',
     },
     secondary: {
-      // This is green.A700 as hex.
       main: '#00675b',
     },
     typography: {
@@ -69,6 +65,7 @@ const theme = createTheme({
     },
   },
 });
+
 export default function CustomizedDialogs(props) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
@@ -89,19 +86,8 @@ export default function CustomizedDialogs(props) {
     setOpen(false);
   };
 
-  // const { addProject, refresh } = useApplicationData();
-  // const handleClick = (value, event) => {
-  //   event.preventDefault();
-  //   addProject(value);
-  //   handleClose();
-  //   // props.setList(value);
-  //   // forceUpdate();
-  //   props.setCounter(props.counter + 1);
-  // };
-  console.log("users state", users);
-
   function validate(value, users) {
-    
+
     if (value === "") {
       setError("Please Enter Project Name");
       return;
@@ -122,52 +108,50 @@ export default function CustomizedDialogs(props) {
     setValue("");
     setUsers([]);
   };
+
   return (
     <ThemeProvider theme={theme}>
-    <div>
-      <Button variant="contained" color="primary" onClick={handleClickOpen}>
-        {props.name}
-      </Button>
-      <BootstrapDialog
-        onClose={handleClose}
-        aria-labelledby="customized-dialog-title"
-        open={open}
-      >
-        <BootstrapDialogTitle
-          id="customized-dialog-title"
+      <div>
+        <Button variant="contained" color="primary" onClick={handleClickOpen}>
+          {props.name}
+        </Button>
+        <BootstrapDialog
           onClose={handleClose}
+          aria-labelledby="customized-dialog-title"
+          open={open}
         >
-          Add Project
-        </BootstrapDialogTitle>
-        <DialogContent dividers>
-          <TextInput
-            name="Project Name"
-            title="Add Developers"
-            value={value}
-            setValue={setValue}
-            users={users}
-            setUsers={setUsers}
-            userId={props.userId}
-            setUserId={props.setUserId}
-            error={error}
-            errorNoDevs={errorNoDevs}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button
-            autoFocus
-            onClick={(event) => {
-              validate(value, users);
-              //props.addProject(value);
-              //props.handleClick(value, props.userId, event);
-              //handleClose();
-            }}
+          <BootstrapDialogTitle
+            id="customized-dialog-title"
+            onClose={handleClose}
           >
-            {props.add}
-          </Button>
-        </DialogActions>
-      </BootstrapDialog>
-    </div>
+            Add Project
+          </BootstrapDialogTitle>
+          <DialogContent dividers>
+            <TextInput
+              name="Project Name"
+              title="Add Developers"
+              value={value}
+              setValue={setValue}
+              users={users}
+              setUsers={setUsers}
+              userId={props.userId}
+              setUserId={props.setUserId}
+              error={error}
+              errorNoDevs={errorNoDevs}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button
+              autoFocus
+              onClick={(event) => {
+                validate(value, users);
+              }}
+            >
+              {props.add}
+            </Button>
+          </DialogActions>
+        </BootstrapDialog>
+      </div>
     </ThemeProvider>
   );
 }

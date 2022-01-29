@@ -64,7 +64,6 @@ export default function TicketsTable(props) {
                   >
                     {row.name}
                   </Link>
-                  {/* {row.name} */}
                 </TableCell>
                 <TableCell align="center">{row.priority}</TableCell>
                 <TableCell align="center">{row.description}</TableCell>

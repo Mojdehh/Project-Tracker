@@ -32,12 +32,6 @@ export default function TicketPage(props) {
 
   const { comments, setComments } = useCommentsData(project_id, ticket_id);
   const [resetTicketState, setResetTicketState] = React.useState({});
-  //const [priority, setPriority] = React.useState("");
-  //const [ticketStatus, setTicketStatus] = React.useState();
-  console.log("ticketPagePriority", ticketState.priority);
-  console.log("ticketPageStatus", ticketState.status);
-  console.log("ticketPageName", ticketState.name);
-  console.log("ticketPageDescription", ticketState.description);
 
   const avatarStyle = {
     display: "flex",
@@ -45,6 +39,7 @@ export default function TicketPage(props) {
     justifyContent: "center",
     alignItems: "center",
   };
+
   function editTicket() {
     return axios
       .put(
@@ -57,8 +52,6 @@ export default function TicketPage(props) {
         }
       )
       .then((response) => {
-        // console.log("response project pg", response.data);
-        // setTicket(response.data);
         axios
           .get(
             `http://localhost:8080/api/projects/${project_id}/tickets/${ticket_id}`
@@ -71,8 +64,8 @@ export default function TicketPage(props) {
       });
   }
 
-  console.log("@!!!", ticket);
   const handleSaveChanges = () => editTicket();
+
   return (
     <>
       <div>
@@ -89,8 +82,6 @@ export default function TicketPage(props) {
             setTicketState={handleChangeTicket}
             resetTicketState={resetTicketState}
             setResetTicketState={setResetTicketState}
-            // priority={priority}
-            // setPriority={setPriority}
             handleSaveChanges={handleSaveChanges}
           />
         </div>
@@ -102,8 +93,6 @@ export default function TicketPage(props) {
             display: "flex",
             justifyContent: "center",
             flexDirection: "row",
-
-            // flexWrap: 'wrap',
             "& > :not(style)": {
               mt: 3,
               pt: 2.5,

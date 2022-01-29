@@ -8,7 +8,6 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import RadioBtn from "./RadioBtn";
@@ -83,7 +82,6 @@ export default function TicketPopUp(props) {
     setPriority();
     setOpen(false);
   };
-  console.log("priority", priority);
   function validate(users) {
     if (name === "") {
       setError("Please Enter Ticket Name");
@@ -120,29 +118,9 @@ export default function TicketPopUp(props) {
           rows.unshift(response.data[0]);
           return rows;
         });
-
-        // axios
-        //   .get(`http://localhost:8080/api/projects/${project_id}/tickets`)
-        //   .then((details) => {
-        //     console.log("detials", details.data);
-        //     props.setTicketRows(details.data);
-        //   });
-        //  return props.ticketRows;
-        //setTableRows(details.data);
-        //console.log(response);
       })
       .catch((err) => console.log(err));
   }
-
-  // const newTickets = async () => {
-  //   const result = await axios
-  //       .get(`http://localhost:8080/api/projects/${project_id}/tickets`)
-
-  //       // .then((details) => {
-  //       //   console.log("detials", details.data);
-  //       //   props.setTicketRows(details.data);
-  //       props.setTicketRows(result.data);
-  // }
 
   const theme = createTheme({
     palette: {
@@ -160,87 +138,86 @@ export default function TicketPopUp(props) {
     },
   });
 
-
   return (
     <ThemeProvider theme={theme}>
-    <div>
-      <Button variant="contained" color="primary" onClick={handleClickOpen}>
-        Add a Ticket
-      </Button>
-      <BootstrapDialog
-        onClose={handleClickClose}
-        aria-labelledby="customized-dialog-title"
-        open={open}
-      >
-        <BootstrapDialogTitle
-          id="customized-dialog-title"
+      <div>
+        <Button variant="contained" color="primary" onClick={handleClickOpen}>
+          Add a Ticket
+        </Button>
+        <BootstrapDialog
           onClose={handleClickClose}
+          aria-labelledby="customized-dialog-title"
+          open={open}
         >
-          Add Ticket
-        </BootstrapDialogTitle>
-        <DialogContent dividers>
-          <Box
-            component="form"
-            sx={{
-              "& .MuiTextField-root": { m: 1, width: "50ch" },
-            }}
-            noValidate
-            autoComplete="off"
+          <BootstrapDialogTitle
+            id="customized-dialog-title"
+            onClose={handleClickClose}
           >
-            <div>
-              <TextField
-                id=""
-                label="Ticket Name"
-                placeholder="Ticket Name"
-                multiline
-                value={name}
-                onChange={(event) => {
-                  setName(event.target.value);
-                }}
-              />
-              <section
-                style={{
-                  marginLeft: "15px",
-                  color: "red",
-                }}
-              >
-                {error}
-              </section>
-              <br />
-              <TextField
-                id=""
-                label="Ticket Description"
-                placeholder="Ticket Description"
-                multiline
-                value={description}
-                onChange={(event) => {
-                  setDescription(event.target.value);
-                }}
-              />
-              <section
-                style={{
-                  marginLeft: "15px",
-                  color: "red",
-                }}
-              >
-                {errorDescription}
-              </section>
-              <br />
-              <RadioBtn
-                priority={"priority"}
-                setPriority={setPriority}
-                errorPriority={errorPriority}
-              />
-            </div>
-          </Box>
-        </DialogContent>
-        <DialogActions>
-          <Button autoFocus onClick={validate}>
-            Create New Ticket
-          </Button>
-        </DialogActions>
-      </BootstrapDialog>
-    </div>
+            Add Ticket
+          </BootstrapDialogTitle>
+          <DialogContent dividers>
+            <Box
+              component="form"
+              sx={{
+                "& .MuiTextField-root": { m: 1, width: "50ch" },
+              }}
+              noValidate
+              autoComplete="off"
+            >
+              <div>
+                <TextField
+                  id=""
+                  label="Ticket Name"
+                  placeholder="Ticket Name"
+                  multiline
+                  value={name}
+                  onChange={(event) => {
+                    setName(event.target.value);
+                  }}
+                />
+                <section
+                  style={{
+                    marginLeft: "15px",
+                    color: "red",
+                  }}
+                >
+                  {error}
+                </section>
+                <br />
+                <TextField
+                  id=""
+                  label="Ticket Description"
+                  placeholder="Ticket Description"
+                  multiline
+                  value={description}
+                  onChange={(event) => {
+                    setDescription(event.target.value);
+                  }}
+                />
+                <section
+                  style={{
+                    marginLeft: "15px",
+                    color: "red",
+                  }}
+                >
+                  {errorDescription}
+                </section>
+                <br />
+                <RadioBtn
+                  priority={"priority"}
+                  setPriority={setPriority}
+                  errorPriority={errorPriority}
+                />
+              </div>
+            </Box>
+          </DialogContent>
+          <DialogActions>
+            <Button autoFocus onClick={validate}>
+              Create New Ticket
+            </Button>
+          </DialogActions>
+        </BootstrapDialog>
+      </div>
     </ThemeProvider>
   );
 }

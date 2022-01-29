@@ -9,19 +9,19 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 export default function SearchField(props) {
   const inputE1 = useRef("");
 
-  const searchHandler = () => {    
+  const searchHandler = () => {
     props.setSearchTerm(inputE1.current.value);
-      if(inputE1.current.value) {
-        const filteredResult = props.state.filter((project) => {
-          return Object.values(project)
-            .join(" ")
-            .toLowerCase()
-            .includes(props.searchTerm.toLowerCase());
-        });
-        props.setProjects(filteredResult);
-      } else {
-        props.setProjects(props.state);
-      }
+    if (inputE1.current.value) {
+      const filteredResult = props.state.filter((project) => {
+        return Object.values(project)
+          .join(" ")
+          .toLowerCase()
+          .includes(props.searchTerm.toLowerCase());
+      });
+      props.setProjects(filteredResult);
+    } else {
+      props.setProjects(props.state);
+    }
   };
 
   const theme = createTheme({
@@ -37,31 +37,30 @@ export default function SearchField(props) {
 
   return (
     <ThemeProvider theme={theme}>
-    <Box
-      component="form"
-      sx={{
-        '& > :not(style)': { m: 1, width: '50ch' }, color: 'inherit'
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <TextField 
-        id="input-with-sx" 
-        label={props.label}
-        variant="outlined"
-        inputRef={inputE1}
-        value={props.searchTerm} 
-        onChange={searchHandler}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <SearchIcon />
-            </InputAdornment>
-          ),
+      <Box
+        component="form"
+        sx={{
+          '& > :not(style)': { m: 1, width: '50ch' }, color: 'inherit'
         }}
-      />
-    </Box>
+        noValidate
+        autoComplete="off"
+      >
+        <TextField
+          id="input-with-sx"
+          label={props.label}
+          variant="outlined"
+          inputRef={inputE1}
+          value={props.searchTerm}
+          onChange={searchHandler}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            ),
+          }}
+        />
+      </Box>
     </ThemeProvider>
   );
-
 }

@@ -4,9 +4,6 @@ import TextField from "@mui/material/TextField";
 import UsersDropDown from "./UsersDropDown";
 
 export default function TextInput(props) {
-  // const handleChange = (event) => {
-  //   setValue(event.target.value)
-  // };
 
   return (
     <Box
@@ -21,7 +18,6 @@ export default function TextInput(props) {
         <TextField
           id="project_name"
           label={props.name}
-          // placeholder={props.name}
           multiline
           value={props.value}
           onChange={(event) => {
