@@ -6,25 +6,20 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import { Link } from "react-router-dom";
-import DeveloperModeIcon from "@mui/icons-material/DeveloperMode";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
-import PestControlOutlinedIcon from "@mui/icons-material/PestControlOutlined";
 import Avatar from "@mui/material/Avatar";
 import { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import NextWeekOutlinedIcon from "@mui/icons-material/NextWeekOutlined";
 import CodeIcon from "@mui/icons-material/Code";
 
 const theme = createTheme({
   palette: {
     primary: {
-      // Purple and green play nicely together.
       main: "#009688",
     },
     secondary: {
-      // This is green.A700 as hex.
       main: "#004c40",
     },
     typography: {
@@ -45,7 +40,6 @@ export default function ButtonAppBar() {
   }, []);
 
   const handleLogoutClick = () => {
-    // useEffect(() => {
     axios.post("http://localhost:8080/api/logout").then(() => {
       {
         window.location.href = "/login";
@@ -93,13 +87,6 @@ export default function ButtonAppBar() {
                   </Button>
                 </>
               ) : null
-              // <Button
-              //   variant="outlined"
-              //   color="success"
-              //   onClick={() => {window.location.href = '/login'}}
-              //   >
-              //   Login
-              // </Button>
             }
           </Toolbar>
         </AppBar>

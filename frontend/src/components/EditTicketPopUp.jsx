@@ -56,11 +56,9 @@ const ariaLabel = { "aria-label": "description" };
 const theme = createTheme({
   palette: {
     primary: {
-      // Purple and green play nicely together.
       main: "#00675b",
     },
     secondary: {
-      // This is green.A700 as hex.
       main: "#00675b",
     },
   },
@@ -87,7 +85,7 @@ export default function CustomizedDialogs(props) {
     });
     setOpen(false);
   };
-  console.log("props.ticketState", props.ticketState);
+
   return (
     <ThemeProvider theme={theme}>
       <div>
@@ -119,8 +117,6 @@ export default function CustomizedDialogs(props) {
                   required
                   id="ticketName"
                   label={"Ticket Name"}
-                  //placeholder="Edit Ticket Name"
-                  //multiline
                   value={props.ticketState.name}
                   onChange={(event) => {
                     props.setTicketState({ name: event.target.value });
@@ -131,8 +127,6 @@ export default function CustomizedDialogs(props) {
                   required
                   id="ticketDescription"
                   label={"Ticket Description"}
-                  //placeholder="Edit Ticket Description"
-                  //multiline
                   helperText="Enter Ticket Description"
                   value={props.ticketState.description}
                   onChange={(event) => {
@@ -142,14 +136,7 @@ export default function CustomizedDialogs(props) {
               </div>
               <div>
                 <br />
-                {/* <RadioBtn
-                //priority={"priority"}
-                //setPriority={props.setPriority}
-                setTicketState={props.setTicketState}
-                ticketState={props.ticketState}
-              /> */}
                 <RadioBtn
-                  //ticketStatus={"priority"}
                   resetTicketState={props.resetTicketState}
                   ticketState={props.ticketState}
                   setTicketState={props.setTicketState}

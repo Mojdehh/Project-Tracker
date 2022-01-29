@@ -8,7 +8,6 @@ import Typography from "@mui/material/Typography";
 import EditProjectPopUp from "./EditProjectPopUp";
 import { useParams } from "react-router-dom";
 import CircularUnderLoad from "./CircularUnderLoad";
-
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { Grid } from "@mui/material";
@@ -40,8 +39,6 @@ export default function InteractiveList(props) {
     return devs;
   };
 
-  // console.log("not iterable", props.projects);
-  //console.log(assignedDevs(props.projects));
   const arrOfDevs = arrAssignedDevs(props.projects);
 
   if (props.projects.length === 0) return <CircularUnderLoad />;
@@ -80,8 +77,9 @@ export default function InteractiveList(props) {
               </Typography>
               <Demo>
                 <List
-                  sx={{ display: "flex", flexDirection: "row", justifyContent: "space-around"
-                }}
+                  sx={{
+                    display: "flex", flexDirection: "row", justifyContent: "space-around"
+                  }}
                   dense={dense}
                 >
                   <ListItem>
@@ -155,13 +153,12 @@ export default function InteractiveList(props) {
                       />
                     </ListItem>
                   )}
-
                 </List>
               </Demo>
             </Box>
           </div>
-          <Grid sx={{mt:4}}>
-            <EditProjectPopUp 
+          <Grid sx={{ mt: 4 }}>
+            <EditProjectPopUp
               name="Edit Project"
               add="Edit Project"
               title={props.projects[0].name}

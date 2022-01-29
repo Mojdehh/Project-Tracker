@@ -25,18 +25,14 @@ export default function ProjectPage() {
     status,
     setStatus,
   } = useProjectDetail(project_id);
-  // const [ticketRow, setTicketRows] = React.useState([]);
 
   const { tickets, setTickets } = useTicketsData(project_id);
   const [resetName, setResetName] = React.useState();
-  //const [status, setStatus] = React.useState();
   const [searchTerm, setSearchTerm] = React.useState("");
   const [searchResults, setSearchResults] = React.useState([]);
   const [userId, setUserId] = React.useState([]);
   const [names, setNames] = React.useState([]);
 
-  console.log("status project page", status);
-  console.log("setUserId", userId);
   React.useEffect(() => {
     return axios
       .get("http://localhost:8080/api/users")
@@ -49,8 +45,6 @@ export default function ProjectPage() {
   }, []);
 
   function editProject(projectName, event, status, ids) {
-    console.log("userId", ids);
-    console.log("status on edit pro", status);
     return axios
       .put(`http://localhost:8080/api/projects/${project_id}`, {
         projectName,
@@ -88,13 +82,6 @@ export default function ProjectPage() {
   const handleSaveChanges = (projectName, event, status, ids) =>
     editProject(projectName, event, status, ids);
 
-  // React.useEffect(() => {
-  //   setTicketRows(state);
-  // }, [ticketRow]);
-  // console.log("projects page", projects);
-  // console.log("tickets length", tickets.length);
-  // console.log("tickets ", tickets);
-
   return (
     <>
       <div>
@@ -123,8 +110,6 @@ export default function ProjectPage() {
             display: "flex",
             justifyContent: "center",
             flexDirection: "row",
-
-            // flexWrap: 'wrap',
             "& > :not(style)": {
               mt: 3,
               pt: 2.5,

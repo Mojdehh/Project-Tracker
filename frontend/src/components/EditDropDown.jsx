@@ -32,22 +32,8 @@ export default function MultipleSelectChip(props) {
   const theme = useTheme();
   const [personName, setPersonName] = React.useState(props.arrOfDevs);
 
-  // React.useEffect(() => {
-  //   return axios
-  //     .get("http://localhost:8080/api/users")
-  //     .then((users) => {
-  //       setNames(users.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
-
   const findIdByUserName = (name) => {
-    console.log("names drop down", props.names);
-    console.log("name drop down", name);
     const user = props.names.find((id) => id.full_name === name);
-    //console.log(user);
     return user.id;
   };
 
@@ -66,21 +52,11 @@ export default function MultipleSelectChip(props) {
       target: { value },
     } = event;
     setPersonName(
-      // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
     props.setUsers(value);
-    console.log("users drop down", props.users);
-    // const newArr = names.find(
-    //   (name) => name.full_name === value[value.length - 1]
-    // );
-
-    //console.log("newArr", newArr);
-    console.log("value", value);
     const ids = getIds(value);
     props.setUserId(ids);
-    console.log("Ids", ids);
-    console.log("props.id", props.userId);
   };
 
   const arrDevs = (arr) => {
@@ -90,15 +66,8 @@ export default function MultipleSelectChip(props) {
     }
     return newArr;
   };
-  console.log(props.names);
 
-  //console.log(findIdByUserName("Alice Smith"));
-  //const valueDevs = arrDevs(props.devs);
-  //console.log("setUsers", props.users);
-  //setPersonName(valueDevs);
-  //console.log("personName", personName);
-  //console.log(arrDevs(props.devs));
-  function sort(arr1, arr2) {}
+  function sort(arr1, arr2) { }
   return (
     <div>
       <FormControl sx={{ m: 1, width: "50ch" }}>
