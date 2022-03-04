@@ -1,17 +1,16 @@
 import * as React from "react";
+import { useParams } from "react-router-dom";
 import { styled } from "@mui/material/styles";
+import { formatDateTime } from "../Helper/dateHelperFuncs.ts"
 import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import Typography from "@mui/material/Typography";
-import useTicketDetails from "../hooks/useTicketDetails";
-import { useParams } from "react-router-dom";
 import EditTicketPopUp from "./EditTicketPopUp";
+import Typography from "@mui/material/Typography";
 import CircularUnderLoad from "./CircularUnderLoad";
-import {formatDateTime} from "../Helper/dateHelperFuncs.ts"
-import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import ListItemText from "@mui/material/ListItemText";
 
 const Demo = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
@@ -21,9 +20,7 @@ export default function TicketsList(props) {
   const [dense, setDense] = React.useState(true);
   const [secondary, setSecondary] = React.useState(false);
   let { project_id, ticket_id } = useParams();
-  console.log(ticket_id);
-  // const ticket = useTicketDetails(project_id, ticket_id);
-  //console.log("ticketlistticket", ticket);
+
   if (props.ticket.length === 0) return <CircularUnderLoad />;
   return (
     <Box
@@ -41,7 +38,6 @@ export default function TicketsList(props) {
         },
       }}
     >
-      {/* <div style={{ display: "flex", justifyContent: "center" }}> */}
       <Card
         elevation={4}
         sx={{ mt: 1, mb: 2, display: "block", width: "60vw" }}
@@ -164,7 +160,6 @@ export default function TicketsList(props) {
           />
         </CardContent>
       </Card>
-      {/* </div> */}
     </Box>
   );
 }

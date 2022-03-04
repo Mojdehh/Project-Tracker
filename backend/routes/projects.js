@@ -80,7 +80,6 @@ module.exports = ({
 
   router.get("/:project_id/user_project", (req, res) => {
     const projectID = req.params.project_id;
-    //const userID = req.params.user_id;
     getUser_ProjectIds(projectID)
       .then((result) => res.json(result))
       .catch((err) =>
@@ -92,7 +91,6 @@ module.exports = ({
 
   router.post("/", (req, res) => {
     const name = req.body.projectName;
-    console.log("name: ", name);
     addProject(name)
       .then((projects) => res.json(projects))
       .catch((err) =>
@@ -128,7 +126,6 @@ module.exports = ({
     const projectID = req.body.project_id;
     const userID = req.body.user_id;
     const projectTitle = req.body.project_name;
-    console.log("projectID and userID: ", projectID, userID);
     addProjectUsers(userID, projectTitle, projectID)
       .then((projects) => res.json(projects))
       .catch((err) =>

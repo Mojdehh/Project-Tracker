@@ -1,25 +1,19 @@
 import * as React from "react";
+import { useParams } from "react-router-dom";
+import { formatTimeAgo } from "../Helper/dateHelperFuncs.ts";
+import Box from "@mui/material/Box";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
+import Card from "@mui/material/Card";
+import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
+import ListItem from "@mui/material/ListItem";
+import Typography from "@mui/material/Typography";
+import CardContent from "@mui/material/CardContent";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
-import Avatar from "@mui/material/Avatar";
-import Typography from "@mui/material/Typography";
-import { useParams } from "react-router-dom";
-import CommentIcon from "@mui/icons-material/Comment";
-import Grid from "@mui/material/Grid";
-import CommentPopUp from "./CommentPopup";
-import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import { formatTimeAgo } from "../Helper/dateHelperFuncs.ts";
-
 
 export default function CommentSection(props) {
   let { project_id, ticket_id } = useParams();
-  // const comments = useCommentsData(project_id, ticket_id);
 
   const avatarStyle = {
     display: "flex",
@@ -28,8 +22,6 @@ export default function CommentSection(props) {
     alignItems: "center",
   };
 
-  // if (props.comments.length === 0) return "No Comments";
-  console.log("props.comments", props.comments);
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <Card elevation={4} sx={{ mt: 3, mb: 10, display: "block", width: 1000 }}>

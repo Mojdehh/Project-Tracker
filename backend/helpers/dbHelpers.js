@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 module.exports = (db) => {
   const getUsers = () => {
     const query = {
-      text: "SELECT users.full_name, users.id from users",
+      text: "SELECT users.full_name, users.id from users;",
     };
 
     return db
@@ -14,7 +14,7 @@ module.exports = (db) => {
 
   const getProjects = () => {
     const query = {
-      text: "SELECT * FROM projects",
+      text: "SELECT * FROM projects;",
     };
 
     return db
@@ -23,37 +23,13 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
-  // const getUserByEmail = email => {
-
-  //     const query = {
-  //         text: `SELECT * FROM users WHERE email = $1` ,
-  //         values: [email]
-  //     }
-
-  //     return db
-  //         .query(query)
-  //         .then(result => result.rows[0])
-  //         .catch((err) => err);
-  // }
-
-  // const addUser = (firstName, lastName, email, password) => {
-  //     const query = {
-  //         text: `INSERT INTO users (first_name, last_name, email, password) VALUES ($1, $2, $3, $4) RETURNING *` ,
-  //         values: [firstName, lastName, email, password]
-  //     }
-
-  //     return db.query(query)
-  //         .then(result => result.rows[0])
-  //         .catch(err => err);
-  // }
-
   const getProjectDetails = () => {
     const query = {
       text: `SELECT projects.*, count(tickets.*) 
           as number_of_tickets FROM projects 
           FULL OUTER JOIN tickets ON projects.id = project_id 
           GROUP BY projects.id
-          ORDER BY date_created DESC`,
+          ORDER BY date_created DESC;`,
     };
     return db
       .query(query)
@@ -67,7 +43,7 @@ module.exports = (db) => {
             FROM projects
             JOIN user_project ON projects.id = project_id
             JOIN users ON users.id = user_id  WHERE projects.id = $1 
-            GROUP BY users.full_name, projects.id`,
+            GROUP BY users.full_name, projects.id;`,
     };
     const values = [id];
     return db
@@ -82,7 +58,7 @@ module.exports = (db) => {
           FROM users 
           JOIN user_project ON user_id = users.id 
           JOIN projects ON project_id = projects.id 
-          WHERE project_id = $1`,
+          WHERE project_id = $1;`,
       values: $1,
     };
     const values = [];
@@ -137,7 +113,6 @@ module.exports = (db) => {
 
   const getUser_ProjectIds = (project_id) => {
     const query = {
-      // text: `SELECT * from user_project WHERE project_id = $1 AND user_id = $2;`,
       text: `SELECT * FROM user_project WHERE project_id = $1;`,
     };
     const values = [project_id];
@@ -237,7 +212,10 @@ module.exports = (db) => {
         return result.rows[0];
       })
       .then((result) => {
-        if (result !== undefined && bcrypt.compareSync(password, result.password)) {
+        if (
+          result !== undefined &&
+          bcrypt.compareSync(password, result.password)
+        ) {
           return result;
         }
         return null;

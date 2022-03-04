@@ -1,13 +1,13 @@
 import * as React from "react";
-import { useTheme } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import Chip from "@mui/material/Chip";
 import axios from "axios";
+import Box from "@mui/material/Box";
+import Chip from "@mui/material/Chip";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import { useTheme } from "@mui/material/styles";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import OutlinedInput from "@mui/material/OutlinedInput";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -51,7 +51,6 @@ export default function UsersDropDown(props) {
       target: { value },
     } = event;
     setPersonName(
-      // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
     props.setUsers(value);
@@ -59,42 +58,13 @@ export default function UsersDropDown(props) {
       (name) => name.full_name === value[value.length - 1]
     );
     props.setUserId(value);
-
-    console.log("props.id", props.userId);
-    console.log(newArr);
-    console.log(value);
-    // names.forEach((user) => {
-    // if (props.id.length !== 0) {
-    //   let newID = [...props.id, newArr];
-    //   props.setId(newID);
-    // } else {
-    //   props.setId(newArr);
-    // }
-    // console.log(value);
-    // if (!user) {
-    //   setId(user);
-    // } else if (user.full_name === value[0]) {
-    //   console.log(value);
-    //   setId(user);
-    // }
-    // console.log("user", user);
-    // console.log("id", id);
-    // });
   };
-  // const handleSelection = (event) => {
-  //   props.setUsers(value);
-  // };
-  // const findUserIdByName = (name) => {
-  //   const id = names.find((id) => id.name === name);
-  //   return id.id;
-  // };
-  // console.log(findUserIdByName("Alice Smith"));
+
   const findUserNameById = (id) => {
-    console.log("names", names);
     const user = names.find((name) => name.id === id);
-    console.log(user);
     return user.full_name;
   };
+
   return (
     <div>
       <FormControl sx={{ m: 1, width: "50ch" }}>

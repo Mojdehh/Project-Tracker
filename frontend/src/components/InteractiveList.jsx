@@ -1,18 +1,17 @@
 import * as React from "react";
+import { useParams } from "react-router-dom";
 import { styled } from "@mui/material/styles";
+import { formatDateTime } from "../Helper/dateHelperFuncs.ts"
 import Box from "@mui/material/Box";
+import { Grid } from "@mui/material";
 import List from "@mui/material/List";
+import Card from "@mui/material/Card";
 import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 import EditProjectPopUp from "./EditProjectPopUp";
-import { useParams } from "react-router-dom";
-import CircularUnderLoad from "./CircularUnderLoad";
-
-import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import { Grid } from "@mui/material";
-import { formatDateTime } from "../Helper/dateHelperFuncs.ts"
+import CircularUnderLoad from "./CircularUnderLoad";
+import ListItemText from "@mui/material/ListItemText";
 
 const Demo = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
@@ -22,7 +21,6 @@ export default function InteractiveList(props) {
   const [dense, setDense] = React.useState(true);
   const [secondary, setSecondary] = React.useState(false);
   let { project_id } = useParams();
-  console.log(project_id);
 
   const assignedDevs = (projects) => {
     const devs = [];
@@ -40,8 +38,6 @@ export default function InteractiveList(props) {
     return devs;
   };
 
-  // console.log("not iterable", props.projects);
-  //console.log(assignedDevs(props.projects));
   const arrOfDevs = arrAssignedDevs(props.projects);
 
   if (props.projects.length === 0) return <CircularUnderLoad />;
@@ -80,8 +76,9 @@ export default function InteractiveList(props) {
               </Typography>
               <Demo>
                 <List
-                  sx={{ display: "flex", flexDirection: "row", justifyContent: "space-around"
-                }}
+                  sx={{
+                    display: "flex", flexDirection: "row", justifyContent: "space-around"
+                  }}
                   dense={dense}
                 >
                   <ListItem>
@@ -155,13 +152,12 @@ export default function InteractiveList(props) {
                       />
                     </ListItem>
                   )}
-
                 </List>
               </Demo>
             </Box>
           </div>
-          <Grid sx={{mt:4}}>
-            <EditProjectPopUp 
+          <Grid sx={{ mt: 4 }}>
+            <EditProjectPopUp
               name="Edit Project"
               add="Edit Project"
               title={props.projects[0].name}

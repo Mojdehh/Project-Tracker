@@ -10,7 +10,6 @@ export default function useTicketDetails(project_id, ticket_id) {
     priority: "",
   });
 
-  console.log(project_id, ticket_id);
   useEffect(() => {
     axios
       .get(
@@ -29,7 +28,6 @@ export default function useTicketDetails(project_id, ticket_id) {
       })
       .catch((err) => console.log(err));
   }, []);
-  console.log("tickets->", ticket);
   return {
     ticket,
     setTicket,

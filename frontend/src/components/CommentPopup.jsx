@@ -1,18 +1,17 @@
 import * as React from "react";
+import axios from "axios";
 import PropTypes from "prop-types";
+import { useParams } from "react-router-dom";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
+import { styled } from "@mui/material/styles";
+import TextField from "@mui/material/TextField";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import { useParams } from "react-router-dom";
-import axios from "axios";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -56,11 +55,9 @@ BootstrapDialogTitle.propTypes = {
 const theme = createTheme({
   palette: {
     primary: {
-      // Purple and green play nicely together.
       main: "#00675b",
     },
     secondary: {
-      // This is green.A700 as hex.
       main: "#00675b",
     },
   },
@@ -99,13 +96,11 @@ export default function CustomizedDialogs(props) {
   }
 
   function addComment() {
-    console.log("comment", comment);
     return axios
       .post(
         `http://localhost:8080/api/projects/${project_id}/tickets/${ticket_id}/comments`,
         {
           comment: comment,
-          // userId: someValue
         }
       )
       .then((response) => {
@@ -116,20 +111,9 @@ export default function CustomizedDialogs(props) {
           .then((response) => {
             console.log("response", response);
             props.setComments(response.data);
-            // props.setComments((prev) => {
-            //   const rows = [...prev];
-            //   rows.push(response.data[0]);
-            //   return rows;
           });
-        // props.setComments((prev) => {
-        //   const rows = [...prev];
-        //   rows.push(response.data[0]);
-        //   return rows;
-        // });
-        //console.log(response);
       })
       .catch((err) => console.log(err));
-    // });
   }
 
   return (
